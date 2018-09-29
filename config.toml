@@ -24,4 +24,4 @@ paginate = 5
   [[menu.main]]
     identifier = "Rides"
     name = "Rides"
-    url = "/Rides"
+    url = "/rides"

@@ -1,0 +1,1450 @@
+---
+title: Rides
+author: nige
+date: '2017-07-14'
+cover: "IMG_4866.jpg"
+categories:
+  - Bike
+  - R
+  - Strava
+tags:
+  - strava
+  - data
+---
+
+
+
+<div id="the-data" class="section level1">
+<h1>The data</h1>
+<div id="ride-data" class="section level2">
+<h2>Ride data</h2>
+<p>Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to <a href="http://www.montebellosoftware.com/">Ascent</a> to <a href="http://www.strava.com">Strava</a> to store ride data. Recently the following have provided the potential to make combining these data easy:</p>
+<ul>
+<li>workflow, particularly with
+<ul>
+<li><a href="http://tidyverse.org/">tidyverse</a></li>
+<li><a href="http://rmarkdown.rstudio.com/">rmarkdown</a></li>
+</ul></li>
+<li>apps to rip data out of MS Access databases from a mac <a href="https://eggerapps.at/mdbviewer/">mdb accdb Viewer</a></li>
+<li>the export .csv button on most pages on <a href="http://www.veloviewer.com">Veloviewer</a></li>
+</ul>
+<p>This is the piecing together and exploration of those data.</p>
+<table>
+<caption>
+<span id="tab:dataAccess">Table 1: </span>First few rows/columns of the ride data from MS Access
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Source
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:right;">
+Dist
+</th>
+<th style="text-align:right;">
+Time
+</th>
+<th style="text-align:right;">
+AvS
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-04
+</td>
+<td style="text-align:right;">
+47.92
+</td>
+<td style="text-align:right;">
+8445
+</td>
+<td style="text-align:right;">
+20.42771
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-05
+</td>
+<td style="text-align:right;">
+48.16
+</td>
+<td style="text-align:right;">
+8717
+</td>
+<td style="text-align:right;">
+19.88941
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-06
+</td>
+<td style="text-align:right;">
+49.23
+</td>
+<td style="text-align:right;">
+13629
+</td>
+<td style="text-align:right;">
+13.00374
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-07
+</td>
+<td style="text-align:right;">
+24.74
+</td>
+<td style="text-align:right;">
+5904
+</td>
+<td style="text-align:right;">
+15.08537
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-08
+</td>
+<td style="text-align:right;">
+68.64
+</td>
+<td style="text-align:right;">
+13283
+</td>
+<td style="text-align:right;">
+18.60303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-09
+</td>
+<td style="text-align:right;">
+85.63
+</td>
+<td style="text-align:right;">
+20339
+</td>
+<td style="text-align:right;">
+15.15650
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-10
+</td>
+<td style="text-align:right;">
+57.50
+</td>
+<td style="text-align:right;">
+12755
+</td>
+<td style="text-align:right;">
+16.22893
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-12
+</td>
+<td style="text-align:right;">
+96.99
+</td>
+<td style="text-align:right;">
+18184
+</td>
+<td style="text-align:right;">
+19.20172
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-13
+</td>
+<td style="text-align:right;">
+76.35
+</td>
+<td style="text-align:right;">
+11675
+</td>
+<td style="text-align:right;">
+23.54261
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Access
+</td>
+<td style="text-align:left;">
+1999-06-14
+</td>
+<td style="text-align:right;">
+89.31
+</td>
+<td style="text-align:right;">
+15532
+</td>
+<td style="text-align:right;">
+20.70023
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>
+<span id="tab:dataStrava">Table 2: </span>First few rows/columns of ride data from Strava
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Source
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:right;">
+Dist
+</th>
+<th style="text-align:right;">
+Time
+</th>
+<th style="text-align:right;">
+AvS
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-21
+</td>
+<td style="text-align:right;">
+19.8276
+</td>
+<td style="text-align:right;">
+5191
+</td>
+<td style="text-align:right;">
+3.8196
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-20
+</td>
+<td style="text-align:right;">
+18.9059
+</td>
+<td style="text-align:right;">
+2780
+</td>
+<td style="text-align:right;">
+6.8007
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-19
+</td>
+<td style="text-align:right;">
+9.9764
+</td>
+<td style="text-align:right;">
+2893
+</td>
+<td style="text-align:right;">
+3.4485
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-18
+</td>
+<td style="text-align:right;">
+101.4400
+</td>
+<td style="text-align:right;">
+22335
+</td>
+<td style="text-align:right;">
+4.5418
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-17
+</td>
+<td style="text-align:right;">
+15.5295
+</td>
+<td style="text-align:right;">
+2988
+</td>
+<td style="text-align:right;">
+5.1973
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-14
+</td>
+<td style="text-align:right;">
+33.7023
+</td>
+<td style="text-align:right;">
+7021
+</td>
+<td style="text-align:right;">
+4.8002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-12
+</td>
+<td style="text-align:right;">
+29.1697
+</td>
+<td style="text-align:right;">
+6182
+</td>
+<td style="text-align:right;">
+4.7185
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-11
+</td>
+<td style="text-align:right;">
+59.8480
+</td>
+<td style="text-align:right;">
+9068
+</td>
+<td style="text-align:right;">
+6.5999
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-08
+</td>
+<td style="text-align:right;">
+12.8408
+</td>
+<td style="text-align:right;">
+3397
+</td>
+<td style="text-align:right;">
+3.7800
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strava(Veloviewer)
+</td>
+<td style="text-align:left;">
+2012-02-08
+</td>
+<td style="text-align:right;">
+18.8926
+</td>
+<td style="text-align:right;">
+2569
+</td>
+<td style="text-align:right;">
+7.3541
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Comining these datasets gives 4931 individual rides.</p>
+</div>
+<div id="lap-data" class="section level2">
+<h2>Lap data</h2>
+<p>Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.</p>
+<table>
+<caption>
+<span id="tab:dataLapsAccess">Table 3: </span>First few rows/columns of segment data from MS Access
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Gear
+</th>
+<th style="text-align:left;">
+LapName
+</th>
+<th style="text-align:right;">
+LDis
+</th>
+<th style="text-align:right;">
+LTime
+</th>
+<th style="text-align:right;">
+LHRAverage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2001-12-09
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Humpty
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+869
+</td>
+<td style="text-align:right;">
+128
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001-12-10
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+289
+</td>
+<td style="text-align:right;">
+162
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001-12-13
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Full Norton - bridge to gates
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+1051
+</td>
+<td style="text-align:right;">
+171
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001-12-13
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+335
+</td>
+<td style="text-align:right;">
+147
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-01-20
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+253
+</td>
+<td style="text-align:right;">
+154
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-03-14
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+263
+</td>
+<td style="text-align:right;">
+161
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-03-19
+</td>
+<td style="text-align:left;">
+mtb
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+308
+</td>
+<td style="text-align:right;">
+153
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-04-04
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Windy Point Climb
+</td>
+<td style="text-align:right;">
+3.15
+</td>
+<td style="text-align:right;">
+680
+</td>
+<td style="text-align:right;">
+159
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-04-25
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+309
+</td>
+<td style="text-align:right;">
+165
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-04-30
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Pole Rd (to Upper Sturt)
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+325
+</td>
+<td style="text-align:right;">
+147
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>
+<span id="tab:dataLapsStrava">Table 4: </span>First few rows/columns of segment data from strava
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Gear
+</th>
+<th style="text-align:left;">
+LapName
+</th>
+<th style="text-align:right;">
+LDis
+</th>
+<th style="text-align:right;">
+LTime
+</th>
+<th style="text-align:right;">
+LHRAverage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2012-12-20
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.91360
+</td>
+<td style="text-align:right;">
+1575
+</td>
+<td style="text-align:right;">
+151.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2013-01-24
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.90590
+</td>
+<td style="text-align:right;">
+1584
+</td>
+<td style="text-align:right;">
+163.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-07-08
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.90670
+</td>
+<td style="text-align:right;">
+1635
+</td>
+<td style="text-align:right;">
+156.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-07-31
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.90280
+</td>
+<td style="text-align:right;">
+1698
+</td>
+<td style="text-align:right;">
+153.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2012-05-31
+</td>
+<td style="text-align:left;">
+tourer
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.89958
+</td>
+<td style="text-align:right;">
+1713
+</td>
+<td style="text-align:right;">
+157.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-12-04
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.89920
+</td>
+<td style="text-align:right;">
+1728
+</td>
+<td style="text-align:right;">
+157.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-07-18
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+7.11070
+</td>
+<td style="text-align:right;">
+1729
+</td>
+<td style="text-align:right;">
+151.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2012-01-03
+</td>
+<td style="text-align:left;">
+tourer
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.92400
+</td>
+<td style="text-align:right;">
+1756
+</td>
+<td style="text-align:right;">
+162.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-02-05
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.90190
+</td>
+<td style="text-align:right;">
+1760
+</td>
+<td style="text-align:right;">
+146.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-02-19
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.89850
+</td>
+<td style="text-align:right;">
+1767
+</td>
+<td style="text-align:right;">
+150.9
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>
+<span id="tab:lapsCombine">Table 5: </span>Starred laps with more than 14 efforts
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+LapName
+</th>
+<th style="text-align:right;">
+efforts
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+353
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+216
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Belair Rd
+</td>
+<td style="text-align:right;">
+177
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Windy Point Climb
+</td>
+<td style="text-align:right;">
+151
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mt Osmond (Beaumont side short)
+</td>
+<td style="text-align:right;">
+98
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Full Norton - bridge to gates
+</td>
+<td style="text-align:right;">
+91
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Old Freeway (Tollgate to Bollards)
+</td>
+<td style="text-align:right;">
+82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Aldgate Valley Road
+</td>
+<td style="text-align:right;">
+79
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Humpty
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sturt Valley Rd
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tilleys Hil Rd
+</td>
+<td style="text-align:right;">
+53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clarendon to Bakers Gully
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Caroline Path
+</td>
+<td style="text-align:right;">
+39
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Caroline Path to Gloucestor
+</td>
+<td style="text-align:right;">
+37
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Greenhill Road
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Burdetts Road (Little Italy)
+</td>
+<td style="text-align:right;">
+34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Murrays Hill Rd
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clarendon to Humpty
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pole Rd (to Upper Sturt)
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Last climb to Deviation
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brownhill Creek Rd Climb
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pole Rd to Ironbank
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Old Willunga Hill
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scott Creek Road
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pwt-bullock-beela
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Veloway - Seacombe Rd to Majors Rd turnoff
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+</tbody>
+</table>
+<p>Given the plethora of segments on Strava these days, filtering the segments of interest is probably worthwhile. As a starting point, starred segments ridden more than 14 times gives 26 segments (Table <a href="#tab:lapsCombine">5</a>).</p>
+<p>Combining the segment data gives 1870 individual efforts on 26 segments which were both starred and ridden more than 14 times.</p>
+</div>
+</div>
+<div id="data-checks" class="section level1">
+<h1>Data checks</h1>
+<p>Probably best to check these data before using them for anything…</p>
+<p>A series of visual plots as quick data checks.</p>
+<div id="ride-data-1" class="section level2">
+<h2>Ride data</h2>
+<div class="figure"><span id="fig:dataCheckRides"></span>
+<img src="/post/20170714_rides_files/figure-html/dataCheckRides-1.png" alt="Rides per day" width="672" />
+<p class="caption">
+Figure 1: Rides per day
+</p>
+</div>
+<p>Nothing concerning here. Apparently rides were more likely to be combined within a day in Access and more likely to recorded individualy on Strava.</p>
+<div class="figure"><span id="fig:dataCheckDist"></span>
+<img src="/post/20170714_rides_files/figure-html/dataCheckDist-1.png" alt="Daily distance (km)" width="672" />
+<p class="caption">
+Figure 2: Daily distance (km)
+</p>
+</div>
+<p>All looks ok. A few patterns:</p>
+<ul>
+<li>A bunch of low km while living somewhere flat 2005-2007</li>
+<li>Increased frequency of very short rides after 2015</li>
+<li>Very few very short rides recorded in late 90s /early 00s</li>
+</ul>
+<div class="figure"><span id="fig:dataCheckTime"></span>
+<img src="/post/20170714_rides_files/figure-html/dataCheckTime-1.png" alt="Daily time" width="672" />
+<p class="caption">
+Figure 3: Daily time
+</p>
+</div>
+<p>Again, looks fine. Patterns are almost identical to daily km.</p>
+
+<div class="figure"><span id="fig:dataCheckAscent"></span>
+<img src="/post/20170714_rides_files/figure-html/dataCheckAscent-1.png" alt="Daily ascent (m)" width="672" />
+<p class="caption">
+Figure 4: Daily ascent (m)
+</p>
+</div>
+<p>Ascent data only starts in ~2006 - a shame looking back as the bike computer from 2001 onwards recorded ascent. There’s an increase in ascent after moving back to the hills in march 2007 and a drop after moving to the ‘flats’ in late 2014.</p>
+
+<p><img src="/post/20170714_rides_files/figure-html/dataCheckMaxHR-1.png" width="672" /></p>
+<p>Garmin/Strava websites must do a good job of filtering max heart rates that are dubious, cause i’ve never seen the ridiculous maximum heart rates shown here. This graph brings back memories of manually adjusting polar HR data to remove spurious data peaks (from memory that applied to speed as well as hr).</p>
+
+<p><img src="/post/20170714_rides_files/figure-html/dataCheckAvHR-1.png" width="672" /></p>
+<p>hmmm. seems i’m slowing down.</p>
+
+<p><img src="/post/20170714_rides_files/figure-html/dataCheckAvPwr-1.png" width="672" /></p>
+<p>I only got a power meter in 2012. I commuted on the cx (the bike with the power meter) from then until leaving the hills in late 2014. Seems there’s opportunity to ride a bit harder these days. Patchy data is a reflection of the flaky nature of the <a href="https://stagescycling.com/">stages</a> power meter - doubt i’d get another one.</p>
+
+<p><img src="/post/20170714_rides_files/figure-html/dataCheckTemp-1.png" width="672" /></p>
+<p>This was surprising to me for some reason. Clearly it’s warmer in summer and cooler in winter.</p>
+
+<p><img src="/post/20170714_rides_files/figure-html/dataCheckAvS-1.png" width="672" /></p>
+<p>Wow, wtf is going on with Strava(Veloviewer) average speeds? That might take some looking into. Try recalculating from raw distance and time data.</p>
+<p><img src="/post/20170714_rides_files/figure-html/dataCheck2AvS-1.png" width="672" /></p>
+<p>Much better. Some interesting patterns there with commutes/non-commute average speeds.</p>
+<p>Some other interesting overall trends visible in these data:</p>
+<ul>
+<li>data gaps
+<ul>
+<li>early 2000s - can’t really remember what happened there</li>
+<li>2009 (see note below)</li>
+<li>2015 (ankle injury - perhaps most obvious in the AvHR plot)</li>
+</ul></li>
+<li>increasing recording of short rides</li>
+<li>little obvious difference between devices (good), which for the record were (in order):
+<ul>
+<li><a href="https://www.cateye.com/files/manual_dl/1/457/MT200_v7_E.pdf">Cateye Mity 2</a></li>
+<li><a href="https://www.cateye.com/files/manual_dl/7/487/3DxU_E_v1.pdf">Cateye MSC-3Dx</a> (after early 2000s data gap)</li>
+<li><a href="https://www.polar.com/support_files/en/C225742500419A8AC2257097003888BC/Polar_S625X_S725X_user_manual_English.pdf">Polar s725x</a> (ascent data starts about mid-2006)</li>
+<li><a href="http://static.garmin.com/pumac/2297_OwnersManual.pdf">Garmin Edge 705</a> (after 2009 data gap)</li>
+<li><a href="http://static.garmin.com/pumac/Edge810_OM_EN.pdf">Garmin Edge 810</a> (from where temperature data starts mid-2015)</li>
+</ul></li>
+<li>the garmins seem to record dodgy maximum heart rates frequently (although perhaps i filtered this manually with the polar)
+<ul>
+<li>the premium heart rate strap may have fixed this in latter data (need to check purchase date…)</li>
+</ul></li>
+</ul>
+<p>For the missing 2009 data - it’s in a ‘.tlp’ file used by the ‘Ascent’ app. I’ve lost the registration key for the app so it’s unobtainable at the moment.</p>
+</div>
+<div id="lap-data-1" class="section level2">
+<h2>Lap data</h2>
+<div class="figure"><span id="fig:lapCheckDist"></span>
+<img src="/post/20170714_rides_files/figure-html/lapCheckDist-1.png" alt="Lap distance (km)" width="672" />
+<p class="caption">
+Figure 5: Lap distance (km)
+</p>
+</div>
+<p>Hmm. There’s a few laps with massive distance outliers… and some that just look like they’re recorded differently. Perhaps the outliers are best fixed by replacing with NA and letting the rest of the data set the distance for that lap. Those that are recorded differently are perhaps unretreivable (or I could go back and make [private] segments in Strava to match).</p>
+<p>Those that don’t match (mean difference between Access and Strava &gt; 100 m) are in Table <a href="#tab:diffLaps">6</a></p>
+<table>
+<caption>
+<span id="tab:diffLaps">Table 6: </span>Segments with a difference in mean distance between Strava and Access of greater than 100 m
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+LapName
+</th>
+<th style="text-align:right;">
+Access
+</th>
+<th style="text-align:right;">
+Strava(Veloviewer)
+</th>
+<th style="text-align:right;">
+&lt;NA&gt;
+</th>
+<th style="text-align:right;">
+meanDistDiff
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Clarendon to Humpty
+</td>
+<td style="text-align:right;">
+6.525500
+</td>
+<td style="text-align:right;">
+6.153132
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+372.3680
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Greenhill Road
+</td>
+<td style="text-align:right;">
+7.283000
+</td>
+<td style="text-align:right;">
+7.170493
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+112.5071
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Humpty
+</td>
+<td style="text-align:right;">
+2.441476
+</td>
+<td style="text-align:right;">
+2.559759
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+118.2832
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Last climb to Deviation
+</td>
+<td style="text-align:right;">
+1.962600
+</td>
+<td style="text-align:right;">
+1.812737
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+149.8632
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pole Rd to Ironbank
+</td>
+<td style="text-align:right;">
+1.730000
+</td>
+<td style="text-align:right;">
+2.877453
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+1147.4526
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Old Freeway (Tollgate to Bollards)
+</td>
+<td style="text-align:right;">
+8.642000
+</td>
+<td style="text-align:right;">
+8.775616
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+133.6155
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Windy Point Climb
+</td>
+<td style="text-align:right;">
+3.152143
+</td>
+<td style="text-align:right;">
+3.605317
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+453.1745
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span id="fig:lapCheckDistII"></span>
+<img src="/post/20170714_rides_files/figure-html/lapCheckDistII-1.png" alt="Lap distance (km)" width="672" />
+<p class="caption">
+Figure 6: Lap distance (km)
+</p>
+</div>
+</div>
+<div id="distribution-of-times-on-certain-climbs" class="section level2">
+<h2>Distribution of times on certain climbs</h2>
+<div id="mt-osmond" class="section level3">
+<h3>Mt Osmond</h3>
+<div class="figure"><span id="fig:lapMtO"></span>
+<img src="/post/20170714_rides_files/figure-html/lapMtO-1.png" alt="Mt Osmond lap times" width="672" />
+<p class="caption">
+Figure 7: Mt Osmond lap times
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="average-km" class="section level1">
+<h1>Average km</h1>
+<div id="monthly" class="section level2">
+<h2>Monthly</h2>
+<p>How many km were ridden each month over the whole span of records.</p>
+<p><img src="/post/20170714_rides_files/figure-html/distYearMonth-1.png" width="672" /></p>
+<p>After the initial drop from the larger km in the late 90s - early 00s, i’m surprised at how variable the data points are are but how relatively stable the non-commute model is. Since about 2007 i’ve consistently ridden 500 km a month, with most of the variation coming from commuting km. Breaking these data down by bike type in the next plot…</p>
+<p><img src="/post/20170714_rides_files/figure-html/distYearMonthByBike-1.png" width="672" /></p>
+<p>The drop in the roadie km, partially offset by an increase in cx km. Between 2006 and 2012 I commuted on the tourer - a round trip of about 40 km, possibly accounting for the increased use through those years. Perhaps most surprising to me is the <em>increase</em> in monthly mtb km, although they do dive towards the end of this dataset so maybe i’m just remembering that drop. Glad to see an increasing trend at the end of the dataset, other than mtb.</p>
+<p>Taking the average monthly km over this period gives…</p>
+<p><img src="/post/20170714_rides_files/figure-html/avDistMonthly-1.png" width="672" /></p>
+<p>January is clearly riding month (summer, tour down under, good weather). The winter peak (July, August) is probably driven by riding escapes to warmer climes rather than any <a href="http://www.velominati.com/the-rules/#9">Rule 9</a> tendencies. No idea why October has ended up with so little riding through the years.</p>
+<p>Do the ride type data support any of this speculation…</p>
+<p><img src="/post/20170714_rides_files/figure-html/avDistMonthlyByBikeType-1.png" width="672" /></p>
+<p>Increased tourer use in winter supports the ‘escape to warmer climes’ theory.</p>
+</div>
+</div>
+<div id="querying-the-data" class="section level1">
+<h1>Querying the data</h1>
+<div id="rides" class="section level2">
+<h2>Rides</h2>
+<p>Combining the datasets then allows querying all ride data from 1999 to 2018. The geocode function from the ggmap package helped standardise location information between datasets.</p>
+<ul>
+<li>individual rides: 4931</li>
+<li>days with a ride: 3510</li>
+<li>total distance: 152,933 km</li>
+<li>earliest ride in the dataset: 04/June/1999
+<ul>
+<li>with description: <code>Eastwood-Airport-Airport-Ubud</code></li>
+</ul></li>
+<li>longest mtb: 208.8 km
+<ul>
+<li>with description: <code>01/11/14 Blinman, South Australia, Australia. https://www.strava.com/activities/214980907</code></li>
+</ul></li>
+<li>highest ascent: 4521 m
+<ul>
+<li>with description: <code>Magic. https://www.strava.com/activities/777793194</code></li>
+</ul></li>
+<li>rides have started in: Australia, China, Indonesia, Italy, Jordan, Malaysia, New Caledonia, Pakistan, Singapore, United States</li>
+</ul>
+</div>
+<div id="laps" class="section level2">
+<h2>Laps</h2>
+<p>The 1870 efforts were from 26 starred laps ridden 15 or more times. Some summaries:</p>
+<ul>
+<li>most ridden segment is <code>Belair NP - Eastern Gate</code> with 353 efforts
+<ul>
+<li>fastest effort being 1970-01-01 00:03:42 ridden on the roadie</li>
+<li>slowest effort being 1970-01-01 00:18:51</li>
+<li>mean time for the effort 00:06:28</li>
+</ul></li>
+<li>highest average heart rate for an effort was 183 bpm on segment Belair Rd
+<ul>
+<li>in 1970-01-01 00:11:52: May 2003</li>
+<li>best effort for that lap was 00:10:23</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="other-analyses" class="section level1">
+<h1>Other analyses</h1>
+<div id="temperature" class="section level2">
+<h2>Temperature</h2>
+<p>What effect does temperature have on distance?</p>
+<p><img src="/post/20170714_rides_files/figure-html/tempDist-1.png" width="672" /></p>
+<p>Having the luxury of riding mostly for enjoyment, I do seem to choose pleasant temperatures for longer rides.</p>
+</div>
+<div id="countries" class="section level2">
+<h2>Countries</h2>
+<p>Does ride characteristics change in different countries?</p>
+<p><img src="/post/20170714_rides_files/figure-html/country-1.png" width="672" /></p>
+</div>
+<div id="ascent-with-time" class="section level2">
+<h2>Ascent with time</h2>
+<p><img src="/post/20170714_rides_files/figure-html/countryAscent-1.png" width="672" /></p>
+</div>
+<div id="calendar" class="section level2">
+<h2>Calendar</h2>
+<p><img src="/post/20170714_rides_files/figure-html/calendar-1.png" width="672" /></p>
+</div>
+<div id="ridge-plots" class="section level2">
+<h2>Ridge plots</h2>
+<p><img src="/post/20170714_rides_files/figure-html/distJoy-1.png" width="672" /></p>
+<p><img src="/post/20170714_rides_files/figure-html/elevJoy-1.png" width="672" /></p>
+</div>
+<div id="kudos" class="section level2">
+<h2>Kudos</h2>
+<p><img src="/post/20170714_rides_files/figure-html/kudosDist-1.png" width="672" /></p>
+<p><img src="/post/20170714_rides_files/figure-html/kudosAsc-1.png" width="672" /></p>
+</div>
+</div>
