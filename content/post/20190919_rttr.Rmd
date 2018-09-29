@@ -242,7 +242,7 @@ Sarah spent much more time moving than the other finishers!
       coord_flip() +
       riderFill +
       guides(fill = FALSE) +
-      labs(y = "Time stopped or moving at less than 5 km/h")
+      labs(y = "Hours stopped or moving at less than 5 km/h")
 
 ```
 
@@ -280,6 +280,7 @@ Mapping the speed by each data point results in the following maps. The map is s
 
 ```
 
+<br>
 
 ---
 
