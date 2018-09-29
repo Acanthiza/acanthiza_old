@@ -152,16 +152,18 @@ tags:
 
 # Race to the rock
 
-There are so many ways race to the rock is inspiring and good. For an introduction read about the first [2016 ride](https://www.curvecycling.com.au/blogs/news/37059717-race-to-the-rock-bike-packing-adventure-sep-2016). Race to the rock happened again in [2017](https://www.curvecycling.com.au/pages/race-to-the-rock-2017) and [2018](https://www.facebook.com/RaceToTheRock/). An active online community emerged quickly that serves up a constant stream of [visual inspiration](https://www.instagram.com/explore/tags/racetotherock/?hl=en).
+"It’s safer, less painful and less soul destroying to remain a dot watcher."
 
-This post is a little different, but hopefully adds another tasty tidbit to the race-to-the-rock soup.
+With those words for inspiration, this post takes dot watching several levels too far. 
 
-Each rider carries a live gps tracker that, in combination with [map progress website](http://maprogress.com/), provides easily accessible **data** about their ride. (The full data set is available [here]("https://racetotherock2018.maprogress.com/locations/download/?eventId=1052&format=csv")). Some quick summary stats:
+For an introduction to Race to the Rock perhaps read about the first [2016 ride](https://www.curvecycling.com.au/blogs/news/37059717-race-to-the-rock-bike-packing-adventure-sep-2016). Race to the rock happened again in [2017](https://www.curvecycling.com.au/pages/race-to-the-rock-2017) and [2018](https://www.facebook.com/RaceToTheRock/). There's an active online community serving up a constant stream of [visual inspiration](https://www.instagram.com/explore/tags/racetotherock/?hl=en). This post is a little different, but hopefully adds another tasty tidbit to the race-to-the-rock soup.
+
+Each rider carries a live gps tracker that, in combination with [map progress website](http://maprogress.com/), provides easily accessible ride data for each racer. (The full data for 2018 is available [here]("https://racetotherock2018.maprogress.com/locations/download/?eventId=1052&format=csv")). Some quick summary stats:
 
 * The data set for the four finishers provided `r nrow(dat)` datapoints
 * In `r round(100*sum(dat$speed < 0.5,na.rm=TRUE)/nrow(dat),1)`% of those datapoints were stopped (or less than 0.5 km/hr)
 
-This post is about playing around with that data.
+What other insights can the dot watcher gain from playing with these data...
 
 ---
 
