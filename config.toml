@@ -1,13 +1,13 @@
 baseurl = "/"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 languageCode = "en-us"
-title = "data rides nature"
+title = "Acanthiza"
 theme = "hugo-theme-hello-friend"
 copyright = ""
 paginate = 5
 
 [params]
-  subtitle = "A simple theme for Hugo"
+  subtitle = "data rides nature"
 
 [params.logo]
   logoText = "data rides nature"
