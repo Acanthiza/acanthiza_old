@@ -1,0 +1,262 @@
+---
+title: Race to the rock
+author: nige
+date: '2018-09-19'
+cover: "IMG_1806.JPG"
+categories:
+  - Bike
+  - R
+tags:
+  - dotwatcher
+  - mapprogress
+  - racetotherock
+  - data
+---
+
+```{r setup, include = F}
+
+  library("tidyverse") # everything data science related
+  library("lubridate")
+  library("bookdown")
+  library("knitr")
+  library("sf")
+  library("tmap")
+  library("tmaptools")
+  library("ggridges")
+  library("widgetframe")
+  library("DT")
+
+  knitr::opts_chunk$set(echo = F
+                        , warning = F
+                        , message = F
+                        #, include = F
+                        , collapse = TRUE
+                        )
+
+```
+
+```{r functions}
+  
+# https://stackoverflow.com/questions/48949608/make-many-circles-with-st-buffer-at-multiple-geographic-locations
+  utm_prj4 <- function(x) {
+
+    coords <- x$geometry
+  
+    long <- coords$X
+    lat <- coords$Y
+  
+    zone <- if(lat >= 56 && lat < 64 && long >= 3 && long < 12){x <- 32} else if(
+      lat >= 72 && lat < 84 && long >= 0 && long < 9) {x <- 31} else if(
+        lat >= 72 && lat < 84 && long >= 9 && long < 21) {x <- 33} else if(
+          lat >= 72 && lat < 84 && long >= 21 && long < 33) {x <- 35} else if(
+            lat >= 72 && lat < 84 && long >= 33 && long < 42) {x <- 37} else{
+              x <- (floor((long + 180)/6) %% 60) + 1
+            }
+    prj <- purrr::map2_chr(zone, lat, function(y, z){
+      if (z >= 0){
+        paste0("+proj=utm +zone=", y, " +datum=WGS84 +units=m +no_defs")
+      } else{
+        paste0("+proj=utm +zone=", y, " +south", " +datum=WGS84 +units=m +no_defs")
+      }})
+    prj
+  }
+
+
+```
+
+```{r getData}
+
+  latest <- read_csv("../../data/latest.csv")
+  #read_csv("https://racetotherock2018.maprogress.com/locations/download/?eventId=1052&format=csv") %>% write_csv("../../data/latest.csv")
+
+  entree <- read_GPX(list.files("../../data/",pattern="Entree",full.names = TRUE))$track_points
+  
+  main <- read_GPX(list.files("../../data/",pattern="Main",full.names = TRUE))$track_points
+  
+  full <- entree %>%
+    rbind(main) %>%
+    dplyr::mutate(track_seq_point_id = rownames(.)) %>%
+    dplyr::select(track_seq_point_id,geometry)
+
+```
+
+```{r fixData}
+
+  dat <- latest %>%
+    dplyr::group_by(Name) %>%
+    tidyr::nest() %>%
+    dplyr::ungroup(Name) %>%
+    dplyr::slice(1:3) %>%
+    dplyr::mutate(data = map(data,st_as_sf,coords = c("Longitude","Latitude"),crs = st_crs(full))
+                  , data = map(data, function(x) x %>% dplyr::mutate(ID = as.numeric(row.names(.))))
+                  , tree = map(data,~createTree(st_coordinates(.)))
+                  )
+
+  datToFull <- dat %>%
+    dplyr::mutate(index = map(tree,knnLookup,newdat=st_coordinates(full),k=1)
+                  , index = map(index,as_tibble)
+                  , full = map(index,~bind_cols(full,.))
+                  , full = map2(full,data,function(.x,.y) .x %>% dplyr::rename(ID = V1) %>% dplyr::left_join(.y %>% as.data.frame %>% dplyr::select(-geometry)))
+                  , full = map(full,~st_as_sf(.,st_crs(full)))
+                  , full = map(full, function(x) x %>%
+                                 dplyr::group_by(ID) %>%
+                                 dplyr::summarise(n = n(),do_union=FALSE) %>%
+                                 st_cast("LINESTRING")
+                               )
+                  ) %>%
+    tidyr::unnest(full) %>%
+    dplyr::mutate(geo = map_dbl(geometry,length)) %>%
+    dplyr::filter(geo > 2) %>%
+    dplyr::left_join(dat %>%
+                       tidyr::unnest(data) %>%
+                       dplyr::select(Name,ID,Number,Time)
+                     ) %>%
+    dplyr::group_by(Name,ID,Number,Time) %>%
+    tidyr::nest() %>%
+    dplyr::mutate(full = map(data,~st_as_sf(.,st_crs(full))))
+    
+  tm_shape(dat$full[[1]]) +
+    tm_dots() +
+  tm_shape(full) +
+    tm_lines()
+
+```
+
+
+
+```{r data}
+
+  dat <- latest %>%
+    dplyr::mutate(Rider = Name
+                  , Rider = fct_relevel(Rider, c("Sarah Hammond","Erinn Klein","Nick Skarajew","Emma Flukes"))
+                  ) %>%
+    dplyr::group_by(Rider) %>%
+    dplyr::mutate(timeDiff = Time - lag(Time, default = dmy_hm("01/09/2018 06:22"))
+                  , timeDiffHr = timeDiff/(60*60)
+                  , km = (`Distance (metres)`-lag(`Distance (metres)`, default = 0))/1000
+                  , speed = km/as.numeric(timeDiffHr)
+                  , dist = sum(km,na.rm = TRUE)
+                  , cumDist = cumsum(dist)/1000
+                  , week = as.numeric(round(difftime(Time,min(Time),units = "weeks"),0))+1
+                  ) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(dist > 3000)
+  
+  col <- c("#ac04d4","#2D42BD","#067F27","#42394E")
+  names(col) <- levels(factor(dat$Rider))
+  riderFill <- scale_fill_manual(name = "Rider", values = col)
+  riderCol <- scale_colour_manual(name = "Rider", values = col)
+
+```
+
+# Race to the rock
+
+There are so many ways race to the rock is inspiring and good. For an introduction read about the first [2016 ride](https://www.curvecycling.com.au/blogs/news/37059717-race-to-the-rock-bike-packing-adventure-sep-2016). Race to the rock happened again in [2017](https://www.curvecycling.com.au/pages/race-to-the-rock-2017) and [2018](https://www.facebook.com/RaceToTheRock/). An active online community emerged quickly that serves up a constant stream of [visual inspiration](https://www.instagram.com/explore/tags/racetotherock/?hl=en).
+
+This post is a little different, but hopefully adds another tasty tidbit to the race-to-the-rock soup.
+
+Each rider carries a live gps tracker that, in combination with [map progress website](http://maprogress.com/), provides easily accessible **data** about their ride. (The full data set is available [here]("https://racetotherock2018.maprogress.com/locations/download/?eventId=1052&format=csv")). Some quick summary stats:
+
+* The data set for the four finishers provided `r nrow(dat)` datapoints
+* In `r round(100*sum(dat$speed < 0.5,na.rm=TRUE)/nrow(dat),1)`% of those datapoints were stopped (or less than 0.5 km/hr)
+
+This post is about playing around with that data.
+
+---
+
+## Distance
+
+```{r dist}
+
+  dat %>%
+    ggplot(aes(Time,cumDist, colour = Rider)) +
+      geom_point() +
+      riderCol
+
+```
+
+---
+
+## Speeds
+
+Figure \@ref(fig:speedPlot) shows the distribution of speed in km/hr between each pair of data points.
+
+```{r speedPlot, fig.cap = "Distribution of speed", out.width="120%"}
+
+  datSpeed <- dat %>%
+    dplyr::filter(speed > 0
+                  , !is.na(speed)
+                  )
+
+  
+  datSpeed %>%
+    ggplot() +
+      geom_density_ridges(aes(speed
+                              , Rider
+                              , fill = Rider
+                              )
+                   , alpha = 0.5
+                   , panel_scaling = FALSE
+                   ) +
+      facet_grid(~week) + 
+      xlim(c(0,35)) +
+      labs(title = paste0("Distribution of speed by week ",min(datSpeed$week), " to ", max(datSpeed$week))
+           , x = "Speed (km/hr)"
+           ) +
+      guides(fill = FALSE) +
+      riderFill
+
+```
+
+---
+
+Mapping the speed by each data point results in Figure \@ref(fig:map). The map is set to zoom on about Leigh Creek, but you can pan/zoom anywhere.
+
+```{r map, out.width = "110%", fig.cap = "Speed by location"}
+
+  Speed <- st_as_sf(datSpeed
+                    , coords = c("Longitude","Latitude")
+                    , crs = 4326
+                    )
+
+  tmap_mode("view")
+
+  tm_shape(Speed) +
+    tm_dots(col = "speed"
+            , palette = "plasma"
+            , breaks = c(0,0.1,5,10,15,20,25,100)
+            , alpha = 0.5
+            ) +
+  tm_facets(by = "Rider"
+              , free.coords = FALSE
+              , ncol = 2
+              ) +
+    tm_shape(entree) +
+    tm_lines() +
+  tm_shape(main) +
+    tm_lines() +
+  tm_basemap(c("OpenStreetMap.Mapnik")) +
+    tm_view(set.view = c(138.405958,-30.594151,9))
+
+```
+
+<br>
+
+---
+
+The following table shows the first few records for each rider. If the table options are hard to see, press the lightbulb at the top-right of the page to switch to 'light' mode.
+
+```{r dataTable}
+
+  datatable(latest %>%
+                dplyr::group_by(Name) %>%
+                dplyr::slice(1:10) %>%
+                dplyr::ungroup()
+          , rownames = FALSE
+          )
+    
+```
+
+
+
+        

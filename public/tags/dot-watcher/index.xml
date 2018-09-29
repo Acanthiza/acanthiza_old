@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dot Watcher on data bikes nature</title>
+    <link>/tags/dot-watcher/</link>
+    <description>Recent content in Dot Watcher on data bikes nature</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/dot-watcher/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Race to the rock</title>
+      <link>/post/rttr/</link>
+      <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/rttr/</guid>
+      <description>Race to the rock data analysis Data are available from the map progress website for race to the rock 2018. Table 1 shows how the format of the data straight from the map progress website.
+I offer the following visualisations as yet another tid-bit to add to the race-to-the-rock soup.
+ Table 1: Data come out looking like this  Number Name Time Unix Seconds Latitude Longitude Distance (metres) Elevation (metres) Message Type Message Detail Source Time Zone    1 Adam Lana 2018-09-01 06:32:29 1535747549 -43.</description>
+    </item>
+    
+  </channel>
+</rss>
