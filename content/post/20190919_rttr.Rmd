@@ -280,9 +280,9 @@ Mapping the speed by each data point results in the following maps. The map is s
 
 ```
 
-<br>
-
 ---
+
+## Wrap-up  
 
 Thanks for making it this far...
 

@@ -22,6 +22,6 @@ paginate = 5
     name = "About"
     url = "/about"
   [[menu.main]]
-    identifier = "showcase"
-    name = "Showcase"
-    url = "/showcase"
+    identifier = "Rides"
+    name = "Rides"
+    url = "/Rides"
