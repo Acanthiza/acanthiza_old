@@ -48,11 +48,29 @@
     </item>
     
     <item>
+      <title>Rides</title>
+      <link>/tags/rides/</link>
+      <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rides/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Strava</title>
       <link>/tags/strava/</link>
       <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/strava/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Veloviewer</title>
+      <link>/tags/veloviewer/</link>
+      <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/veloviewer/</guid>
       <description></description>
     </item>
     

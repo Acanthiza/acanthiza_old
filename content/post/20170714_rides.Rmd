@@ -4,27 +4,14 @@ author: nige
 date: '2017-07-14'
 cover: "IMG_4866.jpg"
 categories:
-  - Bike
-  - R
-  - Strava
+  - data
+  - rides
 tags:
   - strava
+  - veloviewer
   - data
+  - rides
 ---
-
-# The data
-
-## Ride data
-
-Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to [Ascent](http://www.montebellosoftware.com/) to [Strava](http://www.strava.com) to store ride data. Recently the following have provided the potential to make combining these data easy:
-
-* workflow, particularly with
-    + [tidyverse](http://tidyverse.org/)
-    + [rmarkdown](http://rmarkdown.rstudio.com/)
-* apps to rip data out of MS Access databases from a mac [mdb accdb Viewer](https://eggerapps.at/mdbviewer/)
-* the export .csv button on most pages on [Veloviewer](http://www.veloviewer.com)
-
-This is the piecing together and exploration of those data.
 
 ```{r setup, include = F}
 
@@ -46,12 +33,10 @@ This is the piecing together and exploration of those data.
                         )
   
   options(knitr.kable.NA = ''
-          , knitr.table.format = "html"
+          #, knitr.table.format = "html"
           )
 
 ```
-
-
 
 ```{r functions}
 
@@ -65,13 +50,11 @@ This is the piecing together and exploration of those data.
     
   }
 
-
 ```
 
+```{r dataRidesAccess}
 
-```{r dataAccess}
-
-# data from access database rel/RideMaster.mdb
+  # data from access database rel/RideMaster.mdb
   dat1 <- read_csv("../../data/Ride.csv") %>%
     dplyr::left_join(read_csv("../../data/LapTime.csv"), by = "RideID") %>%
     dplyr::left_join(read_csv("../../data/LapInfo.csv"), by = "LapID") %>%
@@ -114,20 +97,11 @@ This is the piecing together and exploration of those data.
     dplyr::select(-State,-Country,-RideType) %>%
     tidyr::nest()
 
-  kable(dat1 %>% slice(1:10) %>% select(1:6,-2)
-        , format = "html"
-        , pad = 0
-        , caption = "First few rows/columns of the ride data from MS Access"
-        )
-
 ```
 
+```{r dataRideStrava}
 
-\n
-
-
-```{r dataStrava, results = 'asis'}
-# data from strava - via veloviewer
+  # data from strava - via veloviewer
   # ride data
 
   dat2 <- tibble(files = list.files("../../data/")) %>%
@@ -166,21 +140,11 @@ This is the piecing together and exploration of those data.
                   , Gear, loc1 = City, loc2 = State, Kudos, Notes
                   )
 
-  kable(dat2 %>% slice(1:10) %>% select(1:6,-2)
-        , format = "html"
-        , pad = 0
-        , caption = "First few rows/columns of ride data from Strava" 
-        )
-   
 ```
 
+```{r dataRidesCombine}
 
-\n
-
-
-```{r dataCombine}
-
-# combine the two datasets
+  # combine the two datasets
   dat <- dat1 %>%
     bind_rows(dat2) %>%
     dplyr::filter(!is.na(Dist)) %>%
@@ -216,16 +180,8 @@ This is the piecing together and exploration of those data.
   
 # fix dodgy elevation reading from China
   dat[dat$Ascent > 6000 & !is.na(dat$Ascent),'Ascent'] <- 2500
-  
-  
+
 ```
-
-Comining these datasets gives `r nrow(dat)` individual rides.
-
-## Lap data
-
-Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.
-
 
 ```{r dataLapsAccess}
 
@@ -234,19 +190,7 @@ Having Strava do all the work makes recording segments (efforts/laps) all too ea
     tidyr::unnest() %>%
     dplyr::filter(!is.na(LTime), LapName != "")
 
-  kable(accessLaps %>% slice(1:10) %>% select(2:7)
-        , format = "html"
-        , pad = 0
-        , caption = "First few rows/columns of segment data from MS Access" 
-        )
-
 ```
-
-
-
-\n
-
-
 
 ```{r dataLapsStrava}
 
@@ -272,21 +216,9 @@ Having Strava do all the work makes recording segments (efforts/laps) all too ea
                   , LTemperature = Temp
                   )
 
-  kable(stravaLaps %>% slice(1:10) %>% select(2:7)
-        , format = "html"
-        , pad = 0
-        , caption = "First few rows/columns of segment data from strava" 
-        )
-  
 ```
 
-
-
-\n
-
-
-
-```{r lapsCombine}
+```{r dataLapsCombine}
 
   starList <- tibble(LapName = c(unique(stravaLaps$LapName),"MtOsmond-Bullock-OldFreeway","Tilleys Hil Rd"))
 
@@ -335,9 +267,89 @@ Having Strava do all the work makes recording segments (efforts/laps) all too ea
                   , meanTime
                   , Best
                   ) %>%
-    dplyr::ungroup()
+    dplyr::ungroup() %>%
+    dplyr::filter(!is.na(Source))
   
   lapSummary <- laps %>% dplyr::select(LapName,efforts) %>% unique()
+
+```
+
+# The data
+
+## Ride data
+
+Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to [Ascent](http://www.montebellosoftware.com/) to [Strava](http://www.strava.com) to store ride data. Recently the following have provided the potential to make combining these data easy:
+
+* workflow, particularly with
+    + [tidyverse](http://tidyverse.org/)
+    + [rmarkdown](http://rmarkdown.rstudio.com/)
+* apps to rip data out of MS Access databases from a mac [mdb accdb Viewer](https://eggerapps.at/mdbviewer/)
+* the export .csv button on most pages on [Veloviewer](http://www.veloviewer.com)
+
+This is the piecing together and exploration of those data.
+
+---
+
+```{r dataAccess}
+
+  kable(dat1 %>% slice(1:5) %>% select(1:6,-2)
+        , format = "html"
+        , pad = 0
+        , caption = "First few rows/columns of the ride data from MS Access"
+        )
+
+```
+
+---
+
+```{r dataStrava}
+
+  kable(dat2 %>% slice(1:5) %>% select(1:6,-2)
+        , format = "html"
+        , pad = 0
+        , caption = "First few rows/columns of ride data from Strava" 
+        )
+   
+```
+
+Comining the datasets gives `r nrow(dat)` individual rides.
+
+---
+
+## Lap data
+
+Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.
+
+Given the plethora of segments on Strava these days, filtering the segments of interest is probably worthwhile. As a starting point, starred segments ridden more than `r effortThresh` times gives `r nrow(lapSummary)` segments (Table \@ref(tab:lapsCombine)).
+
+Combining the segment data gives `r nrow(laps)` individual efforts on `r nrow(lapSummary)` segments which were both starred and ridden more than `r effortThresh` times.
+
+
+```{r lapsAccess}
+
+  kable(accessLaps %>% slice(1:10) %>% select(2:7)
+        , format = "html"
+        , pad = 0
+        , caption = "First few rows/columns of segment data from MS Access" 
+        )
+
+```
+
+---
+
+```{r lapsStrava}
+
+  kable(stravaLaps %>% slice(1:10) %>% select(2:7)
+        , format = "html"
+        , pad = 0
+        , caption = "First few rows/columns of segment data from strava" 
+        )
+  
+```
+
+---
+
+```{r lapsCombine}
   
   kable(lapSummary %>% arrange(desc(efforts))
         , caption = paste0("Starred laps with more than ",effortThresh," efforts")
@@ -345,10 +357,7 @@ Having Strava do all the work makes recording segments (efforts/laps) all too ea
   
 ```
 
-
-Given the plethora of segments on Strava these days, filtering the segments of interest is probably worthwhile. As a starting point, starred segments ridden more than `r effortThresh` times gives `r nrow(lapSummary)` segments (Table \@ref(tab:lapsCombine)).
-
-Combining the segment data gives `r nrow(laps)` individual efforts on `r nrow(lapSummary)` segments which were both starred and ridden more than `r effortThresh` times.
+---
 
 # Data checks
 
@@ -370,7 +379,8 @@ A series of visual plots as quick data checks.
 
 Nothing concerning here. Apparently rides were more likely to be combined within a day in Access and more likely to recorded individualy on Strava.
   
-  
+---
+
 ```{r dataCheckDist, fig.cap = "Daily distance (km)"}
 
   dat %>% dplyr::group_by(Date,Source) %>%
@@ -387,6 +397,7 @@ All looks ok. A few patterns:
 * Increased frequency of very short rides after 2015
 * Very few very short rides recorded in late 90s /early 00s
 
+---
 
 ```{r dataCheckTime, fig.cap = "Daily time"}
 
@@ -402,9 +413,7 @@ All looks ok. A few patterns:
 
 Again, looks fine. Patterns are almost identical to daily km.
 
-
-\n
-
+---
   
 ```{r dataCheckAscent, fig.cap = "Daily ascent (m)"}
 
@@ -417,9 +426,7 @@ Again, looks fine. Patterns are almost identical to daily km.
 
 Ascent data only starts in ~2006 - a shame looking back as the bike computer from 2001 onwards recorded ascent. There's an increase in ascent after moving back to the hills in march 2007 and a drop after moving to the 'flats' in late 2014.
 
-
-\n
-
+---
 
 ```{r dataCheckMaxHR} 
   
@@ -432,9 +439,7 @@ Ascent data only starts in ~2006 - a shame looking back as the bike computer fro
 
 Garmin/Strava websites must do a good job of filtering max heart rates that are dubious, cause i've never seen the ridiculous maximum heart rates shown here. This graph brings back memories of manually adjusting polar HR data to remove spurious data peaks (from memory that applied to speed as well as hr).
 
-
-\n
-
+---
 
 ```{r dataCheckAvHR}
   
@@ -447,9 +452,7 @@ Garmin/Strava websites must do a good job of filtering max heart rates that are 
 
 hmmm. seems i'm slowing down.
 
-
-\n
-
+---
 
 ```{r dataCheckAvPwr}
 
@@ -462,9 +465,7 @@ hmmm. seems i'm slowing down.
 
 I only got a power meter in 2012. I commuted on the cx (the bike with the power meter) from then until leaving the hills in late 2014. Seems there's opportunity to ride a bit harder these days. Patchy data is a reflection of the flaky nature of the [stages](https://stagescycling.com/) power meter - doubt i'd get another one.
 
-
-\n
-
+---
 
 ```{r dataCheckTemp}
   
@@ -477,10 +478,8 @@ I only got a power meter in 2012. I commuted on the cx (the bike with the power 
 
 This was surprising to me for some reason. Clearly it's warmer in summer and cooler in winter.
 
+---
 
-\n
-
-  
 ```{r dataCheckAvS}
 
   dat %>%
@@ -491,6 +490,8 @@ This was surprising to me for some reason. Clearly it's warmer in summer and coo
 ```
 
 Wow, wtf is going on with Strava(Veloviewer) average speeds? That might take some looking into. Try recalculating from raw distance and time data.
+
+---
 
 ```{r dataCheck2AvS}
 
@@ -503,11 +504,13 @@ Wow, wtf is going on with Strava(Veloviewer) average speeds? That might take som
 
 Much better. Some interesting patterns there with commutes/non-commute average speeds.
 
+---
+
 Some other interesting overall trends visible in these data:
 
 * data gaps
     + early 2000s - can't really remember what happened there
-    + 2009 (see note below)
+    + 2009 distances (see note below)
     + 2015 (ankle injury - perhaps most obvious in the AvHR plot)
 * increasing recording of short rides
 * little obvious difference between devices (good), which for the record were (in order):
@@ -516,11 +519,13 @@ Some other interesting overall trends visible in these data:
     + [Polar s725x](https://www.polar.com/support_files/en/C225742500419A8AC2257097003888BC/Polar_S625X_S725X_user_manual_English.pdf) (ascent data starts about mid-2006)
     + [Garmin Edge 705](http://static.garmin.com/pumac/2297_OwnersManual.pdf) (after 2009 data gap)
     + [Garmin Edge 810](http://static.garmin.com/pumac/Edge810_OM_EN.pdf) (from where temperature data starts mid-2015)
+    + [Wahoo elemnt bolt]() (from September 2018 as the edge 810 stopped charging)
 * the garmins seem to record dodgy maximum heart rates frequently (although perhaps i filtered this manually with the polar)
     + the premium heart rate strap may have fixed this in latter data (need to check purchase date...) 
 
-For the missing 2009 data - it's in a '.tlp' file used by the 'Ascent' app. I've lost the registration key for the app so it's unobtainable at the moment.
+For the missing 2009 speed/distance data - from memory my polar sensor was failing. I think I used to enter the distance manually after the ride. That's all stored in a '.tlp' file used by the 'Ascent' app. I've lost the registration key for the app so it's unobtainable at the moment. I managed to get the time and heart rate data by uploading the .hrm files to strava.
 
+---
 
 ## Lap data
 
@@ -540,6 +545,7 @@ Hmm. There's a few laps with massive distance outliers... and some that just loo
 
 Those that don't match (mean difference between Access and Strava > 100 m) are in Table \@ref(tab:diffLaps)
 
+---
 
 ```{r diffLaps}
 
@@ -562,8 +568,7 @@ Those that don't match (mean difference between Access and Strava > 100 m) are i
 
 ```
 
-
-
+---
 
 ```{r lapCheckDistII, fig.cap = "Lap distance (km)"}
 
@@ -584,275 +589,9 @@ Those that don't match (mean difference between Access and Strava > 100 m) are i
   
 ```
 
+---
 
-## Distribution of times on certain climbs
+# Wrap-up
 
-### Mt Osmond
-
-```{r lapMtO, fig.cap = "Mt Osmond lap times"}
-
-  laps %>%
-    dplyr::filter(LapName %in% c("Mt Osmond (Beaumont side short)"
-                                 ,"Greenhill Road"
-                                 ,"Belair Rd"
-                                 ,"Full Norton - bridge to gates"
-                                 , "MtOsmond-Bullock-OldFreeway"
-                                 , "Scott Creek Road"
-                                 )
-                  ) %>%
-    #dplyr::filter(LapName == "Greenhill Road") %>%
-    ggplot(aes(Time, as.character(halfDec), colour = Gear, fill = Gear)) +
-      geom_density_ridges(alpha = 0.5) +
-      facet_wrap(~LapName, scales = "free_x") +
-      geom_rug(alpha=0.5)
-  
-```
-
-# Average km
-
-## Monthly
-
-How many km were ridden each month over the whole span of records.
-
-```{r distYearMonth}
-
-  dat %>% group_by(yearMonth,Commute) %>%
-    dplyr::summarise(Dist = sum(Dist)) %>%
-    ggplot(aes(yearMonth,Dist, colour = Commute)) +
-      geom_point() +
-      geom_smooth() +
-      scale_y_continuous(breaks=seq(0,11000,1000)) +
-      scale_x_continuous(breaks=seq(1999,2017,1)) + 
-      geom_smooth(data = (dat %>% group_by(yearMonth) %>% dplyr::summarise(Dist = sum(Dist)))
-                  , aes(yearMonth,Dist)
-                  , inherit.aes = F
-                  )
-   
-```
-
-After the initial drop from the larger km in the late 90s - early 00s, i'm surprised at how variable the data points are are but how relatively stable the non-commute model is. Since about 2007 i've consistently ridden 500 km a month, with most of the variation coming from commuting km. Breaking these data down by bike type in the next plot...
-
- 
-```{r distYearMonthByBike}
-
-  includeGear <- dat %>% dplyr::group_by(Gear) %>%
-    dplyr::summarise(n = n()) %>%
-    dplyr::filter(n > 200)
-
-  dat %>% dplyr::inner_join(includeGear) %>%
-    dplyr::group_by(yearMonth, Gear) %>%
-    dplyr::summarise(Dist = sum(Dist)) %>%
-    ggplot(aes(yearMonth,Dist, colour = Gear)) +
-      geom_point(shape = 16, alpha = 0.7, size = 2) +
-      geom_smooth(se = F, span = 0.7)
-
-```
-
-The drop in the roadie km, partially offset by an increase in cx km. Between 2006 and 2012 I commuted on the tourer - a round trip of about 40 km, possibly accounting for the increased use through those years. Perhaps most surprising to me is the *increase* in monthly mtb km, although they do dive towards the end of this dataset so maybe i'm just remembering that drop. Glad to see an increasing trend at the end of the dataset, other than mtb.
-
-Taking the average monthly km over this period gives...
-
-```{r avDistMonthly}
-
-  dat %>%
-    dplyr::group_by(yearMonth, Month, Commute) %>%
-    dplyr::summarise(Dist = sum(Dist)) %>%
-    dplyr::group_by(Month, Commute) %>%
-    dplyr::summarise(Dist = mean(Dist), sdDist = sd(Dist)) %>%
-    ggplot(aes(Month, Dist, colour = Commute)) +
-      geom_point(shape = 16, alpha = 0.7, size = 2) +
-      geom_smooth(span = 0.7)
-  
-```
-
-January is clearly riding month (summer, tour down under, good weather). The winter peak (July, August) is probably driven by riding escapes to warmer climes rather than any [Rule 9](http://www.velominati.com/the-rules/#9) tendencies. No idea why October has ended up with so little riding through the years.
-
-Do the ride type data support any of this speculation...
-
-```{r avDistMonthlyByBikeType}
-
-  dat %>% dplyr::inner_join(includeGear) %>%
-    dplyr::group_by(yearMonth, Month, Gear) %>%
-    dplyr::summarise(Dist = sum(Dist)) %>%
-    dplyr::group_by(Month,Gear) %>%
-    dplyr::summarise(Dist = mean(Dist), sdDist = sd(Dist)) %>%
-    ggplot(aes(Month, Dist, colour = Gear)) +
-      geom_point(shape = 16, alpha = 1, size = 2) +
-      geom_smooth(se = F, span = 0.7)
-  
-```
-
-Increased tourer use in winter supports the 'escape to warmer climes' theory.
-
-
-# Querying the data
-
-## Rides
-
-Combining the datasets then allows querying all ride data from `r format(min(dat$Date), "%Y")` to `r format(max(dat$Date), "%Y")`. The geocode function from the ggmap package helped standardise location information between datasets.
-
-* individual rides: `r nrow(dat)`
-* days with a ride: `r length(unique(dat$Date))`
-* total distance: `r format(round(sum(dat$Dist),0), big.mark = ",")` km
-* earliest ride in the dataset: `r format.Date(min(dat$Date), "%d/%B/%Y")`
-    + with description: ``r unlist(dat[dat$Date == min(dat$Date),'Notes'])``
-* longest mtb: `r dat %>% dplyr::filter(Gear == "mtb") %>% dplyr::summarise(max(Dist)) %>% round(1)` km
-    + with description: ``r dat %>% dplyr::filter(Gear == "mtb") %>% dplyr::top_n(1,Dist) %>% dplyr::select(Notes) %>% unlist()``
-* highest ascent: `r dat %>% dplyr::filter(Gear != "tourer") %>% dplyr::summarise(max(Ascent, na.rm = T))` m
-    + with description: ``r dat %>% dplyr::top_n(1,Ascent) %>% dplyr::select(Notes) %>% unlist()``
-* rides have started in: `r sort(unique(dat$country) %>% na.omit())`
-
-## Laps
-
-The `r nrow(laps)` efforts were from `r nrow(lapSummary)` starred laps ridden `r effortThresh + 1` or more times. Some summaries:
-
-* most ridden segment is ``r lapSummary %>% top_n(1,efforts) %>% select(LapName) %>% unique()`` with `r laps %>% top_n(1,efforts) %>% dplyr::pull(efforts) %>% unique()` efforts
-    + fastest effort being `r laps %>% top_n(1,efforts) %>% top_n(-1,LTime) %>% dplyr::pull(Time)` ridden on the `r laps %>% top_n(1,efforts) %>% top_n(-1,LTime)  %>% dplyr::pull(Gear)`
-    + slowest effort being `r laps %>% top_n(1,efforts) %>% top_n(1,LTime) %>% dplyr::pull(Time)`
-    + mean time for the effort `r laps %>% top_n(1,efforts) %>% dplyr::pull(meanTime) %>% unique()`
-* highest average heart rate for an effort was `r laps %>% top_n(1,LHRAverage) %>% dplyr::pull(LHRAverage)` bpm on segment `r laps %>% top_n(1,LHRAverage) %>% dplyr::pull(LapName)`
-    + in `r laps %>% top_n(1,LHRAverage) %>% dplyr::pull(Time)`: `r laps %>% top_n(1,LHRAverage) %>% dplyr::pull(Date) %>% format("%B %Y")`
-    + best effort for that lap was `r laps %>% top_n(1,LHRAverage) %>% dplyr::pull(Best)`
-    
-# Other analyses
-
-## Temperature
-
-What effect does temperature have on distance?
-
-```{r tempDist}
-
-  dat %>% ggplot(aes(Dist,Temp, colour = Commute)) +
-    geom_point(alpha = 0.5)
-  
-```
-
-Having the luxury of riding mostly for enjoyment, I do seem to choose pleasant temperatures for longer rides.
-
-## Countries
-
-Does ride characteristics change in different countries?
-
-```{r country}
-
-  dat %>%
-    #dplyr::filter(country != "Australia") %>%
-    ggplot(aes(Dist, Time, colour = country)) +
-      geom_point(alpha = 0.4) +
-      geom_smooth(method = "loess", se = F)
-  
-```
-
-## Ascent with time
-
-```{r countryAscent}
-
-  dat %>%
-    dplyr::filter(Ascent > 1000) %>% 
-    dplyr::mutate(Time = as_datetime(Time, origin = lubridate::origin)) %>%
-    ggplot(aes(Time, Ascent, colour = Gear)) +
-      geom_point(shape = 16, size = 2, alpha = 0.5) +
-      geom_smooth(se = F)
-
-```
-
-
-## Calendar
-
-```{r calendar}
-
-  datCal <- dat %>%
-    dplyr::group_by(yearMonth) %>%
-    dplyr::mutate(MonthF = factor(Month
-                                  ,levels=as.character(1:12)
-                                  ,labels=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-                                  ,ordered=TRUE
-                                  )
-                  , Weekday = as.POSIXlt(Date)$wday
-                  , WeekdayF = factor(Weekday
-                                      ,levels=rev(0:6)
-                                      ,labels=rev(c("Mon","Tue","Wed","Thu","Fri","Sat","Sun"))
-                                      ,ordered=TRUE
-                                      )
-                  , YearMonthF = factor(yearMonth)
-                  , Week = as.numeric(format(Date,"%W"))
-                  
-                  , monthWeek = 1 + Week-min(Week)
-                  ) %>%
-    dplyr::group_by(Year,MonthF,yearMonth,monthWeek,WeekdayF) %>%
-    dplyr::summarise(Dist = sum(Dist)
-                     , Ascent = sum(Ascent)
-                     )
-                                  
-
-  ggplot(datCal, aes(monthWeek, WeekdayF, fill = Dist)) + 
-    geom_tile(colour = "black") +
-    facet_grid(Year~MonthF) +
-    scale_fill_gradient(low="blue", high="red") +
-    labs(title = "Distance Calendar Heatmap"
-         , x = "Week of Month"
-         , y = "Day of Week"
-         ) +
-    theme(text = element_text(size=8)
-          , strip.text.y = element_text(angle = 0)
-          )
-
-```
-
-
-## Ridge plots
-
-```{r distJoy}
-  
-  datCal %>%
-  ggplot(aes(Dist,as.character(Year))) +
-    geom_density_ridges() +
-    xlim(0,NA)
-  
-```
-
-```{r elevJoy}
-
-  datCal %>%
-  ggplot(aes(Ascent,as.character(Year))) +
-    geom_density_ridges() +
-    xlim(0,NA)
-
-```
-
-## Kudos
-
-```{r kudosDist}
-
-  dat %>%
-  dplyr::filter(!is.na(Kudos)
-                , Kudos > 0
-                , Commute != 1
-                , Dist > 50
-                , Date > "2016-01-01"
-                ) %>%
-  ggplot(aes(Date,Kudos,colour=Ascent,size=Ascent)) +
-    geom_point() +
-    geom_smooth()
-
-
-```
-
-
-```{r kudosAsc}
-
-  dat %>%
-  dplyr::filter(!is.na(Kudos)
-                , Kudos > 0
-                , Commute != 1
-                , Ascent > 200
-                ) %>%
-  ggplot(aes(Ascent,Kudos)) +
-    geom_point() +
-    facet_wrap(~Year) +
-    geom_smooth(method = "lm") +
-    xlim(50,NA)
-
-
-```
+All the data finally in one spot. For the first time since abandoning MS Access in 2009 when we got a mac. Plenty here to keep a ride-data-nerd happy for a long time.
 
