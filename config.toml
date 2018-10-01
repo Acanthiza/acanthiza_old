@@ -22,6 +22,6 @@ paginate = 5
     name = "About"
     url = "/about"
   [[menu.main]]
-    identifier = "Rides"
-    name = "Rides"
-    url = "/rides"
+    identifier = "Code"
+    name = "Code"
+    url = "https://github.com/Acanthiza/acanthiza"
