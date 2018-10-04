@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://acanthiza.netlify.com/"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 languageCode = "en-us"
 title = "Acanthiza"

@@ -1,116 +1,117 @@
-location,lon,lat,type,loctype,address,north,south,east,west,establishment,administrative_area_level_1,country,locality,postal_code,administrative_area_level_2,colloquial_area,administrative_area_level_3
-"Bali, Indonesia",115.0919509,-8.3405389,establishment,approximate,"bali, indonesia",-8.0615638,-8.8506285,115.7115407,114.4315468,Bali,Bali,Indonesia,NA,NA,NA,NA,NA
-"South Australia, Australia",136.2091547,-30.0002315,administrative_area_level_1,approximate,"south australia, australia",-25.9963765,-38.0611336,141.0029553,129.0013852,NA,South Australia,Australia,NA,NA,NA,NA,NA
-"Singapore, Singapore",103.819836,1.352083,country,approximate,singapore,1.4707592,1.1587023,104.0884808,103.6055575,NA,NA,Singapore,NA,NA,NA,NA,NA
-"Malaysia, Malaysia",101.975766,4.210484,country,approximate,malaysia,7.819847,0.461421,119.813461,99.422836,NA,NA,Malaysia,NA,NA,NA,NA,NA
-"Canberra, Australia",149.1300092,-35.2809368,locality,approximate,"canberra act 2601, australia",-35.2752841,-35.2873252,149.1376675,149.1207312,NA,Australian Capital Territory,Australia,Canberra,2601,NA,NA,NA
-"New South Wales, Australia",146.921099,-31.2532183,administrative_area_level_1,approximate,"new south wales, australia",-28.1570718,-37.5050181,153.6385162,140.9992793,NA,New South Wales,Australia,NA,NA,NA,NA,NA
-"Victoria, Australia",144.7851531,-37.4713077,administrative_area_level_1,approximate,"victoria, australia",-33.9806474,-39.1590935,149.9764884,140.9616819,NA,Victoria,Australia,NA,NA,NA,NA,NA
-"New Caledonia, New Caledonia",165.618042,-20.904305,country,approximate,new caledonia,-19.5395087,-22.8819479,168.1336819,163.569721,NA,NA,New Caledonia,NA,NA,NA,NA,NA
-"Kahgan Valley, Pakistan",73.6492059,34.9077061,locality,approximate,"naran, pakistan",34.9128217,34.8981104,73.654232,73.6435033,NA,Khyber Pakhtunkhwa,Pakistan,Naran,NA,Manshera,NA,NA
-"Northern Territory, Australia",132.5509603,-19.4914108,administrative_area_level_1,approximate,"northern territory, australia",-10.9062914,-25.9995015,138.0011997,129.0005834,NA,Northern Territory,Australia,NA,NA,NA,NA,NA
-"Tasmania, Australia",145.9706648,-41.4545196,administrative_area_level_1,approximate,"tasmania, australia",-39.1998415,-43.7403156,148.4985501,143.8193017,NA,Tasmania,Australia,NA,NA,NA,NA,NA
-"Upper Sturt, SA",138.686,-35.015,locality,approximate,"upper sturt sa 5156, australia",-35.0083312,-35.0377375,138.7055605,138.6489937,NA,South Australia,Australia,Upper Sturt,5156,NA,NA,NA
-"Goolwa, SA",138.7783094,-35.4980286,locality,approximate,"goolwa sa 5214, australia",-35.4699595,-35.5080196,138.7993818,138.7392907,NA,South Australia,Australia,Goolwa,5214,Alexandrina Council,NA,NA
-"Goolwa Beach, SA",138.7618244,-35.5121467,locality,approximate,"goolwa beach sa 5214, australia",-35.5046165,-35.5231686,138.7766066,138.7463041,NA,South Australia,Australia,Goolwa Beach,5214,Alexandrina Council,NA,NA
-"Crafers West, SA",138.6840168,-34.9934589,locality,approximate,"crafers west sa 5152, australia",-34.9742275,-35.0139018,138.7047505,138.6590385,NA,South Australia,Australia,Crafers West,5152,NA,NA,NA
-"Blackwood, SA",138.6163371,-35.022684,locality,approximate,"blackwood sa 5051, australia",-35.0063483,-35.0375334,138.6255908,138.5956816,NA,South Australia,Australia,Blackwood,5051,City of Mitcham,NA,NA
-"Adelaide, SA",138.6007456,-34.9284989,colloquial_area,approximate,"adelaide sa, australia",-34.652564,-35.3489699,138.7801898,138.4421843,NA,South Australia,Australia,NA,NA,NA,Adelaide,NA
-"Rose Park, SA",138.62798,-34.93072,locality,approximate,"rose park sa 5067, australia",-34.9274513,-34.9339635,138.6330876,138.6235558,NA,South Australia,Australia,Rose Park,5067,City of Burnside,NA,NA
-"College Park, SA",138.622,-34.913,locality,approximate,"college park sa 5069, australia",-34.9052902,-34.9168233,138.6248027,138.6142744,NA,South Australia,Australia,College Park,5069,The City of Norwood Payneham and St Peters,NA,NA
-"Ironbank, SA",138.683333,-35.05,locality,approximate,"ironbank sa 5153, australia",-35.0275282,-35.0635521,138.70986,138.6673641,NA,South Australia,Australia,Ironbank,5153,NA,NA,NA
-"Kent Town, SA",138.619167,-34.920278,locality,approximate,"kent town sa 5067, australia",-34.9157165,-34.9281867,138.6236174,138.6150904,NA,South Australia,Australia,Kent Town,5067,The City of Norwood Payneham and St Peters,NA,NA
-"雅安市, 四川省",103.013261,29.980537,locality,approximate,"ya'an, sichuan, china",30.0661692,29.9364252,103.1008422,102.9143643,NA,Sichuan,China,Ya'an,NA,NA,NA,NA
-"阿坝藏族羌族自治州, 四川省",102.224653,31.899413,locality,approximate,"aba, sichuan, china",31.9869928,31.82784,102.363739,102.0849609,NA,Sichuan,China,Aba,NA,NA,NA,NA
-"甘孜藏族自治州, 四川省",101.96231,30.04952,locality,approximate,"garze, sichuan, china",30.1355053,29.9298535,102.1501923,101.8151093,NA,Sichuan,China,Garze,NA,NA,NA,NA
-"Kuitpo, SA",138.6796276,-35.1980504,locality,approximate,"kuitpo sa 5201, australia",-35.1663638,-35.2650611,138.7187519,138.6379076,NA,South Australia,Australia,Kuitpo,5201,NA,NA,NA
-"Kihei, HI",-156.4450063,20.7644275,locality,approximate,"kihei, hi 96753, usa",20.813699,20.7164779,-156.411648,-156.4909361,NA,Hawaii,United States,Kihei,96753,Maui County,NA,NA
-"Makawao, HI",-156.3130556,20.8569444,locality,approximate,"makawao, hi, usa",20.875148,20.8333431,-156.3023659,-156.3470369,NA,Hawaii,United States,Makawao,NA,Maui County,NA,NA
-"Paia, HI",-156.3694444,20.9033333,locality,approximate,"paia, hi 96779, usa",20.9315567,20.882686,-156.350229,-156.3944017,NA,Hawaii,United States,Paia,96779,Maui County,NA,NA
-"Glenunga, SA",138.639,-34.951,locality,approximate,"glenunga sa 5064, australia",-34.945356,-34.9564636,138.6437053,138.63401,NA,South Australia,Australia,Glenunga,5064,City of Burnside,NA,NA
-"Belair, SA",138.62254,-34.998118,locality,approximate,"belair sa 5052, australia",-34.9888398,-35.0260372,138.681403,138.6007315,NA,South Australia,Australia,Belair,5052,NA,NA,NA
-"Turner, ACT",149.124167,-35.268611,locality,approximate,"turner act 2612, australia",-35.2603562,-35.2757731,149.1321362,149.1132112,NA,Australian Capital Territory,Australia,Turner,2612,NA,NA,NA
-"Hawthorndene, SA",138.631,-35.02,locality,approximate,"hawthorndene sa 5051, australia",-35.015076,-35.0376584,138.655377,138.6184216,NA,South Australia,Australia,Hawthorndene,5051,City of Mitcham,NA,NA
-"Bellevue Heights, SA",138.587,-35.033,locality,approximate,"bellevue heights sa 5050, australia",-35.0172338,-35.0383685,138.5958952,138.5701489,NA,South Australia,Australia,Bellevue Heights,5050,City of Mitcham,NA,NA
-"Marengo, VIC",143.6583166,-38.776141,locality,approximate,"marengo vic 3233, australia",-38.7675925,-38.7912065,143.6662849,143.6442339,NA,Victoria,Australia,Marengo,3233,Colac Otway Shire,NA,NA
-"St Marys, SA",138.577,-35.006,locality,approximate,"st marys sa 5042, australia",-34.9924902,-35.0149271,138.5854685,138.5749001,NA,South Australia,Australia,Saint Marys,5042,City of Mitcham,NA,NA
-"Mt Pleasant, SA",139.051,-34.773,locality,approximate,"mount pleasant sa 5235, australia",-34.7106786,-34.8153377,139.1783952,138.9880698,NA,South Australia,Australia,Mount Pleasant,5235,NA,NA,NA
-"Punyelroo, SA",139.601667,-34.604444,locality,approximate,"punyelroo sa 5353, australia",-34.5886759,-34.6234976,139.6141512,139.5785875,NA,South Australia,Australia,Punyelroo,5353,Mid Murray Council,NA,NA
-"Inneston, SA",136.8966261,-35.2367083,locality,approximate,"inneston sa 5577, australia",-35.1535605,-35.3007271,136.9698837,136.8224111,NA,South Australia,Australia,Inneston,5577,Yorke Peninsula Council,NA,NA
-"Cudlee Creek, SA",138.8623937,-34.8439296,locality,approximate,"cudlee creek sa 5232, australia",-34.824284,-34.8922023,138.878,138.7854268,NA,South Australia,Australia,Cudlee Creek,5232,Adelaide Hills Council,NA,NA
-"Hobart, TAS",147.3271949,-42.8821377,locality,approximate,"hobart tas 7000, australia",-42.8730457,-42.8916347,147.341493,147.31561,NA,Tasmania,Australia,Hobart,7000,NA,NA,NA
-"Chain Of Lagoons, TAS",148.313852,-41.625153,locality,approximate,"chain of lagoons tas 7215, australia",-41.6035382,-41.7130977,148.3207938,148.2268757,NA,Tasmania,Australia,Chain of Lagoons,7215,Break O'Day Council,NA,NA
-"Coles Bay, TAS",148.2331598,-42.0811078,locality,approximate,"coles bay tas 7215, australia",-42.0035627,-42.1470303,148.3453984,148.1566519,NA,Tasmania,Australia,Coles Bay,7215,Glamorgan-Spring Bay Council,NA,NA
-"Penguin, TAS",146.070833,-41.116667,locality,approximate,"penguin tas 7316, australia",-41.100533,-41.1779528,146.12035,146.0056052,NA,Tasmania,Australia,Penguin,7316,Central Coast Council,NA,NA
-"Moina, TAS",146.0615864,-41.5301163,locality,approximate,"moina tas 7310, australia",-41.4620901,-41.5497955,146.1358205,146.0394155,NA,Tasmania,Australia,Moina,7310,Kentish Council,NA,NA
-"Mantung, SA",140.1260259,-34.6021849,locality,approximate,"mantung sa 5308, australia",-34.5021555,-34.6946884,140.1946749,140.064022,NA,South Australia,Australia,Mantung,5308,NA,NA,NA
-"North Adelaide, SA",138.5939,-34.9061,locality,approximate,"north adelaide sa 5006, australia",-34.8985465,-34.9194904,138.6129047,138.5770168,NA,South Australia,Australia,North Adelaide,5006,NA,NA,NA
-"Lorne, VIC",143.9715484,-38.5366556,locality,approximate,"lorne vic 3232, australia",-38.4671461,-38.5794179,144.0122221,143.8245329,NA,Victoria,Australia,Lorne,3232,Surf Coast Shire,NA,NA
-"Mt Nelson, TAS",147.329081,-42.9226273,locality,approximate,"mount nelson tas 7007, australia",-42.9055834,-42.9366572,147.3516281,147.3048327,NA,Tasmania,Australia,Mount Nelson,7007,NA,NA,NA
-"Sandy Bay, TAS",147.327,-42.901,locality,approximate,"sandy bay tas 7005, australia",-42.8899143,-42.9316559,147.3619758,147.3170422,NA,Tasmania,Australia,Sandy Bay,7005,Hobart City Council,NA,NA
-"Klemzig, SA",138.636,-34.882,locality,approximate,"klemzig sa 5087, australia",-34.8675558,-34.8882666,138.6483821,138.6264424,NA,South Australia,Australia,Klemzig,5087,City of Port Adelaide Enfield,NA,NA
-"Netherby, SA",138.627,-34.972,locality,approximate,"netherby sa 5062, australia",-34.9645871,-34.9754334,138.6362341,138.617784,NA,South Australia,Australia,Netherby,5062,City of Mitcham,NA,NA
-"Apollo Bay, VIC",143.65,-38.75,locality,approximate,"apollo bay vic 3233, australia",-38.677739,-38.7943944,143.7057697,143.586326,NA,Victoria,Australia,Apollo Bay,3233,Colac Otway Shire,NA,NA
-"Forrest, VIC",143.716667,-38.516667,locality,approximate,"forrest vic 3236, australia",-38.4739552,-38.5501809,143.7443294,143.642929,NA,Victoria,Australia,Forrest,3236,Colac Otway Shire,NA,NA
-"Halls Gap, VIC",142.5235245,-37.1467982,locality,approximate,"halls gap vic 3381, australia",-37.0662763,-37.1983487,142.5821491,142.4833199,NA,Victoria,Australia,Halls Gap,3381,NA,NA,NA
-"Mt Buller, VIC",146.4489704,-37.1467949,locality,approximate,"mount buller vic 3723, australia",-37.0026421,-37.536232,146.6560379,146.2116929,NA,Victoria,Australia,Mount Buller,3723,NA,NA,NA
-"Mirimbah, VIC",146.396505,-37.1103367,locality,approximate,"mirimbah vic 3722, australia",-37.0909431,-37.139065,146.426952,146.365841,NA,Victoria,Australia,Mirimbah,3722,NA,NA,NA
-"Bright, VIC",146.9836221,-36.7321521,locality,approximate,"bright vic 3741, australia",-36.628243,-36.776968,147.1362889,146.92749,NA,Victoria,Australia,Bright,3741,Alpine Shire,NA,NA
-"Mt Torrens, SA",138.959,-34.874,locality,approximate,"mount torrens sa 5244, australia",-34.8377986,-34.9223161,139.0253961,138.9060909,NA,South Australia,Australia,Mount Torrens,5244,NA,NA,NA
-"Craigburn Farm, SA",138.60515,-35.04119,locality,approximate,"craigburn farm sa 5051, australia",-35.0323395,-35.0504154,138.6205706,138.5862897,NA,South Australia,Australia,Craigburn Farm,5051,City of Mitcham,NA,NA
-"Edwardstown, SA",138.571,-34.98,locality,approximate,"edwardstown sa 5039, australia",-34.9672624,-34.9932561,138.5747867,138.5640464,NA,South Australia,Australia,Edwardstown,5039,City of Marion,NA,NA
-"St Georges, SA",138.648,-34.954,locality,approximate,"st georges sa 5064, australia",-34.9479257,-34.9560662,138.6526767,138.6431146,NA,South Australia,Australia,Saint Georges,5064,City of Burnside,NA,NA
-"East Side, NT",133.900743,-23.6887032,locality,approximate,"east side nt 0870, australia",-23.6808279,-23.7034249,133.913309,133.8840728,NA,Northern Territory,Australia,East Side,0870,Alice Springs Municipality,NA,NA
-"Desert Springs, NT",133.8888096,-23.7142463,locality,approximate,"desert springs nt 0870, australia",-23.703188,-23.7212409,133.9003079,133.874828,NA,Northern Territory,Australia,Desert Springs,0870,Alice Springs Municipality,NA,NA
-"Alice Springs, NT",133.8807471,-23.698042,locality,approximate,"alice springs nt 0870, australia",-23.691614,-23.7070929,133.8859969,133.874263,NA,Northern Territory,Australia,Alice Springs,0870,Alice Springs Municipality,NA,NA
-"Gunns Plains, TAS",146.05,-41.283333,locality,approximate,"gunns plains tas 7315, australia",-41.2256876,-41.3581154,146.0963365,145.9492972,NA,Tasmania,Australia,Gunns Plains,7315,Central Coast Council,NA,NA
-"Lower Mitcham, SA",138.605833,-34.981111,locality,approximate,"lower mitcham sa 5062, australia",-34.9761537,-34.9871453,138.611134,138.6004338,NA,South Australia,Australia,Lower Mitcham,5062,City of Mitcham,NA,NA
-"Rostrevor, SA",138.6965591,-34.8955402,locality,approximate,"rostrevor sa 5073, australia",-34.8848853,-34.9028532,138.7127353,138.6742362,NA,South Australia,Australia,Rostrevor,5073,NA,NA,NA
-"Eastwood, SA",138.621,-34.942,locality,approximate,"eastwood sa 5063, australia",-34.9400623,-34.9463071,138.6250581,138.6155436,NA,South Australia,Australia,Eastwood,5063,NA,NA,NA
-"Loxton, SA",140.5693309,-34.45493,locality,approximate,"loxton sa 5333, australia",-34.4259945,-34.515997,140.6629535,140.4874097,NA,South Australia,Australia,Loxton,5333,District Council of Loxton Waikerie,NA,NA
-"Unley, SA",138.6,-34.95,locality,approximate,"unley sa 5061, australia",-34.9409447,-34.9536111,138.6164367,138.5992473,NA,South Australia,Australia,Unley,5061,City of Unley,NA,NA
-"Casterton, VIC",141.4,-37.583333,locality,approximate,"casterton vic 3311, australia",-37.524874,-37.675684,141.5178249,141.1511158,NA,Victoria,Australia,Casterton,3311,Glenelg Shire,NA,NA
-"Glenside, SA",138.635,-34.943,locality,approximate,"glenside sa 5065, australia",-34.9392204,-34.9462552,138.6429053,138.6244769,NA,South Australia,Australia,Glenside,5065,City of Burnside,NA,NA
-"Kingswood, SA",138.616,-34.971,locality,approximate,"kingswood sa 5062, australia",-34.9650016,-34.9773494,138.6184509,138.6086101,NA,South Australia,Australia,Kingswood,5062,City of Mitcham,NA,NA
-"Melrose, SA",138.1893045,-32.8087635,locality,approximate,"melrose sa 5483, australia",-32.6683009,-32.9441412,138.2819174,138.0828751,NA,South Australia,Australia,Melrose,5483,District Council of Mount Remarkable,NA,NA
-"Blinman, SA",138.6929578,-31.1187694,locality,approximate,"blinman sa 5730, australia",-31.061173,-31.1841035,138.7717002,138.6450238,NA,South Australia,Australia,Blinman,5730,NA,NA,NA
-"Al Karak, Jordan, Al Karak",35.7047733,31.1853497,locality,approximate,"kerak, jordan",31.2487479,31.124182,35.7703388,35.6195114,NA,Karak Governorate,Jordan,Kerak,NA,Karak Qasabah District,NA,NA
-"Ma'an, Jordan, Ma'an",35.7249409,30.1926637,locality,approximate,"ma'an, jordan",30.3368031,30.1035304,35.7874614,35.5862215,NA,Ma'an Governorate,Jordan,Ma'an,NA,Ma'an Qasabah District,NA,NA
-"Aqaba, Jordan, Aqaba",35.0063209,29.5320522,locality,approximate,"aqaba, jordan",29.6841754,29.4779204,35.1722656,34.9780065,NA,Aqaba Governorate,Jordan,Aqaba,NA,Aqaba Qasabah District,NA,NA
-"Madaba, Jordan, Madaba",35.7932432,31.7193405,locality,approximate,"madaba, jordan",31.741939,31.6895753,35.8212447,35.775556,NA,Madaba Governorate,Jordan,Madaba,NA,Madaba Qasabah District,NA,NA
-"Lucca, Tuscany",10.4950609,43.8376211,locality,approximate,"55100 lucca, province of lucca, italy",43.9307158,43.7687028,10.5595241,10.385155,NA,Tuscany,Italy,Lucca,55100,Province of Lucca,NA,Lucca
-"Menaggio, Lombardy",9.2388285,46.0217068,locality,approximate,"22017 menaggio, province of como, italy",46.0390351,46.0091061,9.2429068,9.2186064,NA,Lombardy,Italy,Menaggio,22017,Province of Como,NA,Menaggio
-"Lenno, Lombardy",9.1836964,45.9811917,administrative_area_level_3,approximate,"lenno, province of como, italy",46.011817,45.9647707,9.2029096,9.149666,NA,Lombardy,Italy,NA,NA,Province of Como,NA,Lenno
-"Pove Del Grappa, Veneto",11.7298063,45.8009338,locality,approximate,"36020 pove del grappa vi, italy",45.8061351,45.7853234,11.7390563,11.7142419,NA,Veneto,Italy,Pove del Grappa,36020,Provincia di Vicenza,NA,Pove del Grappa
-"Valcanover, Trentino-Alto Adige/Südtirol",11.2284524,46.0300016,locality,approximate,"38057 valcanover tn, italy",46.0322475,46.022862,11.2324404,11.2261523,NA,Trentino-Alto Adige,Italy,Valcanover,38057,Provincia di Trento,NA,Pergine Valsugana
-"Trentino, Italy, Trentino-Alto Adige/Südtirol",11.1175392,46.0512004,administrative_area_level_2,approximate,"province of trento, italy",46.5327795,45.6730546,11.9627131,10.4521527,NA,Trentino-Alto Adige/South Tyrol,Italy,NA,NA,Province of Trento,NA,NA
-"Bormio, Lombardy",10.3704671,46.4663571,locality,approximate,"23032 bormio so, italy",46.4765681,46.458601,10.3840519,10.357298,NA,Lombardia,Italy,Bormio,23032,Provincia di Sondrio,NA,Bormio
-"Lynton, SA",138.609,-34.998,locality,approximate,"lynton sa 5062, australia",-34.9937058,-35.0003536,138.6113404,138.6023386,NA,South Australia,Australia,Lynton,5062,City of Mitcham,NA,NA
-"Mount Torrens, SA",138.959,-34.874,locality,approximate,"mount torrens sa 5244, australia",-34.8377986,-34.9223161,139.0253961,138.9060909,NA,South Australia,Australia,Mount Torrens,5244,NA,NA,NA
-"Emu Bay, SA",137.5447303,-35.5940847,locality,approximate,"emu bay sa 5223, australia",-35.5720637,-35.6052945,137.565351,137.4951388,NA,South Australia,Australia,Emu Bay,5223,Kangaroo Island Council,NA,NA
-"Mitcham, SA",138.625,-34.987,locality,approximate,"mitcham sa 5062, australia",-34.9739004,-34.9922855,138.6295096,138.6142887,NA,South Australia,Australia,Mitcham,5062,City of Mitcham,NA,NA
-"Myrtle Bank, SA",138.636,-34.959,locality,approximate,"myrtle bank sa 5064, australia",-34.9562537,-34.9645871,138.6442476,138.625879,NA,South Australia,Australia,Myrtle Bank,5064,City of Unley,NA,NA
-"Lenswood, SA",138.8315666,-34.9172455,locality,approximate,"lenswood sa 5240, australia",-34.8873022,-34.9609463,138.8473129,138.7962122,NA,South Australia,Australia,Lenswood,5240,Adelaide Hills Council,NA,NA
-"Brown Hill Creek, SA",138.653,-34.987,locality,approximate,"brown hill creek sa 5062, australia",-34.9705393,-34.99751,138.671826,138.6272913,NA,South Australia,Australia,Brown Hill Creek,5062,City of Mitcham,NA,NA
-"Highgate, SA",138.6226003,-34.9623501,locality,approximate,"highgate sa 5063, australia",-34.958396,-34.9650088,138.6264869,138.6163074,NA,South Australia,Australia,Highgate,5063,City of Unley,NA,NA
-"Coromandel Valley, SA",138.6213476,-35.0476306,locality,approximate,"coromandel valley sa 5051, australia",-35.0301326,-35.0619414,138.6365493,138.6099461,NA,South Australia,Australia,Coromandel Valley,5051,NA,NA,NA
-"Beechworth, VIC",146.6877247,-36.3533015,locality,approximate,"beechworth vic 3747, australia",-36.246224,-36.4216092,146.7619779,146.5579662,NA,Victoria,Australia,Beechworth,3747,Indigo Shire,NA,NA
-"Falls Creek, VIC",147.2869802,-36.8658814,locality,approximate,"falls creek vic 3699, australia",-36.817838,-36.9401293,147.3455795,147.1433463,NA,Victoria,Australia,Falls Creek,3699,NA,NA,NA
-"Hotham Heights, VIC",147.1520733,-36.9940351,locality,approximate,"hotham heights vic 3741, australia",-36.8159376,-37.1825209,147.2780967,147.0612875,NA,Victoria,Australia,Hotham Heights,3741,NA,NA,NA
-"Magill, SA",138.6758,-34.909,locality,approximate,"magill sa 5072, australia",-34.8966288,-34.9196315,138.6852031,138.6659505,NA,South Australia,Australia,Magill,5072,NA,NA,NA
-"Norwood, SA",138.633,-34.923,locality,approximate,"norwood sa 5067, australia",-34.9148011,-34.9279033,138.6414731,138.6226459,NA,South Australia,Australia,Norwood,5067,The City of Norwood Payneham and St Peters,NA,NA
-"Seacliff, SA",138.516667,-35.033333,locality,approximate,"seacliff sa 5049, australia",-35.0264496,-35.0404993,138.5248645,138.5160644,NA,South Australia,Australia,Seacliff,5049,City of Holdfast Bay,NA,NA
-"Mount Pleasant, SA",139.051,-34.773,locality,approximate,"mount pleasant sa 5235, australia",-34.7106786,-34.8153377,139.1783952,138.9880698,NA,South Australia,Australia,Mount Pleasant,5235,NA,NA,NA
-"Adelaide, South Australia",138.6007456,-34.9284989,colloquial_area,approximate,"adelaide sa, australia",-34.652564,-35.3489699,138.7801898,138.4421843,NA,South Australia,Australia,NA,NA,NA,Adelaide,NA
-"Blinman, South Australia",138.6929578,-31.1187694,locality,approximate,"blinman sa 5730, australia",-31.061173,-31.1841035,138.7717002,138.6450238,NA,South Australia,Australia,Blinman,5730,NA,NA,NA
-"Melrose, South Australia",138.1893045,-32.8087635,locality,approximate,"melrose sa 5483, australia",-32.6683009,-32.9441412,138.2819174,138.0828751,NA,South Australia,Australia,Melrose,5483,District Council of Mount Remarkable,NA,NA
-"Goolwa, South Australia",138.7783094,-35.4980286,locality,approximate,"goolwa sa 5214, australia",-35.4699595,-35.5080196,138.7993818,138.7392907,NA,South Australia,Australia,Goolwa,5214,Alexandrina Council,NA,NA
-"Cudlee Creek, South Australia",138.8623937,-34.8439296,locality,approximate,"cudlee creek sa 5232, australia",-34.824284,-34.8922023,138.878,138.7854268,NA,South Australia,Australia,Cudlee Creek,5232,Adelaide Hills Council,NA,NA
-"Victor Harbor, South Australia",138.616667,-35.55,locality,approximate,"victor harbor sa 5211, australia",-35.5253455,-35.568274,138.631505,138.5905017,NA,South Australia,Australia,Victor Harbor,5211,City of Victor Harbor,NA,NA
-"Hawthorndene, South Australia",138.631,-35.02,locality,approximate,"hawthorndene sa 5051, australia",-35.015076,-35.0376584,138.655377,138.6184216,NA,South Australia,Australia,Hawthorndene,5051,City of Mitcham,NA,NA
-"North Adelaide, South Australia",138.5939,-34.9061,locality,approximate,"north adelaide sa 5006, australia",-34.8985465,-34.9194904,138.6129047,138.5770168,NA,South Australia,Australia,North Adelaide,5006,NA,NA,NA
-"Kuitpo, South Australia",138.6796276,-35.1980504,locality,approximate,"kuitpo sa 5201, australia",-35.1663638,-35.2650611,138.7187519,138.6379076,NA,South Australia,Australia,Kuitpo,5201,NA,NA,NA
-"Fullarton, South Australia",138.629,-34.951,locality,approximate,"fullarton sa 5063, australia",-34.9463071,-34.9589116,138.6381429,138.6162262,NA,South Australia,Australia,Fullarton,5063,City of Unley,NA,NA
-"Hackney, South Australia",138.616,-34.917,locality,approximate,"hackney sa 5069, australia",-34.9076443,-34.9195951,138.620683,138.6128476,NA,South Australia,Australia,Hackney,5069,The City of Norwood Payneham and St Peters,NA,NA
-"Parkside, South Australia",138.613,-34.944,locality,approximate,"parkside sa 5063, australia",-34.9404887,-34.9528279,138.6255236,138.6067597,NA,South Australia,Australia,Parkside,5063,City of Unley,NA,NA
-"Punyelroo, South Australia",139.601667,-34.604444,locality,approximate,"punyelroo sa 5353, australia",-34.5886759,-34.6234976,139.6141512,139.5785875,NA,South Australia,Australia,Punyelroo,5353,Mid Murray Council,NA,NA
+location,lon,lat,type,loctype,address,north,south,east,west,locality,administrative_area_level_2,administrative_area_level_1,country,postal_code,administrative_area_level_3
+"Bali, Indonesia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"South Australia, Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Singapore, Singapore",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Malaysia, Malaysia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Canberra, Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"New South Wales, Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Victoria, Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"New Caledonia, New Caledonia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Kahgan Valley, Pakistan",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Northern Territory, Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Tasmania, Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+", ",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Upper Sturt, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Goolwa, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Goolwa Beach, SA",138.7618244,-35.5121467,locality,approximate,"goolwa beach sa 5214, australia",-35.5046165,-35.5240269,138.7766066,138.7461456,Goolwa Beach,Alexandrina Council,South Australia,Australia,5214,NA
+"Crafers West, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Blackwood, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Adelaide, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Rose Park, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"College Park, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Ironbank, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Kent Town, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"雅安市, 四川省",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"阿坝藏族羌族自治州, 四川省",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"甘孜藏族自治州, 四川省",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Kuitpo, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Kihei, HI",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Makawao, HI",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Paia, HI",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Glenunga, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Belair, SA",138.62254,-34.998118,locality,approximate,"belair sa 5052, australia",-34.9888398,-35.0260372,138.681403,138.6007315,Belair,NA,South Australia,Australia,5052,NA
+"Turner, ACT",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Hawthorndene, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Bellevue Heights, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Marengo, VIC",143.6583166,-38.776141,locality,approximate,"marengo vic 3233, australia",-38.7675925,-38.7913809,143.6662849,143.6442339,Marengo,Colac Otway Shire,Victoria,Australia,3233,NA
+"St Marys, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Mt Pleasant, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Punyelroo, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Inneston, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Cudlee Creek, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Hobart, TAS",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Chain Of Lagoons, TAS",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Coles Bay, TAS",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Penguin, TAS",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Moina, TAS",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Mantung, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"North Adelaide, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Lorne, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Mt Nelson, TAS",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Sandy Bay, TAS",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Klemzig, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Netherby, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Apollo Bay, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Forrest, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Halls Gap, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Mt Buller, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Mirimbah, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Bright, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Mt Torrens, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Craigburn Farm, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Edwardstown, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"St Georges, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"East Side, NT",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Desert Springs, NT",133.8888096,-23.7142463,locality,approximate,"desert springs nt 0870, australia",-23.703188,-23.7212409,133.9003079,133.874828,Desert Springs,Alice Springs Municipality,Northern Territory,Australia,0870,NA
+"Alice Springs, NT",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Gunns Plains, TAS",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Lower Mitcham, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Rostrevor, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Eastwood, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Loxton, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Unley, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Casterton, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Glenside, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Kingswood, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Melrose, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Blinman, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Al Karak, Jordan, Al Karak",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Ma'an, Jordan, Ma'an",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Aqaba, Jordan, Aqaba",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Madaba, Jordan, Madaba",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Lucca, Tuscany",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Menaggio, Lombardy",9.2388285,46.0217068,locality,approximate,"22017 menaggio, province of como, italy",46.0390351,46.0091061,9.2429068,9.218606399999999,Menaggio,Province of Como,Lombardy,Italy,22017,Menaggio
+"Lenno, Lombardy",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Pove Del Grappa, Veneto",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Valcanover, Trentino-Alto Adige/Südtirol",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Trentino, Italy, Trentino-Alto Adige/Südtirol",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Bormio, Lombardy",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Lynton, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Mount Torrens, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Emu Bay, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Mitcham, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Myrtle Bank, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Lenswood, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Brown Hill Creek, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Highgate, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Coromandel Valley, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Beechworth, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Falls Creek, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Hotham Heights, VIC",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Norwood, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Magill, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Seacliff, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Mount Pleasant, SA",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Adelaide, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Blinman, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Melrose, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Goolwa, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Cudlee Creek, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Victor Harbor, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Hawthorndene, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"North Adelaide, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Kuitpo, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Fullarton, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Hackney, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Parkside, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Punyelroo, South Australia",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

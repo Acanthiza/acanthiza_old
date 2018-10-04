@@ -1,8 +1,8 @@
 ---
-title: Rides
+title: My ride data
 author: nige
 date: '2017-07-14'
-cover: "IMG_4866.jpg"
+cover: "jiajinshan.jpg"
 categories:
   - data
   - rides
@@ -16,15 +16,17 @@ tags:
 ```{r setup, include = F}
 
   rm(list = ls())
+
+  packages <- c("tidyverse"
+                , "lubridate"
+                , "zoo"
+                , "bookdown"
+                , "knitr"
+                , "ggridges"
+                , "ggmap"
+                )
   
-  library("tidyverse") # everything data science related
-  library("ggmap") # get location details from google based on, say, city, state or state, country
-  library("zoo") # yearmon function - treat month/year as continuous not character
-  library("lubridate")
-  library("bookdown")
-  library("knitr")
-  library("ggridges")
-  #library(kableExtra)
+  purrr::walk(packages, library, character.only = TRUE)
 
   knitr::opts_chunk$set(echo = F
                         , warning = F
@@ -33,7 +35,7 @@ tags:
                         )
   
   options(knitr.kable.NA = ''
-          #, knitr.table.format = "html"
+          , knitr.table.format = "html"
           )
 
 ```
@@ -165,7 +167,7 @@ tags:
   #   dplyr::filter(location != "NA, NA") %>%
   #   dplyr::mutate(gLoc = map(location,googleLocation)) %>%
   #   tidyr::unnest() %>%
-  #   write_csv(locations,"../../data/locations.csv")
+  #   write_csv("../../data/locations.csv")
   
 # add in google location data and consolidate
   dat <- dat %>%
@@ -274,11 +276,7 @@ tags:
 
 ```
 
-# The data
-
-## Ride data
-
-Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to [Ascent](http://www.montebellosoftware.com/) to [Strava](http://www.strava.com) to store ride data. Recently the following have provided the potential to make combining these data easy:
+Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to [Ascent](http://www.montebellosoftware.com/) to [Strava](http://www.strava.com) to store ride data. # more Recently the following have provided the potential to make combining these data easy:
 
 * workflow, particularly with
     + [tidyverse](http://tidyverse.org/)

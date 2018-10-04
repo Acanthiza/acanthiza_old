@@ -2,7 +2,7 @@
 title: Race to the rock
 author: nige
 date: '2018-09-19'
-cover: "IMG_1806.JPG"
+cover: "mawsontrail.JPG"
 categories:
   - Bike
   - R
@@ -152,8 +152,6 @@ tags:
   riderCol <- scale_colour_manual(name = "Rider", values = col)
 
 ```
-
-# Race to the rock
 
 "It’s safer, less painful and less soul destroying to remain a dot watcher."
 
