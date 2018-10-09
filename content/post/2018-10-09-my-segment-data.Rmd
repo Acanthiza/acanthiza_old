@@ -1,0 +1,404 @@
+---
+title: My segment data
+author: nige
+date: '2018-10-09'
+slug: my-segment-data
+categories:
+  - data
+  - rides
+  - R
+tags:
+  - data
+  - rides
+  - strava
+  - veloviewer
+---
+
+```{r setup, include = F}
+
+  rm(list = ls())
+
+  packages <- c("tidyverse"
+                , "lubridate"
+                , "zoo"
+                , "bookdown"
+                , "knitr"
+                #, "ggridges"
+                #, "ggmap"
+                )
+  
+  purrr::walk(packages, library, character.only = TRUE)
+  
+  cits <- write_bib(packages,file="packageCitations.bib",tweak=TRUE)
+
+  knitr::opts_chunk$set(echo = F
+                        , warning = F
+                        , message = F
+                        #, include = F
+                        )
+  
+  options(knitr.kable.NA = ''
+          , knitr.table.format = "html"
+          )
+
+```
+
+```{r dataRidesAccess}
+
+  # data from access database rel/RideMaster.mdb
+  dat1 <- read_csv("../../data/Ride.csv") %>%
+    dplyr::left_join(read_csv("../../data/LapTime.csv"), by = "RideID") %>%
+    dplyr::left_join(read_csv("../../data/LapInfo.csv"), by = "LapID") %>%
+    dplyr::left_join(read_csv("../../data/BikeName.csv"), by = "BikeID") %>%
+    dplyr::left_join(read_csv("../../data/Person.csv"), by = "PersonID") %>%
+    dplyr::left_join(read_csv("../../data/SetupType.csv"), by = "SetupID") %>%
+    dplyr::left_join(read_csv("../../data/RideType.csv"), by = "RideTypeID") %>%
+    dplyr::filter(Person == "Nigel") %>%
+    dplyr::select(RideID,Date,Dist,Time,Ascent,RideType,MaxHR,AvHR
+                  ,Notes,LapName = Strava,LDis,LTime,LHRAverage,LAscent,LTemperature
+                  ,Gear,State,Country
+                  ) %>%
+    dplyr::mutate(Source = "Access"
+                  , Date = gsub(" 0:00","",Date)
+                  , Date = dmy(Date)
+                  , Time = format(Time, "%H:%M:%S")
+                  , Time = lubridate::hms(Time)
+                  , Time = as.numeric(Time)
+                  , LTime = format(LTime, "%H:%M:%S")
+                  , LTime = lubridate::hms(LTime)
+                  , LTime = as.numeric(LTime)
+                  , AvS = Dist/(Time/(60*60))
+                  , Commute = if_else(RideType == "Commute",1,0)
+                  , Commute = as.factor(Commute)
+                  , AvHR = as.numeric(AvHR)
+                  , Ascent = as.numeric(Ascent)
+                  , AvPwr = as.numeric(NA)
+                  , Temp = as.numeric(NA)
+                  , MaxS = as.numeric(NA)
+                  , Gear = gsub("recumbent","roadie",Gear)
+                  , Kudos = NA
+                  ) %>%
+    dplyr::group_by(Source,RideID,Date,Dist,Time,AvS,Ascent,Commute
+                    ,MaxHR,AvHR,AvPwr,Temp,MaxS,Gear
+                    , loc1 = State
+                    , loc2 = Country
+                    , Kudos
+                    , Notes
+                    ) %>%
+    dplyr::select(-State,-Country,-RideType) %>%
+    tidyr::nest()
+
+```
+
+```{r dataRideStrava}
+
+  # data from strava - via veloviewer
+  # ride data
+
+  dat2 <- tibble(files = list.files("../../data/")) %>%
+    dplyr::filter(grepl("activities",files)) %>%
+    dplyr::mutate(data = map(paste0("../../data/",files)
+                             , read.csv
+                             #, col_types = "-Tcccdd-ddd-----d---dd----d-------i-------------------------------------------------ccci"
+                             )
+                  ) %>%
+    dplyr::select(data) %>%
+    tidyr::unnest() %>%
+    unique() %>%
+    setNames(gsub("\\."," ",names(.))) %>%
+    setNames(gsub("  "," ",names(.))) %>%
+    dplyr::mutate(Source = "Strava(Veloviewer)"
+                  , Date = format(When,format='%d/%m/%Y')
+                  , Date = ymd_hms(When)
+                  , Date = as.Date(Date)
+                  , Time = `Moving Time`
+                  , Notes = paste0(Name,". https://www.strava.com/activities/"
+                                   , `Activity Id`
+                                   )
+                  , Dist = `Dist km`/1000
+                  , Commute = as.factor(Com)
+                  , Gear = if_else(Type == "Ride", if_else(Gear == "","mtb",Gear),Type)
+                  , Gear = gsub("stoked", "tourer", Gear)
+                  , Gear = gsub("trailed", "tourer", Gear)
+                  , Gear = gsub("a perfect blend", "cx", Gear)
+                  , Gear = gsub("Run","run",Gear)
+                  , Gear = ifelse(grepl("retired",Gear),"mtb",Gear)
+                  ) %>%
+    dplyr::select(Source, RideID = `Activity Id`, Date, Dist
+                  , Time, AvS = `Speed km h`, Ascent = `Elv m`, Commute
+                  , MaxHR = `Max Heart`, AvHR = `Heart`
+                  , AvPwr = `Weighted Avg Pwr W`, Temp = `Temp C`, MaxS = `Max Speed km h`
+                  , Gear, loc1 = City, loc2 = State, Kudos, Notes
+                  )
+
+```
+
+```{r dataRidesCombine}
+
+  # combine the two datasets
+  dat <- dat1 %>%
+    bind_rows(dat2) %>%
+    dplyr::filter(!is.na(Dist)) %>%
+    dplyr::arrange(Date,Time) %>%
+    dplyr::mutate(Year = as.numeric(format.Date(Date, "%Y"))
+                  , Month = as.numeric(format.Date(Date, "%m"))
+                  , yearMonth = as.yearmon(paste(Month, Year), "%m %Y")
+                  , halfDec = cut(Year, c(1995,2000,2005,2010,2015,2020,2025), labels = F)
+                  , halfDec = 1990 + halfDec*5
+                  , Gear = as.factor(Gear)
+                  , location = paste0(loc1,", ",loc2)
+                  , halfDec = cut(Year, c(1995,2000,2005,2010,2015,2020,2025), labels = F)
+                  , halfDec = 1990 + halfDec*5
+                  )
+  
+# get location data from google - only need to do this when there are new locations
+  # locations <- tibble(location = unique(dat$location)) %>%
+  #   dplyr::filter(location != "NA, NA") %>%
+  #   dplyr::mutate(gLoc = map(location,googleLocation)) %>%
+  #   tidyr::unnest() %>%
+  #   write_csv("../../data/locations.csv")
+  
+# add in google location data and consolidate
+  dat <- dat %>%
+    dplyr::left_join(read_csv("../../data/locations.csv")[,c('location','administrative_area_level_1','country')]) %>%
+    dplyr::mutate(country = as.factor(country)
+                  , state = administrative_area_level_1
+                  , gLoc =  paste0(state,", ",country)
+                  , gLoc = gsub("NA, ","",gLoc)
+                  , gLoc = gsub("NA",NA,gLoc)
+                  ) %>%
+    dplyr::filter(!Gear %in% c("Canoeing","Swim","Windsurf","run"))
+  
+# fix dodgy elevation reading from China
+  dat[dat$Ascent > 6000 & !is.na(dat$Ascent),'Ascent'] <- 2500
+
+```
+
+
+```{r dataLapsAccess}
+
+  dat1 <- 
+
+  accessLaps <- dat1 %>%
+    dplyr::select(RideID, Date, Gear, data) %>%
+    tidyr::unnest() %>%
+    dplyr::filter(!is.na(LTime), LapName != "")
+
+```
+
+```{r dataLapsStrava}
+
+  stravaLaps <- tibble(files = list.files("../../data/", pattern = "efforts")) %>%
+    dplyr::mutate(data = map(paste0("../../data/",files)
+                             , read_csv
+                             , col_types = "d-ccdd-ccdddd-ddc------ddddd--ccT----d"
+                             )
+                  ) %>%
+    tidyr::unnest() %>%
+    dplyr::mutate(RideID = `Activity Id`
+                  , LDis = `Dist km`/1000
+                  ) %>%
+    dplyr::left_join(dat, by = c("RideID" = "RideID")) %>%
+    dplyr::select(RideID
+                  , Date
+                  , Gear = Gear.y
+                  , LapName = Name
+                  , LDis
+                  , LTime = `Elapsed Time`
+                  , LHRAverage = `Heart Rate`
+                  , LAscent = `Elv change m`
+                  , LTemperature = Temp
+                  )
+
+```
+
+```{r dataLapsCombine}
+
+  starList <- tibble(LapName = c(unique(stravaLaps$LapName),"MtOsmond-Bullock-OldFreeway","Tilleys Hil Rd"))
+
+  effortThresh <- 40
+
+  laps <- accessLaps %>%
+    dplyr::inner_join(starList) %>%
+    dplyr::bind_rows(stravaLaps) %>%
+    dplyr::left_join(dat) %>%
+    dplyr::arrange(LapName,Date) %>%
+    dplyr::group_by(LapName) %>%
+    dplyr::mutate(meanDist = mean(LDis, na.rm = T)
+                  , meanAsc = mean(LAscent, na.rm = T)
+                  , meanTime = mean(LTime, na.rm = T)
+                  , meanTime = as_datetime(meanTime, origin = lubridate::origin)
+                  , meanTime = format(meanTime, "%H:%M:%S")
+                  , efforts = n()
+                  , LAvs = meanDist/(LTime/3600)
+                  , Time = as_datetime(LTime, origin = lubridate::origin)
+                  #, Time = format(Time, "%H:%M:%S")
+                  , Best = min(LTime)
+                  , Best = as_datetime(Best, origin = lubridate::origin)
+                  , Best = format(Best, "%H:%M:%S")
+                  , Year = as.numeric(format.Date(Date, "%Y"))
+                  , halfDec = cut(Year, c(1995,2000,2005,2010,2015,2020,2025), labels = FALSE)
+                  , halfDec = 1990 + halfDec*5
+                  ) %>%
+    dplyr::filter(efforts > get("effortThresh")) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(Source
+                  , RideID
+                  , Year
+                  , halfDec
+                  , LapName
+                  , Date
+                  , LTime
+                  , LDis
+                  , LAvs
+                  , Gear
+                  , LHRAverage
+                  , LAscent
+                  , LTemperature
+                  , Time
+                  , efforts
+                  , meanDist
+                  , meanTime
+                  , Best
+                  ) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(!is.na(Source))
+  
+  lapSummary <- laps %>% dplyr::select(LapName,efforts) %>% unique()
+
+```
+
+Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.
+
+Given the plethora of segments on Strava these days, filtering segments of interest is essential. As a starting point, I retrieved starred segments ridden more than `r effortThresh` times. Combining the segment data gave `r nrow(laps)` individual efforts on `r nrow(lapSummary)` segments which were both starred and ridden more than `r effortThresh` times. See [this post](https://acanthiza.netlify.com/post/20170714_rides/) for details on combining ride data from pre-Strava.
+
+---
+
+```{r lapsAccess}
+
+  kable(accessLaps %>% slice(1:10) %>% select(2:7)
+        , format = "html"
+        , pad = 0
+        , caption = "First few rows/columns of segment data from MS Access" 
+        )
+
+```
+
+---
+
+```{r lapsStrava}
+
+  kable(stravaLaps %>% slice(1:10) %>% select(2:7)
+        , format = "html"
+        , pad = 0
+        , caption = "First few rows/columns of segment data from strava" 
+        )
+  
+```
+
+---
+
+```{r lapsCombine}
+  
+  kable(lapSummary %>% arrange(desc(efforts))
+        , caption = paste0("Starred laps with more than ",effortThresh," efforts")
+        )
+  
+```
+
+---
+
+## Lap data
+
+```{r lapCheckDist, fig.cap = "Lap distance (km)"}
+
+  laps %>%
+    ggplot(aes(Source, LDis)) +
+      geom_boxplot() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+      #ylab("LDis - meanDist") +
+      facet_wrap(~LapName, scales = "free_y") +
+      geom_jitter(shape = 16, size = 1, alpha = 0.3)
+  
+```
+
+Hmm. There's a few laps with massive distance outliers... and some that just look like they're recorded differently. Perhaps the outliers are best fixed by replacing with NA and letting the rest of the data set the distance for that lap. Those that are recorded differently are perhaps unretreivable (or I could go back and make [private] segments in Strava to match).
+
+Those that don't match (mean difference between Access and Strava > 100 m) are in Table \@ref(tab:diffLaps)
+
+---
+
+```{r diffLaps}
+
+  diffThresh <- 100
+
+  diffLaps <- laps %>% dplyr::group_by(LapName,Source) %>%
+    dplyr::summarise(meanDist = mean(LDis, na.rm = T)) %>%
+    tidyr::spread(Source,meanDist) %>%
+    dplyr::mutate(meanDistDiff = 1000*(Access - `Strava(Veloviewer)`)
+                  , meanDistDiff = abs(meanDistDiff)
+                  ) %>%
+    dplyr::filter(meanDistDiff > get("diffThresh"))
+
+  kable(diffLaps
+        , caption = paste0("Segments with a difference in mean distance between Strava and Access of greater than "
+                           , diffThresh
+                           , " m"
+                           )
+        )
+
+```
+
+---
+
+```{r lapCheckDistII, fig.cap = "Difference in lap distance from mean distance (km)"}
+
+  laps <- laps %>%
+    dplyr::mutate(LDisII = ifelse(LDis/meanDist < 1.1 & LDis/meanDist > 0.9, LDis, NA)) %>%
+    dplyr::group_by(LapName) %>%  
+    dplyr::mutate(meanDist = mean(LDisII, na.rm = T)) %>%
+    dplyr::mutate(diff = 1000*(LDis-meanDist)) %>%
+    dplyr::ungroup()
+    
+  laps %>%
+    ggplot(aes(Source, diff)) +
+      geom_boxplot() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+      ylab("Difference from mean distance (m)") +
+      facet_wrap(~LapName, scales = "free_y") +
+      geom_jitter(shape = 16, size = 1, alpha = 0.3)
+  
+```
+
+---
+
+# Acknowledgements
+
+```{r packages}
+ 
+  cits <- tibble(cits = read_lines("packageCitations.bib"))
+ 
+  kable(cits %>%
+          dplyr::filter(grepl("@",cits)
+                        , !grepl("CiteR",cits)
+                        ) %>%
+          dplyr::rename(Package = cits) %>%
+          dplyr::bind_cols(cits %>%
+                             dplyr::filter(grepl("title",cits)) %>%
+                             dplyr::rename(Description = cits)
+                           ) %>%
+          dplyr::mutate(Package = gsub("@Manual\\{|,|R-","",Package)
+                        , Description = gsub("title = \\{|\\},","",Description)
+                        ) %>%
+    dplyr::arrange() %>%
+    dplyr::mutate(Citation = paste0("@R-",Package))
+   , caption = "R packages explicitly loaded (i.e. not including dependencies) to create this post"
+   )
+ 
+```
+
+---
+
+# Citations 
+
+

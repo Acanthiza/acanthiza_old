@@ -26,7 +26,7 @@
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="My ride data :: Acanthiza — data rides nature" />
-<meta name="twitter:description" content="Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to Ascent to Strava to store ride data. # more Recently the following have provided the potential to make combining these data easy:
+<meta name="twitter:description" content="Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to Ascent to Strava to store ride data. Recently the following have provided the potential to make combining these data easy:
  workflow, particularly with  tidyverse rmarkdown  apps to rip data out of MS Access databases from a mac mdb accdb Viewer the export .csv button on most pages on Veloviewer  This is the piecing together and exploration of those data." />
 <meta name="twitter:site" content="" />
 <meta name="twitter:creator" content="" />
@@ -132,7 +132,7 @@
     
 
     <div class="post-content">
-      <p>Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to <a href="http://www.montebellosoftware.com/">Ascent</a> to <a href="http://www.strava.com">Strava</a> to store ride data. # more Recently the following have provided the potential to make combining these data easy:</p>
+      <p>Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to <a href="http://www.montebellosoftware.com/">Ascent</a> to <a href="http://www.strava.com">Strava</a> to store ride data. Recently the following have provided the potential to make combining these data easy:</p>
 <ul>
 <li>workflow, particularly with
 <ul>
@@ -368,704 +368,11 @@ Strava(Veloviewer)
 </tbody>
 </table>
 <p>Comining the datasets gives 5286 individual rides.</p>
-<hr />
-<div id="lap-data" class="section level2">
-<h2>Lap data</h2>
-<p>Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.</p>
-<p>Given the plethora of segments on Strava these days, filtering the segments of interest is probably worthwhile. As a starting point, starred segments ridden more than 14 times gives 27 segments (Table <a href="#tab:lapsCombine">5</a>).</p>
-<p>Combining the segment data gives 1971 individual efforts on 27 segments which were both starred and ridden more than 14 times.</p>
-<table>
-<caption>
-<span id="tab:lapsAccess">Table 3: </span>First few rows/columns of segment data from MS Access
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Date
-</th>
-<th style="text-align:left;">
-Gear
-</th>
-<th style="text-align:left;">
-LapName
-</th>
-<th style="text-align:right;">
-LDis
-</th>
-<th style="text-align:right;">
-LTime
-</th>
-<th style="text-align:right;">
-LHRAverage
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-2001-12-09
-</td>
-<td style="text-align:left;">
-roadie
-</td>
-<td style="text-align:left;">
-Humpty
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-869
-</td>
-<td style="text-align:right;">
-128
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2001-12-10
-</td>
-<td style="text-align:left;">
-roadie
-</td>
-<td style="text-align:left;">
-Belair NP - Eastern Gate
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-289
-</td>
-<td style="text-align:right;">
-162
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2001-12-13
-</td>
-<td style="text-align:left;">
-roadie
-</td>
-<td style="text-align:left;">
-Full Norton - bridge to gates
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-1051
-</td>
-<td style="text-align:right;">
-171
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2001-12-13
-</td>
-<td style="text-align:left;">
-roadie
-</td>
-<td style="text-align:left;">
-Belair NP - Eastern Gate
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-335
-</td>
-<td style="text-align:right;">
-147
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2002-01-20
-</td>
-<td style="text-align:left;">
-roadie
-</td>
-<td style="text-align:left;">
-Belair NP - Eastern Gate
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-253
-</td>
-<td style="text-align:right;">
-154
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2002-03-14
-</td>
-<td style="text-align:left;">
-cx
-</td>
-<td style="text-align:left;">
-Belair NP - Eastern Gate
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-263
-</td>
-<td style="text-align:right;">
-161
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2002-03-19
-</td>
-<td style="text-align:left;">
-mtb
-</td>
-<td style="text-align:left;">
-Belair NP - Eastern Gate
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-308
-</td>
-<td style="text-align:right;">
-153
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2002-04-04
-</td>
-<td style="text-align:left;">
-roadie
-</td>
-<td style="text-align:left;">
-Windy Point Climb
-</td>
-<td style="text-align:right;">
-3.15
-</td>
-<td style="text-align:right;">
-680
-</td>
-<td style="text-align:right;">
-159
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2002-04-25
-</td>
-<td style="text-align:left;">
-roadie
-</td>
-<td style="text-align:left;">
-Belair NP - Eastern Gate
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-309
-</td>
-<td style="text-align:right;">
-165
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2002-04-30
-</td>
-<td style="text-align:left;">
-roadie
-</td>
-<td style="text-align:left;">
-Pole Rd (to Upper Sturt)
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-325
-</td>
-<td style="text-align:right;">
-147
-</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<table>
-<caption>
-<span id="tab:lapsStrava">Table 4: </span>First few rows/columns of segment data from strava
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-Date
-</th>
-<th style="text-align:left;">
-Gear
-</th>
-<th style="text-align:left;">
-LapName
-</th>
-<th style="text-align:right;">
-LDis
-</th>
-<th style="text-align:right;">
-LTime
-</th>
-<th style="text-align:right;">
-LHRAverage
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-2012-12-20
-</td>
-<td style="text-align:left;">
-cx
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-6.91360
-</td>
-<td style="text-align:right;">
-1575
-</td>
-<td style="text-align:right;">
-151.3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2013-01-24
-</td>
-<td style="text-align:left;">
-cx
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-6.90590
-</td>
-<td style="text-align:right;">
-1584
-</td>
-<td style="text-align:right;">
-163.2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2014-07-08
-</td>
-<td style="text-align:left;">
-cx
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-6.90670
-</td>
-<td style="text-align:right;">
-1635
-</td>
-<td style="text-align:right;">
-156.5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2018-03-29
-</td>
-<td style="text-align:left;">
-cx
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-6.91690
-</td>
-<td style="text-align:right;">
-1692
-</td>
-<td style="text-align:right;">
-157.4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2014-07-31
-</td>
-<td style="text-align:left;">
-cx
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-6.90280
-</td>
-<td style="text-align:right;">
-1698
-</td>
-<td style="text-align:right;">
-153.8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2018-05-08
-</td>
-<td style="text-align:left;">
-roadie
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-6.90710
-</td>
-<td style="text-align:right;">
-1707
-</td>
-<td style="text-align:right;">
-157.9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2012-05-31
-</td>
-<td style="text-align:left;">
-tourer
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-6.89958
-</td>
-<td style="text-align:right;">
-1713
-</td>
-<td style="text-align:right;">
-157.5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2014-12-04
-</td>
-<td style="text-align:left;">
-cx
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-6.89920
-</td>
-<td style="text-align:right;">
-1728
-</td>
-<td style="text-align:right;">
-157.4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2014-07-18
-</td>
-<td style="text-align:left;">
-cx
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-7.11070
-</td>
-<td style="text-align:right;">
-1729
-</td>
-<td style="text-align:right;">
-151.7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2018-05-01
-</td>
-<td style="text-align:left;">
-cx
-</td>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-6.91200
-</td>
-<td style="text-align:right;">
-1731
-</td>
-<td style="text-align:right;">
-157.4
-</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<table>
-<caption>
-<span id="tab:lapsCombine">Table 5: </span>Starred laps with more than 14 efforts
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-LapName
-</th>
-<th style="text-align:right;">
-efforts
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Belair NP - Eastern Gate
-</td>
-<td style="text-align:right;">
-354
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-MtOsmond-Bullock-OldFreeway
-</td>
-<td style="text-align:right;">
-230
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Belair Rd
-</td>
-<td style="text-align:right;">
-178
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Windy Point Climb
-</td>
-<td style="text-align:right;">
-153
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mt Osmond (Beaumont side short)
-</td>
-<td style="text-align:right;">
-100
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Full Norton - bridge to gates
-</td>
-<td style="text-align:right;">
-95
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-The Old Freeway (Tollgate to Bollards)
-</td>
-<td style="text-align:right;">
-89
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Aldgate Valley Road
-</td>
-<td style="text-align:right;">
-83
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Sturt Valley Rd
-</td>
-<td style="text-align:right;">
-74
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Humpty
-</td>
-<td style="text-align:right;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Tilleys Hil Rd
-</td>
-<td style="text-align:right;">
-70
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Caroline Path
-</td>
-<td style="text-align:right;">
-42
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Clarendon to Bakers Gully
-</td>
-<td style="text-align:right;">
-42
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Caroline Path to Gloucestor
-</td>
-<td style="text-align:right;">
-40
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Greenhill Road
-</td>
-<td style="text-align:right;">
-40
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Burdetts Road (Little Italy)
-</td>
-<td style="text-align:right;">
-38
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Clarendon to Humpty
-</td>
-<td style="text-align:right;">
-33
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Murrays Hill Rd
-</td>
-<td style="text-align:right;">
-33
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pole Rd (to Upper Sturt)
-</td>
-<td style="text-align:right;">
-31
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Brownhill Creek Rd Climb
-</td>
-<td style="text-align:right;">
-30
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Last climb to Deviation
-</td>
-<td style="text-align:right;">
-29
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Pole Rd to Ironbank
-</td>
-<td style="text-align:right;">
-26
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Scott Creek Road
-</td>
-<td style="text-align:right;">
-21
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Old Willunga Hill
-</td>
-<td style="text-align:right;">
-20
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Veloway - Seacombe Rd to Majors Rd turnoff
-</td>
-<td style="text-align:right;">
-18
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-pwt-bullock-beela
-</td>
-<td style="text-align:right;">
-16
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Coromandel Parade
-</td>
-<td style="text-align:right;">
-15
-</td>
-</tr>
-</tbody>
-</table>
-<hr />
-</div>
 <div id="data-checks" class="section level1">
 <h1>Data checks</h1>
 <p>Probably best to check these data before using them for anything…</p>
 <p>A series of visual plots as quick data checks.</p>
-<div id="ride-data" class="section level2">
-<h2>Ride data</h2>
+<hr />
 <div class="figure"><span id="fig:dataCheckRides"></span>
 <img src="/post/20170714_rides_files/figure-html/dataCheckRides-1.png" alt="Rides per day" width="672" />
 <p class="caption">
@@ -1147,151 +454,137 @@ Figure 4: Daily ascent (m)
 <p>For the missing 2009 speed/distance data - from memory my polar sensor was failing. I think I used to enter the distance manually after the ride. That’s all stored in a ‘.tlp’ file used by the ‘Ascent’ app. I’ve lost the registration key for the app so it’s unobtainable at the moment. I managed to get the time and heart rate data by uploading the .hrm files to strava.</p>
 <hr />
 </div>
-<div id="lap-data-1" class="section level2">
-<h2>Lap data</h2>
-<div class="figure"><span id="fig:lapCheckDist"></span>
-<img src="/post/20170714_rides_files/figure-html/lapCheckDist-1.png" alt="Lap distance (km)" width="672" />
-<p class="caption">
-Figure 5: Lap distance (km)
-</p>
-</div>
-<p>Hmm. There’s a few laps with massive distance outliers… and some that just look like they’re recorded differently. Perhaps the outliers are best fixed by replacing with NA and letting the rest of the data set the distance for that lap. Those that are recorded differently are perhaps unretreivable (or I could go back and make [private] segments in Strava to match).</p>
-<p>Those that don’t match (mean difference between Access and Strava &gt; 100 m) are in Table <a href="#tab:diffLaps">6</a></p>
+<div id="wrap-up" class="section level1">
+<h1>Wrap-up</h1>
+<p>All the data finally in one spot. For the first time since abandoning MS Access in 2009 when we got a mac. Plenty here to keep a ride-data-nerd happy for a long time.</p>
 <hr />
+</div>
+<div id="acknowledgements" class="section level1">
+<h1>Acknowledgements</h1>
 <table>
 <caption>
-<span id="tab:diffLaps">Table 6: </span>Segments with a difference in mean distance between Strava and Access of greater than 100 m
+<span id="tab:packages">Table 3: </span>R packages explicitly loaded (i.e. not including dependencies) to create this post
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
-LapName
+Package
 </th>
-<th style="text-align:right;">
-Access
+<th style="text-align:left;">
+Description
 </th>
-<th style="text-align:right;">
-Strava(Veloviewer)
-</th>
-<th style="text-align:right;">
-meanDistDiff
+<th style="text-align:left;">
+Citation
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-Clarendon to Humpty
+bookdown
 </td>
-<td style="text-align:right;">
-6.525500
+<td style="text-align:left;">
+bookdown: Authoring Books and Technical Documents with R Markdown
 </td>
-<td style="text-align:right;">
-6.153897
-</td>
-<td style="text-align:right;">
-371.6026
+<td style="text-align:left;">
+<span class="citation">Xie (2018a)</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Greenhill Road
+ggmap
 </td>
-<td style="text-align:right;">
-7.283000
+<td style="text-align:left;">
+ggmap: Spatial Visualization with ggplot2
 </td>
-<td style="text-align:right;">
-7.169236
-</td>
-<td style="text-align:right;">
-113.7642
+<td style="text-align:left;">
+<span class="citation">Kahle and Wickham (2016)</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Humpty
+ggridges
 </td>
-<td style="text-align:right;">
-2.441476
+<td style="text-align:left;">
+ggridges: Ridgeline Plots in ‘ggplot2’
 </td>
-<td style="text-align:right;">
-2.559759
-</td>
-<td style="text-align:right;">
-118.2832
+<td style="text-align:left;">
+<span class="citation">Wilke (2017)</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Last climb to Deviation
+knitr
 </td>
-<td style="text-align:right;">
-1.962600
+<td style="text-align:left;">
+knitr: A General-Purpose Package for Dynamic Report Generation in R
 </td>
-<td style="text-align:right;">
-1.813300
-</td>
-<td style="text-align:right;">
-149.3000
+<td style="text-align:left;">
+<span class="citation">Xie (2018b)</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Pole Rd to Ironbank
+lubridate
 </td>
-<td style="text-align:right;">
-1.730000
+<td style="text-align:left;">
+lubridate: Make Dealing with Dates a Little Easier
 </td>
-<td style="text-align:right;">
-2.877728
-</td>
-<td style="text-align:right;">
-1147.7284
+<td style="text-align:left;">
+<span class="citation">Grolemund, Spinu, and Wickham (2016)</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-The Old Freeway (Tollgate to Bollards)
+tidyverse
 </td>
-<td style="text-align:right;">
-8.642000
+<td style="text-align:left;">
+tidyverse: Easily Install and Load ‘Tidyverse’ Packages
 </td>
-<td style="text-align:right;">
-8.761935
-</td>
-<td style="text-align:right;">
-119.9348
+<td style="text-align:left;">
+<span class="citation">Wickham (2017)</span>
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Windy Point Climb
+zoo
 </td>
-<td style="text-align:right;">
-3.152143
+<td style="text-align:left;">
+zoo: S3 Infrastructure for Regular and Irregular Time Series (Z’s
 </td>
-<td style="text-align:right;">
-3.605286
-</td>
-<td style="text-align:right;">
-453.1428
+<td style="text-align:left;">
+<span class="citation">Zeileis, Grothendieck, and Ryan (2016)</span>
 </td>
 </tr>
 </tbody>
 </table>
 <hr />
-<div class="figure"><span id="fig:lapCheckDistII"></span>
-<img src="/post/20170714_rides_files/figure-html/lapCheckDistII-1.png" alt="Lap distance (km)" width="672" />
-<p class="caption">
-Figure 6: Lap distance (km)
-</p>
 </div>
-<hr />
+<div id="citations" class="section level1 unnumbered">
+<h1>Citations</h1>
+<div id="refs" class="references">
+<div id="ref-R-lubridate">
+<p>Grolemund, Garrett, Vitalie Spinu, and Hadley Wickham. 2016. <em>Lubridate: Make Dealing with Dates a Little Easier</em>. <a href="https://CRAN.R-project.org/package=lubridate" class="uri">https://CRAN.R-project.org/package=lubridate</a>.</p>
+</div>
+<div id="ref-R-ggmap">
+<p>Kahle, David, and Hadley Wickham. 2016. <em>Ggmap: Spatial Visualization with Ggplot2</em>. <a href="https://CRAN.R-project.org/package=ggmap" class="uri">https://CRAN.R-project.org/package=ggmap</a>.</p>
+</div>
+<div id="ref-R-tidyverse">
+<p>Wickham, Hadley. 2017. <em>Tidyverse: Easily Install and Load ’Tidyverse’ Packages</em>. <a href="https://CRAN.R-project.org/package=tidyverse" class="uri">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+</div>
+<div id="ref-R-ggridges">
+<p>Wilke, Claus O. 2017. <em>Ggridges: Ridgeline Plots in ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggridges" class="uri">https://CRAN.R-project.org/package=ggridges</a>.</p>
+</div>
+<div id="ref-R-bookdown">
+<p>Xie, Yihui. 2018a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>.</p>
+</div>
+<div id="ref-R-knitr">
+<p>———. 2018b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr" class="uri">https://CRAN.R-project.org/package=knitr</a>.</p>
+</div>
+<div id="ref-R-zoo">
+<p>Zeileis, Achim, Gabor Grothendieck, and Jeffrey A. Ryan. 2016. <em>Zoo: S3 Infrastructure for Regular and Irregular Time Series (Z’s Ordered Observations)</em>. <a href="https://CRAN.R-project.org/package=zoo" class="uri">https://CRAN.R-project.org/package=zoo</a>.</p>
 </div>
 </div>
-<div id="wrap-up" class="section level1">
-<h1>Wrap-up</h1>
-<p>All the data finally in one spot. For the first time since abandoning MS Access in 2009 when we got a mac. Plenty here to keep a ride-data-nerd happy for a long time.</p>
 </div>
 
     </div>

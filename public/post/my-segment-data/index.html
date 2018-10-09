@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>My segment data :: Acanthiza — data rides nature</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="/post/my-segment-data/" />
+
+
+<link rel="stylesheet" href="/assets/style.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/style.css">
+
+
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="My segment data :: Acanthiza — data rides nature" />
+<meta name="twitter:description" content="Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.
+Given the plethora of segments on Strava these days, filtering segments of interest is essential. As a starting point, I retrieved starred segments ridden more than 40 times." />
+<meta name="twitter:site" content="" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image" content="/img/default.jpg">
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="My segment data :: Acanthiza — data rides nature">
+<meta property="og:description" content="" />
+<meta property="og:url" content="/post/my-segment-data/" />
+<meta property="og:site_name" content="My segment data" />
+<meta property="og:image" content="/img/default.jpg">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+<meta property="article:section" content="data" /><meta property="article:section" content="rides" /><meta property="article:section" content="R" />
+<meta property="article:published_time" content="2018-10-09 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+</head>
+<body class="dark-theme">
+<div class="container">
+  <header class="header">
+  <span class="header__inner">
+    <a href="/" style="text-decoration: none;">
+  <div class="logo">
+    
+      <span class="logo__mark">></span>
+      <span class="logo__text">data rides nature</span>
+      <span class="logo__cursor"></span>
+    
+  </div>
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner">
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="https://github.com/Acanthiza/acanthiza">Code</a></li>
+    
+  </ul>
+</nav>
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>        
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="bulb-off" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="24"/>
+  <path d="M4 19C4 19.55 4.45 20 5 20H9C9.55 20 10 19.55 10 19V18H4V19ZM7 0C3.14 0 0 3.14 0 7C0 9.38 1.19 11.47 3 12.74V15C3 15.55 3.45 16 4 16H10C10.55 16 11 15.55 11 15V12.74C12.81 11.47 14 9.38 14 7C14 3.14 10.86 0 7 0ZM9.85 11.1L9 11.7V14H5V11.7L4.15 11.1C2.8 10.16 2 8.63 2 7C2 4.24 4.24 2 7 2C9.76 2 12 4.24 12 7C12 8.63 11.2 10.16 9.85 11.1Z" transform="translate(5 2)" fill="black"/>
+</svg>
+
+<svg class="bulb-on" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="24"/>
+  <path class="bulb-on__base" d="M4 19C4 19.55 4.45 20 5 20H9C9.55 20 10 19.55 10 19V18H4V19Z" transform="translate(5 2)" fill="#a9a9b3" />
+  <path class="bulb-on__glass" d="M0 7C0 3.14 3.14 0 7 0C10.86 0 14 3.14 14 7C14 9.38 12.81 11.47 11 12.74V15C11 15.55 10.55 16 10 16H4C3.45 16 3 15.55 3 15V12.74C1.19 11.47 0 9.38 0 7Z" transform="translate(5 2)" fill="#a9a9b3" />
+</svg>
+  
+      </span>
+    </span>
+  </span>
+</header>
+
+
+  <div class="content">
+    
+  <div class="post">
+    <h2 class="post-title"><a href="/post/my-segment-data/">My segment data</a></h2>
+    <div class="post-meta">
+      <span class="post-date">
+        2018-10-09
+      </span>
+      <span class="post-author">Written by nige</span>
+    </div>
+
+    
+      <span class="post-tags">
+        
+          #<a href="/tags/data">data</a>&nbsp;
+        
+          #<a href="/tags/rides">rides</a>&nbsp;
+        
+          #<a href="/tags/strava">strava</a>&nbsp;
+        
+          #<a href="/tags/veloviewer">veloviewer</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      <p>Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.</p>
+<p>Given the plethora of segments on Strava these days, filtering segments of interest is essential. As a starting point, I retrieved starred segments ridden more than 40 times. Combining the segment data gave 1581 individual efforts on 13 segments which were both starred and ridden more than 40 times. See <a href="https://acanthiza.netlify.com/post/20170714_rides/">this post</a> for details on combining ride data from pre-Strava.</p>
+<hr />
+<table>
+<caption>
+<span id="tab:lapsAccess">Table 1: </span>First few rows/columns of segment data from MS Access
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Gear
+</th>
+<th style="text-align:left;">
+LapName
+</th>
+<th style="text-align:right;">
+LDis
+</th>
+<th style="text-align:right;">
+LTime
+</th>
+<th style="text-align:right;">
+LHRAverage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2001-12-09
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Humpty
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+869
+</td>
+<td style="text-align:right;">
+128
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001-12-10
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+289
+</td>
+<td style="text-align:right;">
+162
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001-12-13
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Full Norton - bridge to gates
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+1051
+</td>
+<td style="text-align:right;">
+171
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001-12-13
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+335
+</td>
+<td style="text-align:right;">
+147
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-01-20
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+253
+</td>
+<td style="text-align:right;">
+154
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-03-14
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+263
+</td>
+<td style="text-align:right;">
+161
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-03-19
+</td>
+<td style="text-align:left;">
+mtb
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+308
+</td>
+<td style="text-align:right;">
+153
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-04-04
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Windy Point Climb
+</td>
+<td style="text-align:right;">
+3.15
+</td>
+<td style="text-align:right;">
+680
+</td>
+<td style="text-align:right;">
+159
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-04-25
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+309
+</td>
+<td style="text-align:right;">
+165
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002-04-30
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+Pole Rd (to Upper Sturt)
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+325
+</td>
+<td style="text-align:right;">
+147
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<caption>
+<span id="tab:lapsStrava">Table 2: </span>First few rows/columns of segment data from strava
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Gear
+</th>
+<th style="text-align:left;">
+LapName
+</th>
+<th style="text-align:right;">
+LDis
+</th>
+<th style="text-align:right;">
+LTime
+</th>
+<th style="text-align:right;">
+LHRAverage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2012-12-20
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.91360
+</td>
+<td style="text-align:right;">
+1575
+</td>
+<td style="text-align:right;">
+151.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2013-01-24
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.90590
+</td>
+<td style="text-align:right;">
+1584
+</td>
+<td style="text-align:right;">
+163.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-07-08
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.90670
+</td>
+<td style="text-align:right;">
+1635
+</td>
+<td style="text-align:right;">
+156.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2018-03-29
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.91690
+</td>
+<td style="text-align:right;">
+1692
+</td>
+<td style="text-align:right;">
+157.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-07-31
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.90280
+</td>
+<td style="text-align:right;">
+1698
+</td>
+<td style="text-align:right;">
+153.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2018-05-08
+</td>
+<td style="text-align:left;">
+roadie
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.90710
+</td>
+<td style="text-align:right;">
+1707
+</td>
+<td style="text-align:right;">
+157.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2012-05-31
+</td>
+<td style="text-align:left;">
+tourer
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.89958
+</td>
+<td style="text-align:right;">
+1713
+</td>
+<td style="text-align:right;">
+157.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-12-04
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.89920
+</td>
+<td style="text-align:right;">
+1728
+</td>
+<td style="text-align:right;">
+157.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014-07-18
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+7.11070
+</td>
+<td style="text-align:right;">
+1729
+</td>
+<td style="text-align:right;">
+151.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2018-05-01
+</td>
+<td style="text-align:left;">
+cx
+</td>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+6.91200
+</td>
+<td style="text-align:right;">
+1731
+</td>
+<td style="text-align:right;">
+157.4
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<table>
+<caption>
+<span id="tab:lapsCombine">Table 3: </span>Starred laps with more than 40 efforts
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+LapName
+</th>
+<th style="text-align:right;">
+efforts
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Belair NP - Eastern Gate
+</td>
+<td style="text-align:right;">
+354
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MtOsmond-Bullock-OldFreeway
+</td>
+<td style="text-align:right;">
+230
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Belair Rd
+</td>
+<td style="text-align:right;">
+178
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Windy Point Climb
+</td>
+<td style="text-align:right;">
+153
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mt Osmond (Beaumont side short)
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Full Norton - bridge to gates
+</td>
+<td style="text-align:right;">
+95
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Old Freeway (Tollgate to Bollards)
+</td>
+<td style="text-align:right;">
+89
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Aldgate Valley Road
+</td>
+<td style="text-align:right;">
+83
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sturt Valley Rd
+</td>
+<td style="text-align:right;">
+74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Humpty
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tilleys Hil Rd
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Caroline Path
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clarendon to Bakers Gully
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="lap-data" class="section level2">
+<h2>Lap data</h2>
+<div class="figure"><span id="fig:lapCheckDist"></span>
+<img src="/post/2018-10-09-my-segment-data_files/figure-html/lapCheckDist-1.png" alt="Lap distance (km)" width="672" />
+<p class="caption">
+Figure 1: Lap distance (km)
+</p>
+</div>
+<p>Hmm. There’s a few laps with massive distance outliers… and some that just look like they’re recorded differently. Perhaps the outliers are best fixed by replacing with NA and letting the rest of the data set the distance for that lap. Those that are recorded differently are perhaps unretreivable (or I could go back and make [private] segments in Strava to match).</p>
+<p>Those that don’t match (mean difference between Access and Strava &gt; 100 m) are in Table <a href="#tab:diffLaps">4</a></p>
+<hr />
+<table>
+<caption>
+<span id="tab:diffLaps">Table 4: </span>Segments with a difference in mean distance between Strava and Access of greater than 100 m
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+LapName
+</th>
+<th style="text-align:right;">
+Access
+</th>
+<th style="text-align:right;">
+Strava(Veloviewer)
+</th>
+<th style="text-align:right;">
+meanDistDiff
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Humpty
+</td>
+<td style="text-align:right;">
+2.441476
+</td>
+<td style="text-align:right;">
+2.559759
+</td>
+<td style="text-align:right;">
+118.2832
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Old Freeway (Tollgate to Bollards)
+</td>
+<td style="text-align:right;">
+8.642000
+</td>
+<td style="text-align:right;">
+8.761935
+</td>
+<td style="text-align:right;">
+119.9348
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Windy Point Climb
+</td>
+<td style="text-align:right;">
+3.152143
+</td>
+<td style="text-align:right;">
+3.605286
+</td>
+<td style="text-align:right;">
+453.1428
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div class="figure"><span id="fig:lapCheckDistII"></span>
+<img src="/post/2018-10-09-my-segment-data_files/figure-html/lapCheckDistII-1.png" alt="Difference in lap distance from mean distance (km)" width="672" />
+<p class="caption">
+Figure 2: Difference in lap distance from mean distance (km)
+</p>
+</div>
+<hr />
+</div>
+<div id="acknowledgements" class="section level1">
+<h1>Acknowledgements</h1>
+<table>
+<caption>
+<span id="tab:packages">Table 5: </span>R packages explicitly loaded (i.e. not including dependencies) to create this post
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Package
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Citation
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+bookdown
+</td>
+<td style="text-align:left;">
+bookdown: Authoring Books and Technical Documents with R Markdown
+</td>
+<td style="text-align:left;">
+<span class="citation">@R-bookdown</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+knitr
+</td>
+<td style="text-align:left;">
+knitr: A General-Purpose Package for Dynamic Report Generation in R
+</td>
+<td style="text-align:left;">
+<span class="citation">@R-knitr</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lubridate
+</td>
+<td style="text-align:left;">
+lubridate: Make Dealing with Dates a Little Easier
+</td>
+<td style="text-align:left;">
+<span class="citation">@R-lubridate</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tidyverse
+</td>
+<td style="text-align:left;">
+tidyverse: Easily Install and Load ‘Tidyverse’ Packages
+</td>
+<td style="text-align:left;">
+<span class="citation">@R-tidyverse</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+zoo
+</td>
+<td style="text-align:left;">
+zoo: S3 Infrastructure for Regular and Irregular Time Series (Z’s
+</td>
+<td style="text-align:left;">
+<span class="citation">@R-zoo</span>
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="citations" class="section level1">
+<h1>Citations</h1>
+</div>
+
+    </div>
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+        <div class="pagination__buttons">
+          
+          
+            <a class="btn previous" href="/post/20190919_rttr/">Race to the rock →</a>
+           
+        </div>
+      </div>
+    
+  </div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <a href="/" style="text-decoration: none;">
+  <div class="logo">
+    
+      <span class="logo__mark">></span>
+      <span class="logo__text">data rides nature</span>
+      <span class="logo__cursor"></span>
+    
+  </div>
+</a>
+
+      <div class="copyright">
+        <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+        <span>Theme created by <a href="https://twitter.com/panr">panr</a> 2018</span>
+      </div>
+    
+  </div>
+</footer>
+
+
+  <script src="/assets/main.js"></script>
+
+  <script src="/assets/prism.js"></script>
+
+
+
+  
+</div>
+
+</body>
+</html>

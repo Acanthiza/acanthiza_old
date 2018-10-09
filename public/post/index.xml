@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Acanthiza</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>My segment data</title>
+      <link>/post/my-segment-data/</link>
+      <pubDate>Tue, 09 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/my-segment-data/</guid>
+      <description>Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.
+Given the plethora of segments on Strava these days, filtering segments of interest is essential. As a starting point, I retrieved starred segments ridden more than 40 times.</description>
+    </item>
     
     <item>
       <title>Race to the rock</title>
@@ -28,7 +38,7 @@ For an introduction to Race to the Rock perhaps read about the first 2016 ride. 
       <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/20170714_rides/</guid>
-      <description>Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to Ascent to Strava to store ride data. # more Recently the following have provided the potential to make combining these data easy:
+      <description>Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to Ascent to Strava to store ride data. Recently the following have provided the potential to make combining these data easy:
  workflow, particularly with  tidyverse rmarkdown  apps to rip data out of MS Access databases from a mac mdb accdb Viewer the export .csv button on most pages on Veloviewer  This is the piecing together and exploration of those data.</description>
     </item>
     

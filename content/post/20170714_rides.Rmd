@@ -3,6 +3,7 @@ title: My ride data
 author: nige
 date: '2017-07-14'
 cover: "jiajinshan.jpg"
+bibliography: ["packageCitations.bib"]
 categories:
   - data
   - rides
@@ -27,6 +28,8 @@ tags:
                 )
   
   purrr::walk(packages, library, character.only = TRUE)
+  
+  cits <- write_bib(packages,file="packageCitations.bib",tweak=TRUE)
 
   knitr::opts_chunk$set(echo = F
                         , warning = F
@@ -185,98 +188,8 @@ tags:
 
 ```
 
-```{r dataLapsAccess}
 
-  accessLaps <- dat1 %>%
-    dplyr::select(RideID, Date, Gear, data) %>%
-    tidyr::unnest() %>%
-    dplyr::filter(!is.na(LTime), LapName != "")
-
-```
-
-```{r dataLapsStrava}
-
-  stravaLaps <- tibble(files = list.files("../../data/", pattern = "efforts")) %>%
-    dplyr::mutate(data = map(paste0("../../data/",files)
-                             , read_csv
-                             , col_types = "d-ccdd-ccdddd-ddc------ddddd--ccT----d"
-                             )
-                  ) %>%
-    tidyr::unnest() %>%
-    dplyr::mutate(RideID = `Activity Id`
-                  , LDis = `Dist km`/1000
-                  ) %>%
-    dplyr::left_join(dat, by = c("RideID" = "RideID")) %>%
-    dplyr::select(RideID
-                  , Date
-                  , Gear = Gear.y
-                  , LapName = Name
-                  , LDis
-                  , LTime = `Elapsed Time`
-                  , LHRAverage = `Heart Rate`
-                  , LAscent = `Elv change m`
-                  , LTemperature = Temp
-                  )
-
-```
-
-```{r dataLapsCombine}
-
-  starList <- tibble(LapName = c(unique(stravaLaps$LapName),"MtOsmond-Bullock-OldFreeway","Tilleys Hil Rd"))
-
-  effortThresh <- 14
-
-  laps <- accessLaps %>%
-    dplyr::inner_join(starList) %>%
-    dplyr::bind_rows(stravaLaps) %>%
-    dplyr::left_join(dat) %>%
-    dplyr::arrange(LapName,Date) %>%
-    dplyr::group_by(LapName) %>%
-    dplyr::mutate(meanDist = mean(LDis, na.rm = T)
-                  , meanAsc = mean(LAscent, na.rm = T)
-                  , meanTime = mean(LTime, na.rm = T)
-                  , meanTime = as_datetime(meanTime, origin = lubridate::origin)
-                  , meanTime = format(meanTime, "%H:%M:%S")
-                  , efforts = n()
-                  , LAvs = meanDist/(LTime/3600)
-                  , Time = as_datetime(LTime, origin = lubridate::origin)
-                  #, Time = format(Time, "%H:%M:%S")
-                  , Best = min(LTime)
-                  , Best = as_datetime(Best, origin = lubridate::origin)
-                  , Best = format(Best, "%H:%M:%S")
-                  , Year = as.numeric(format.Date(Date, "%Y"))
-                  , halfDec = cut(Year, c(1995,2000,2005,2010,2015,2020,2025), labels = FALSE)
-                  , halfDec = 1990 + halfDec*5
-                  ) %>%
-    dplyr::filter(efforts > get("effortThresh")) %>%
-    dplyr::ungroup() %>%
-    dplyr::select(Source
-                  , RideID
-                  , Year
-                  , halfDec
-                  , LapName
-                  , Date
-                  , LTime
-                  , LDis
-                  , LAvs
-                  , Gear
-                  , LHRAverage
-                  , LAscent
-                  , LTemperature
-                  , Time
-                  , efforts
-                  , meanDist
-                  , meanTime
-                  , Best
-                  ) %>%
-    dplyr::ungroup() %>%
-    dplyr::filter(!is.na(Source))
-  
-  lapSummary <- laps %>% dplyr::select(LapName,efforts) %>% unique()
-
-```
-
-Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to [Ascent](http://www.montebellosoftware.com/) to [Strava](http://www.strava.com) to store ride data. # more Recently the following have provided the potential to make combining these data easy:
+Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to [Ascent](http://www.montebellosoftware.com/) to [Strava](http://www.strava.com) to store ride data. Recently the following have provided the potential to make combining these data easy:
 
 * workflow, particularly with
     + [tidyverse](http://tidyverse.org/)
@@ -312,59 +225,13 @@ This is the piecing together and exploration of those data.
 
 Comining the datasets gives `r nrow(dat)` individual rides.
 
----
-
-## Lap data
-
-Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.
-
-Given the plethora of segments on Strava these days, filtering the segments of interest is probably worthwhile. As a starting point, starred segments ridden more than `r effortThresh` times gives `r nrow(lapSummary)` segments (Table \@ref(tab:lapsCombine)).
-
-Combining the segment data gives `r nrow(laps)` individual efforts on `r nrow(lapSummary)` segments which were both starred and ridden more than `r effortThresh` times.
-
-
-```{r lapsAccess}
-
-  kable(accessLaps %>% slice(1:10) %>% select(2:7)
-        , format = "html"
-        , pad = 0
-        , caption = "First few rows/columns of segment data from MS Access" 
-        )
-
-```
-
----
-
-```{r lapsStrava}
-
-  kable(stravaLaps %>% slice(1:10) %>% select(2:7)
-        , format = "html"
-        , pad = 0
-        , caption = "First few rows/columns of segment data from strava" 
-        )
-  
-```
-
----
-
-```{r lapsCombine}
-  
-  kable(lapSummary %>% arrange(desc(efforts))
-        , caption = paste0("Starred laps with more than ",effortThresh," efforts")
-        )
-  
-```
-
----
-
 # Data checks
 
 Probably best to check these data before using them for anything...
 
 A series of visual plots as quick data checks.
 
-## Ride data
-
+---
 
 ```{r dataCheckRides, fig.cap = "Rides per day"}
 
@@ -525,71 +392,38 @@ For the missing 2009 speed/distance data - from memory my polar sensor was faili
 
 ---
 
-## Lap data
-
-```{r lapCheckDist, fig.cap = "Lap distance (km)"}
-
-  laps %>%
-    ggplot(aes(Source, LDis)) +
-      geom_boxplot() +
-      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-      #ylab("LDis - meanDist") +
-      facet_wrap(~LapName, scales = "free_y") +
-      geom_jitter(shape = 16, size = 1, alpha = 0.3)
-  
-```
-
-Hmm. There's a few laps with massive distance outliers... and some that just look like they're recorded differently. Perhaps the outliers are best fixed by replacing with NA and letting the rest of the data set the distance for that lap. Those that are recorded differently are perhaps unretreivable (or I could go back and make [private] segments in Strava to match).
-
-Those that don't match (mean difference between Access and Strava > 100 m) are in Table \@ref(tab:diffLaps)
-
----
-
-```{r diffLaps}
-
-  diffThresh <- 100
-
-  diffLaps <- laps %>% dplyr::group_by(LapName,Source) %>%
-    dplyr::summarise(meanDist = mean(LDis, na.rm = T)) %>%
-    tidyr::spread(Source,meanDist) %>%
-    dplyr::mutate(meanDistDiff = 1000*(Access - `Strava(Veloviewer)`)
-                  , meanDistDiff = abs(meanDistDiff)
-                  ) %>%
-    dplyr::filter(meanDistDiff > get("diffThresh"))
-
-  kable(diffLaps
-        , caption = paste0("Segments with a difference in mean distance between Strava and Access of greater than "
-                           , diffThresh
-                           , " m"
-                           )
-        )
-
-```
-
----
-
-```{r lapCheckDistII, fig.cap = "Lap distance (km)"}
-
-  laps <- laps %>%
-    dplyr::mutate(LDisII = ifelse(LDis/meanDist < 1.1 & LDis/meanDist > 0.9, LDis, NA)) %>%
-    dplyr::group_by(LapName) %>%  
-    dplyr::mutate(meanDist = mean(LDisII, na.rm = T)) %>%
-    dplyr::mutate(diff = 1000*(LDis-meanDist)) %>%
-    dplyr::ungroup()
-    
-  laps %>%
-    ggplot(aes(Source, diff)) +
-      geom_boxplot() +
-      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-      ylab("Difference from mean distance (m)") +
-      facet_wrap(~LapName, scales = "free_y") +
-      geom_jitter(shape = 16, size = 1, alpha = 0.3)
-  
-```
-
----
-
 # Wrap-up
 
 All the data finally in one spot. For the first time since abandoning MS Access in 2009 when we got a mac. Plenty here to keep a ride-data-nerd happy for a long time.
+
+---
+
+# Acknowledgements
+
+```{r packages}
+ 
+  cits <- tibble(cits = read_lines("packageCitations.bib"))
+ 
+  kable(cits %>%
+          dplyr::filter(grepl("@",cits)
+                        , !grepl("CiteR",cits)
+                        ) %>%
+          dplyr::rename(Package = cits) %>%
+          dplyr::bind_cols(cits %>%
+                             dplyr::filter(grepl("title",cits)) %>%
+                             dplyr::rename(Description = cits)
+                           ) %>%
+          dplyr::mutate(Package = gsub("@Manual\\{|,|R-","",Package)
+                        , Description = gsub("title = \\{|\\},","",Description)
+                        ) %>%
+    dplyr::arrange() %>%
+    dplyr::mutate(Citation = paste0("@R-",Package))
+   , caption = "R packages explicitly loaded (i.e. not including dependencies) to create this post"
+   )
+ 
+```
+
+---
+
+# Citations 
 
