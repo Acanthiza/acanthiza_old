@@ -16,8 +16,6 @@ tags:
 
 ```{r setup, include = F}
 
-  rm(list = ls())
-
   packages <- c("tidyverse"
                 , "lubridate"
                 , "zoo"
@@ -223,7 +221,7 @@ This is the piecing together and exploration of those data.
    
 ```
 
-Comining the datasets gives `r nrow(dat)` individual rides.
+Combining the datasets gives `r nrow(dat)` individual rides.
 
 # Data checks
 
