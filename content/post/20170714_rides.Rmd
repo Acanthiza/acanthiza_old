@@ -1,9 +1,9 @@
 ---
-title: My ride data
+title: My rides
 author: nige
 date: '2017-07-14'
-cover: "jiajinshan.jpg"
 bibliography: ["packageCitations.bib"]
+cover: "jiajinshan.jpg"
 categories:
   - data
   - rides
@@ -186,8 +186,7 @@ tags:
 
 ```
 
-
-Data from my rides have been scattered in several places. Through the years I moved from MS Excel to MS Access to [Ascent](http://www.montebellosoftware.com/) to [Strava](http://www.strava.com) to store ride data. Recently the following have provided the potential to make combining these data easy:
+Data from my rides have been scattered in several places. Through the years I moved from Excel to Access to [Ascent](http://www.montebellosoftware.com/) to [Strava](http://www.strava.com) to store ride data. Recently the following have provided the potential to make combining these data easy:
 
 * workflow, particularly with
     + [tidyverse](http://tidyverse.org/)

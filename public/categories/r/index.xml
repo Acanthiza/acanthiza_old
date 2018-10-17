@@ -6,20 +6,10 @@
     <description>Recent content in R on Acanthiza</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>My segment data</title>
-      <link>/post/my-segment-data/</link>
-      <pubDate>Tue, 09 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/my-segment-data/</guid>
-      <description>Having Strava do all the work makes recording segments (efforts/laps) all too easy. It used to take pressing the lap button at the start and end of a climb and then scrolling through that data post-ride to enter the data into MS Access - not a process I miss.
-Given the plethora of segments on Strava these days, filtering segments of interest is essential. As a starting point, I retrieved starred segments ridden more than 40 times.</description>
-    </item>
     
     <item>
       <title>Race to the rock</title>

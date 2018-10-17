@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Acanthiza</title>
+    <link>/blog/</link>
+    <description>Recent content in Blogs on Acanthiza</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Race to the rock</title>
+      <link>/blog/20190919_rttr/</link>
+      <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/20190919_rttr/</guid>
+      <description>“It’s safer, less painful and less soul destroying to remain a dot watcher.”
+With those words for inspiration, this post takes dot watching several levels too far.
+For an introduction to Race to the Rock perhaps read about the first 2016 ride. Race to the rock happened again in 2017 and 2018. There’s an active online community serving up a constant stream of visual inspiration.</description>
+    </item>
+    
+    <item>
+      <title>My rides</title>
+      <link>/blog/20170714_rides/</link>
+      <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/20170714_rides/</guid>
+      <description>Data from my rides have been scattered in several places. Through the years I moved from Excel to Access to Ascent to Strava to store ride data. Recently the following have provided the potential to make combining these data easy:
+ workflow, particularly with  tidyverse rmarkdown  apps to rip data out of MS Access databases from a mac mdb accdb Viewer the export .csv button on most pages on Veloviewer  This is the piecing together and exploration of those data.</description>
+    </item>
+    
+  </channel>
+</rss>

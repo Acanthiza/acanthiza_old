@@ -6,7 +6,7 @@ author = "nige"
 
 <h2>> data rides nature<span class="logo__cursor" style="width: 3px; height: 1.625rem;"></span></h2>
 
-![South of Spalding](../../img/landscape.jpg)
+<img src="../img/landscape.jpg" width="800">
 
 This is my first bumbling attempt at a website. The only goal at the moment is to learn a workflow from data to web. If it's useful or interesting too, well great. All posts should be reproducible from code and data on [github](https://github.com/Acanthiza?tab=repositories).
 
