@@ -1,0 +1,58 @@
+---
+title: Geometry
+author: nige
+date: '2018-11-08'
+cover: "mawsontrail.jpg"
+slug: geometry
+categories:
+  - Bike
+  - R
+tags:
+  - data
+---
+
+```{r setup, include = F}
+
+  library("tidyverse") # everything data science related
+  library("bookdown")
+  library("knitr")
+  
+  knitr::opts_chunk$set(echo = F
+                        , warning = F
+                        , message = F
+                        #, include = F
+                        , collapse = TRUE
+                        )
+
+```
+
+```{r functions}
+
+  noNA <- function(x) sum(is.na(x)) == 0
+
+```
+
+```{r data}
+
+  dat <- read_csv("../../data/BikeGeometry.csv") %>%
+    dplyr::filter(Size >53
+                  , Size < 56
+                  )
+
+```
+
+
+
+```{r analysis}
+
+  datForPCA <- dat %>% select_if(noNA) %>% select_if(is.numeric)
+
+  datMDS <- vegan::metaMDS(datForPCA)
+
+  ggbiplot(pcDat
+           , labels = paste0(dat$Frame,dat$Size)
+           , groups = dat$Man
+           #, scale = 0
+           ) 
+
+```
