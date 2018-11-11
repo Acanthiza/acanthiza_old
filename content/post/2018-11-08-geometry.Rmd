@@ -105,18 +105,19 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (
 ```{r bikeGeometry}
 
  datatable(datForPCA %>%
-                      dplyr::select_if(noNA) %>%
-                      dplyr::select_if(is.numeric) %>%
-                      dplyr::select(SeatAngle
-                                    ,HeadAngle
-                                    ,BBDrop
-                                    ,ChainStay
-                                    ,ForkRake
-                                    ,Stack
-                                    ,Reach
-                                    #,HeadTube
-                                    ,Trail
-                      ))
+                      dplyr::select(Frame
+                                    , Year
+                                    , Use
+                                    , SeatAngle
+                                    , HeadAngle
+                                    , BBDrop
+                                    , ChainStay
+                                    , ForkRake
+                                    , Stack
+                                    , Reach
+                                    , Trail
+                      )
+           )
 
 ```
 
