@@ -17,17 +17,17 @@ tags:
 ```{r setup, include = F}
 
   packages <- c("tidyverse"
-                , "lubridate"
-                , "zoo"
                 , "bookdown"
                 , "knitr"
+                , "lubridate"
+                , "zoo"
                 , "ggridges"
                 , "ggmap"
                 )
   
   purrr::walk(packages, library, character.only = TRUE)
   
-  cits <- write_bib(packages,file="packageCitations.bib",tweak=TRUE)
+  write_bib(packages,file="packageCitations.bib",tweak=TRUE)
 
   knitr::opts_chunk$set(echo = F
                         , warning = F
@@ -411,10 +411,10 @@ All the data finally in one spot. For the first time since abandoning MS Access 
                              dplyr::rename(Description = cits)
                            ) %>%
           dplyr::mutate(Package = gsub("@Manual\\{|,|R-","",Package)
-                        , Description = gsub("title = \\{|\\},","",Description)
+                        , Description = gsub("  title = \\{","",Description)
+                        , Description = gsub("\\},","",Description)
                         ) %>%
-    dplyr::arrange() %>%
-    dplyr::mutate(Citation = paste0("@R-",Package))
+          dplyr::mutate(Citation = paste0("@R-",Package))
    , caption = "R packages explicitly loaded (i.e. not including dependencies) to create this post"
    )
  

@@ -6,10 +6,21 @@
     <description>Recent content in Data on Acanthiza</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/data/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Geometry</title>
+      <link>/post/2018-11-08-geometry/</link>
+      <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018-11-08-geometry/</guid>
+      <description>Baffled by bike geometry? So am I, so don’t look for answers here. But here’s how I’ve helped myself scratch the surface of understanding…
+The main guide for the important numbers to chase was this CylingTips article. Gaps in geometry were filled in using this bike geometry calculator. There’s also geometrygeeks.com providing good explanations of what each term means a good.
+Analysing geometries accumulated from the web gives Figure 1.</description>
+    </item>
     
     <item>
       <title>My rides</title>

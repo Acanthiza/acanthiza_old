@@ -2,20 +2,30 @@
 title: Geometry
 author: nige
 date: '2018-11-08'
-cover: "mawsontrail.jpg"
-slug: geometry
+bibliography: ["packageCitations.bib"]
+cover: "geometry.png"
 categories:
   - Bike
   - R
+  - Data
 tags:
   - data
+  - bikes
+  - geometry
 ---
 
 ```{r setup, include = F}
 
-  library("tidyverse") # everything data science related
-  library("bookdown")
-  library("knitr")
+  packages <- c("tidyverse"
+                , "bookdown"
+                , "knitr"
+                , "ggbiplot"
+                , "DT"
+                )
+  
+  purrr::walk(packages, library, character.only = TRUE)
+  
+  write_bib(packages,file="packageCitations.bib",tweak=TRUE)
   
   knitr::opts_chunk$set(echo = F
                         , warning = F
@@ -23,6 +33,11 @@ tags:
                         #, include = F
                         , collapse = TRUE
                         )
+  
+  options(knitr.kable.NA = ''
+          , knitr.table.format = "html"
+          )
+
 
 ```
 
@@ -37,22 +52,89 @@ tags:
   dat <- read_csv("../../data/BikeGeometry.csv") %>%
     dplyr::filter(Size >53
                   , Size < 56
+                  , !is.na(Trail)
                   )
 
 ```
 
+---
 
+Baffled by bike geometry? So am I, so don't look for answers here. But here's how I've helped myself scratch the surface of understanding...
 
-```{r analysis}
+---
 
-  datForPCA <- dat %>% select_if(noNA) %>% select_if(is.numeric)
+The main guide for the important numbers to chase was this [CylingTips article](https://cyclingtips.com/2011/02/the-geometry-of-bike-handling/). Gaps in geometry were filled in using this [bike geometry calculator](https://www.bikegeocalc.com/#7Unnameda0b4c743.9802d270e600.64877f769.85608g971.72104h412.76493i340j340k1335l813.03517m1133.98576n679.88726o1177.24813p889.84772q1213.32131r1345.15065s893.89606t31.8u40v6w2x10y280z40A0B150C25D370E45F172.5G30H30Z). There's also [geometrygeeks.com](https://geometrygeeks.bike/understanding-bike-geometry) providing good explanations of what each term means a good.
 
-  datMDS <- vegan::metaMDS(datForPCA)
+Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (blue) roadies cluster together and appear correlated with high head angle numbers and low chain stay numbers. Then there's a smear of endurance/gravel bikes (in brown and green respectively). The cx bikes (in red) are spread on one half of the figure, apparently correlated with high fork rake numbers. 
+
+---
+
+```{r pca, fig.cap = "Principal components analysis of key bike geometry values"}
+
+  datForPCA <- dat %>%
+    dplyr::filter(Bars == "Drop"
+                  , Year == 2018
+                  )
+
+  pcDat <- princomp(datForPCA %>%
+                      dplyr::select_if(noNA) %>%
+                      dplyr::select_if(is.numeric) %>%
+                      dplyr::select(SeatAngle
+                                    ,HeadAngle
+                                    ,BBDrop
+                                    ,ChainStay
+                                    ,ForkRake
+                                    ,Stack
+                                    ,Reach
+                                    #,HeadTube
+                                    ,Trail
+                      ) %>%
+                      scale(center=FALSE,scale=TRUE)
+                      )
 
   ggbiplot(pcDat
-           , labels = paste0(dat$Frame,dat$Size)
-           , groups = dat$Man
-           #, scale = 0
-           ) 
+           , labels = paste0(datForPCA$Frame,"_",substr(datForPCA$Year,3,4))
+           , groups = datForPCA$Use
+           , labels.size = 3
+           )
 
 ```
+
+---
+
+```{r bikeGeometry}
+
+ datatable(datForPCA)
+
+```
+
+---
+
+# Acknowledgements
+
+```{r packages}
+ 
+  cits <- tibble(cits = read_lines("packageCitations.bib"))
+ 
+  kable(cits %>%
+          dplyr::filter(grepl("@",cits)
+                        , !grepl("CiteR",cits)
+                        ) %>%
+          dplyr::rename(Package = cits) %>%
+          dplyr::bind_cols(cits %>%
+                             dplyr::filter(grepl("title",cits)) %>%
+                             dplyr::rename(Description = cits)
+                           ) %>%
+          dplyr::mutate(Package = gsub("@Manual\\{|,|R-","",Package)
+                        , Description = gsub("  title = \\{","",Description)
+                        , Description = gsub("\\},","",Description)
+                        ) %>%
+          dplyr::mutate(Citation = paste0("@R-",Package))
+   , caption = "R packages explicitly loaded (i.e. not including dependencies) to create this post"
+   )
+ 
+```
+
+---
+
+# Citations 

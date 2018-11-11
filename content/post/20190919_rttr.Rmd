@@ -3,6 +3,7 @@ title: Race to the rock
 author: nige
 date: '2018-09-19'
 cover: "mawsontrail.jpg"
+bibliography: ["packageCitations.bib"]
 categories:
   - Bike
   - R
@@ -15,17 +16,22 @@ tags:
 
 ```{r setup, include = F}
 
-  library("tidyverse") # everything data science related
-  library("lubridate")
-  library("bookdown")
-  library("knitr")
-  library("sf")
-  library("tmap")
-  library("tmaptools")
-  library("ggridges")
-  library("widgetframe")
-  library("DT")
-  library("SearchTrees")
+  packages <- c("tidyverse"
+                , "lubridate"
+                , "bookdown"
+                , "knitr"
+                , "sf"
+                , "tmap"
+                , "tmaptools"
+                , "ggridges"
+                , "widgetframe"
+                , "DT"
+                , "SearchTrees"
+                )
+  
+  purrr::walk(packages, library, character.only = TRUE)
+  
+  write_bib(packages,file="packageCitations.bib",tweak=TRUE)
 
   knitr::opts_chunk$set(echo = F
                         , warning = F
@@ -33,6 +39,11 @@ tags:
                         #, include = F
                         , collapse = TRUE
                         )
+  
+  options(knitr.kable.NA = ''
+          , knitr.table.format = "html"
+          )
+
 
 ```
 
@@ -308,6 +319,30 @@ The following table shows the first few records for each rider. If the table opt
 
 # Acknowledgements
 
+```{r packages}
+ 
+  cits <- tibble(cits = read_lines("packageCitations.bib"))
+ 
+  kable(cits %>%
+          dplyr::filter(grepl("@",cits)
+                        , !grepl("CiteR",cits)
+                        ) %>%
+          dplyr::rename(Package = cits) %>%
+          dplyr::bind_cols(cits %>%
+                             dplyr::filter(grepl("title",cits)) %>%
+                             dplyr::rename(Description = cits)
+                           ) %>%
+          dplyr::mutate(Package = gsub("@Manual\\{|,|R-","",Package)
+                        , Description = gsub("  title = \\{","",Description)
+                        , Description = gsub("\\},","",Description)
+                        ) %>%
+          dplyr::mutate(Citation = paste0("@R-",Package))
+   , caption = "R packages explicitly loaded (i.e. not including dependencies) to create this post"
+   )
+ 
+```
 
+---
 
+# Citations 
         
