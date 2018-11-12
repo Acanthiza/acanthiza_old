@@ -63,9 +63,11 @@ Baffled by bike geometry? So am I, so don't look for answers here. But here's ho
 
 ---
 
-The main guide for the important numbers to chase was this [CylingTips article](https://cyclingtips.com/2011/02/the-geometry-of-bike-handling/). Gaps in geometry were filled in using this [bike geometry calculator](https://www.bikegeocalc.com/#7Unnameda0b4c743.9802d270e600.64877f769.85608g971.72104h412.76493i340j340k1335l813.03517m1133.98576n679.88726o1177.24813p889.84772q1213.32131r1345.15065s893.89606t31.8u40v6w2x10y280z40A0B150C25D370E45F172.5G30H30Z). There's also [geometrygeeks.com](https://geometrygeeks.bike/understanding-bike-geometry) providing good explanations of what each term means a good.
+The main guide for the important numbers to chase was this [CylingTips article](https://cyclingtips.com/2011/02/the-geometry-of-bike-handling/). Gaps in geometry were filled in using this [bike geometry calculator](https://www.bikegeocalc.com/#7Unnameda0b4c743.9802d270e600.64877f769.85608g971.72104h412.76493i340j340k1335l813.03517m1133.98576n679.88726o1177.24813p889.84772q1213.32131r1345.15065s893.89606t31.8u40v6w2x10y280z40A0B150C25D370E45F172.5G30H30Z). There's also [geometrygeeks.com](https://geometrygeeks.bike/understanding-bike-geometry) providing good explanations of each term.
 
-Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (blue) roadies cluster together and appear correlated with high head angle numbers and low chain stay numbers. Then there's a smear of endurance/gravel bikes (in brown and green respectively). The cx bikes (in red) are spread on one half of the figure, apparently correlated with high fork rake numbers. 
+Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (blue) roadies cluster together and appear correlated with high head angle numbers and low chain stay numbers. Then there's a smear of endurance/gravel bikes (in brown and green respectively). The cx bikes (in red) are spread on one half of the figure, apparently correlated with high fork rake numbers.
+
+Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGravel)
 
 ---
 
@@ -73,7 +75,7 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (
 
   datForPCA <- dat %>%
     dplyr::filter(Bars == "Drop"
-                  , Year == 2018
+                  , Year >= 2018
                   )
 
   pcDat <- princomp(datForPCA %>%
@@ -122,6 +124,38 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (
 ```
 
 ---
+
+```{r pcaGravel, fig.cap = "PCA for just the grave/endurance bikes"}
+
+  datForPCAGravel <- dat %>%
+    dplyr::filter(Bars == "Drop"
+                  , grepl("Gravel|Endurance",Use)
+                  , Year >= 2018
+                  )
+
+  pcDatGravel <- princomp(datForPCAGravel %>%
+                      dplyr::select_if(noNA) %>%
+                      dplyr::select_if(is.numeric) %>%
+                      dplyr::select(SeatAngle
+                                    ,HeadAngle
+                                    ,BBDrop
+                                    ,ChainStay
+                                    ,ForkRake
+                                    ,Stack
+                                    ,Reach
+                                    #,HeadTube
+                                    ,Trail
+                      ) %>%
+                      scale(center=FALSE,scale=TRUE)
+                      )
+
+  ggbiplot(pcDatGravel
+           , labels = paste0(datForPCAGravel$Frame,"_",substr(datForPCAGravel$Year,3,4))
+           , groups = datForPCAGravel$Use
+           , labels.size = 3
+           )
+
+```
 
 # Acknowledgements
 
