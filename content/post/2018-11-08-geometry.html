@@ -30,7 +30,6 @@ tags:
 <hr />
 <p>The main guide for the important numbers to chase was this <a href="https://cyclingtips.com/2011/02/the-geometry-of-bike-handling/">CylingTips article</a>. Gaps in geometry were filled in using this <a href="https://www.bikegeocalc.com/#7Unnameda0b4c743.9802d270e600.64877f769.85608g971.72104h412.76493i340j340k1335l813.03517m1133.98576n679.88726o1177.24813p889.84772q1213.32131r1345.15065s893.89606t31.8u40v6w2x10y280z40A0B150C25D370E45F172.5G30H30Z">bike geometry calculator</a>. There’s also <a href="https://geometrygeeks.bike/understanding-bike-geometry">geometrygeeks.com</a> providing good explanations of each term.</p>
 <p>Analysing geometries accumulated from the web gives Figure <a href="#fig:pca">1</a>. The (blue) roadies cluster together and appear correlated with high head angle numbers and low chain stay numbers. Then there’s a smear of endurance/gravel bikes (in brown and green respectively). The cx bikes (in red) are spread on one half of the figure, apparently correlated with high fork rake numbers.</p>
-<p>Focussing on just the gravel (and endurance) bikes gives Figure <a href="#fig:pcaGravel">2</a></p>
 <hr />
 <div class="figure"><span id="fig:pca"></span>
 <img src="/post/2018-11-08-geometry_files/figure-html/pca-1.png" alt="Principal components analysis of key bike geometry values" width="672" />
@@ -42,12 +41,22 @@ Figure 1: Principal components analysis of key bike geometry values
 <div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21"],["Routt","Routt RSL","Routt 45","Vamoots RSL","Vamoots","Psychlo X RSL","Belgie","Belgie Spirit","GXR","Tripster ATR","UP","Crux","520","SuperX","Tarmac","Defy","TCR Ad","Checkpoint","Diverge","RLT","Revolt"],[2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2019],["Gravel","Gravel","Gravel","Road","Endurance","CX","Road","Endurance","Gravel","Gravel","Gravel","CX","Touring","CX","Road","Endurance","Road","Gravel","Gravel","Gravel","Gravel"],[73.5,73.5,73.5,73.5,73.5,73.5,73.5,73.8,73,73,72.5,73.5,73.8,74,74,73.5,73,73.5,73.5,73.5,73.5],[71.5,72.5,71.5,73.5,72.5,72.5,73,71.5,71.5,70.5,71,71.5,71,71,73,72.5,73,71.8,71.9,71,70.5],[69,69,69,72,76,61,69,72,70,70,70,69,70,69,72,70,68,76,85,75,70],[423,430,450,410,415,423,410,420,432,440,420,425,450,422,410,420,405,425,421,430,425],[47,45,47,43,50,50,45,45,51,45,50,50,52,55,44,45,45,49,50,45,50],[601,585,601,572,586,577,552,574,565,591.2,551,566,565,555,544,567,545,567,592,577,572],[373,381,373,387,377,390,381,374,381,384.7,376,382,378,378,384,377,383,383,373,374,381],[63,59,63,55,54,54,56,65,59,71,63,65,65,62,58,60,57,64,62,68,71]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Frame<\/th>\n      <th>Year<\/th>\n      <th>Use<\/th>\n      <th>SeatAngle<\/th>\n      <th>HeadAngle<\/th>\n      <th>BBDrop<\/th>\n      <th>ChainStay<\/th>\n      <th>ForkRake<\/th>\n      <th>Stack<\/th>\n      <th>Reach<\/th>\n      <th>Trail<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <hr />
+<p>Focussing on just the gravel (and endurance) bikes gives Figure <a href="#fig:pcaGravel">2</a>. The diverge has a seriously low (large bbdrop) bottom bracket! There doesn’t seem to be much noise about it - only <a href="http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528">this</a> intriguing forum post. The UP is close to the middle of everything.</p>
 <div class="figure"><span id="fig:pcaGravel"></span>
 <img src="/post/2018-11-08-geometry_files/figure-html/pcaGravel-1.png" alt="PCA for just the grave/endurance bikes" width="672" />
 <p class="caption">
 Figure 2: PCA for just the grave/endurance bikes
 </p>
 </div>
+<hr />
+<p>An eariler version of this post raised the question about trail vs. offset. Does one determine the other? Figure <a href="#fig:trailoff">3</a> shows the relationship between these two variables for each of the bikes in the assembled data set. There is no obvious relationship between the two.</p>
+<div class="figure"><span id="fig:trailoff"></span>
+<img src="/post/2018-11-08-geometry_files/figure-html/trailoff-1.png" alt="Relationship between traill and (fork) offset (or for rake)" width="672" />
+<p class="caption">
+Figure 3: Relationship between traill and (fork) offset (or for rake)
+</p>
+</div>
+<hr />
 <div id="acknowledgements" class="section level1">
 <h1>Acknowledgements</h1>
 <table>

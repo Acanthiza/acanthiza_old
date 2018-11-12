@@ -67,8 +67,6 @@ The main guide for the important numbers to chase was this [CylingTips article](
 
 Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (blue) roadies cluster together and appear correlated with high head angle numbers and low chain stay numbers. Then there's a smear of endurance/gravel bikes (in brown and green respectively). The cx bikes (in red) are spread on one half of the figure, apparently correlated with high fork rake numbers.
 
-Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGravel)
-
 ---
 
 ```{r pca, fig.cap = "Principal components analysis of key bike geometry values"}
@@ -125,6 +123,8 @@ Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGra
 
 ---
 
+Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The UP is close to the middle of everything.
+
 ```{r pcaGravel, fig.cap = "PCA for just the grave/endurance bikes"}
 
   datForPCAGravel <- dat %>%
@@ -157,7 +157,24 @@ Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGra
 
 ```
 
-# Acknowledgements
+---
+
+An eariler version of this post raised the question about trail vs. offset. Does one determine the other? Figure \@ref(fig:trailoff) shows the relationship between these two variables for each of the bikes in the assembled data set. There is no obvious relationship between the two. 
+
+```{r trailoff, fig.cap = "Relationship between traill and (fork) offset (or for rake)"}
+
+  ggplot(dat, aes(Trail,ForkRake, colour = Use)) +
+    geom_point() +
+    labs(x = "Trail (mm)"
+         , y = "Rake (mm)"
+         )
+
+
+```
+
+---
+
+#Acknowledgements
 
 ```{r packages}
  
