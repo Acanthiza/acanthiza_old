@@ -71,10 +71,7 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (
 
 ```{r pca, fig.cap = "Principal components analysis of key bike geometry values"}
 
-  datForPCA <- dat %>%
-    dplyr::filter(Bars == "Drop"
-                  , Year >= 2018
-                  )
+  datForPCA <- dat
 
   pcDat <- princomp(datForPCA %>%
                       dplyr::select_if(noNA) %>%
@@ -86,13 +83,14 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (
                                     ,ForkRake
                                     ,Stack
                                     ,Reach
-                                    #,HeadTube
+                                    ,HeadTube
                                     ,Trail
-                      ) %>%
-                      scale(center=FALSE,scale=TRUE)
+                                    ) %>%
+                      scale(center=TRUE,scale=TRUE)
                       )
 
   ggbiplot(pcDat
+           , choices = 1:2
            , labels = paste0(datForPCA$Frame,"_",substr(datForPCA$Year,3,4))
            , groups = datForPCA$Use
            , labels.size = 3
@@ -129,7 +127,7 @@ Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGra
 
   datForPCAGravel <- dat %>%
     dplyr::filter(Bars == "Drop"
-                  , grepl("Gravel|Endurance",Use)
+                  , grepl("Gravel|Endurance|CX",Use)
                   , Year >= 2018
                   )
 
