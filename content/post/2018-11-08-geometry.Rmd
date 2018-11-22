@@ -3,7 +3,7 @@ title: Geometry
 author: nige
 date: '2018-11-08'
 bibliography: ["packageCitations.bib"]
-cover: "geometry.png"
+cover: "geometry.jpg"
 categories:
   - Bike
   - R
@@ -49,6 +49,18 @@ tags:
 
 ```{r data}
 
+  luUnits <- tribble(~Attribute, ~units
+                   ,"SeatAngle", "degrees"
+                   ,"HeadAngle", "degrees"
+                   ,"BBDrop", "mm"
+                   ,"ChainStay", "mm"
+                   ,"ForkRake", "mm"
+                   ,"Stack", "mm"
+                   ,"Reach", "mm"
+                   ,"HeadTube", "mm"
+                   ,"Trail", "mm"
+                   )
+
   dat <- read_csv("../../data/BikeGeometry.csv") %>%
     dplyr::filter(Size >53
                   , Size < 56
@@ -59,13 +71,19 @@ tags:
 
 ---
 
-Baffled by bike geometry? So am I, so don't look for answers here. But here's how I've helped myself scratch the surface of understanding...
+Baffled by bike geometry? So am I, so don't look for answers here. But here's how I've helped myself scratch the surface of understanding... And began to understand just how much of an outlier my current bike is as a 'gravel' bike.
 
 ---
 
-The main guide for the important numbers to chase was this [CylingTips article](https://cyclingtips.com/2011/02/the-geometry-of-bike-handling/). Gaps in geometry were filled in using this [bike geometry calculator](https://www.bikegeocalc.com/#7Unnameda0b4c743.9802d270e600.64877f769.85608g971.72104h412.76493i340j340k1335l813.03517m1133.98576n679.88726o1177.24813p889.84772q1213.32131r1345.15065s893.89606t31.8u40v6w2x10y280z40A0B150C25D370E45F172.5G30H30Z). There's also [geometrygeeks.com](https://geometrygeeks.bike/understanding-bike-geometry) providing good explanations of each term.
+The main guides for the important numbers to chase were:
 
-Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (blue) roadies cluster together and appear correlated with high head angle numbers and low chain stay numbers. Then there's a smear of endurance/gravel bikes (in brown and green respectively). The cx bikes (in red) are spread on one half of the figure, apparently correlated with high fork rake numbers.
+* this [CylingTips article](https://cyclingtips.com/2011/02/the-geometry-of-bike-handling/)
+* this great resource on [gravel bikes](http://teknecycling.com/how-to-choose-a-gravel-bike-part-2-geometry/) covering geometry in part two
+* [geometrygeeks.com](https://geometrygeeks.bike/understanding-bike-geometry) provides good explanations of each term.
+
+Gaps in geometry were filled in (as best as possible) using this [bike geometry calculator](https://www.bikegeocalc.com/#7Unnameda0b4c743.9802d270e600.64877f769.85608g971.72104h412.76493i340j340k1335l813.03517m1133.98576n679.88726o1177.24813p889.84772q1213.32131r1345.15065s893.89606t31.8u40v6w2x10y280z40A0B150C25D370E45F172.5G30H30Z). 
+
+Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (principal components analysis [pca] on scaled and centred data). The roadies cluster together and appear correlated with high head angle numbers and low chain stay numbers. Then there's a smear of endurance/gravel bikes with large bottom bracket drop and head tube angles. The CX bikes and mtb bikes are spread on the top half of the figure (with the exception of the Crux_2018). High reach and stack seem correlated with XC. The CX bikes are harder to (visually) correlate with any attribute. The 2012 SuperX is definately an outlier.
 
 ---
 
@@ -100,10 +118,14 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (
 
 ---
 
+Here's the data used in the pca.
+
 ```{r bikeGeometry}
 
  datatable(datForPCA %>%
-                      dplyr::select(Frame
+             dplyr::arrange(Man,Frame) %>%
+             dplyr::select(Manufacturer = Man
+                                    , Frame
                                     , Year
                                     , Use
                                     , SeatAngle
@@ -121,15 +143,12 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca). The (
 
 ---
 
-Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The UP is close to the middle of everything.
+Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The UP is close to the middle of everything. Again, the 2012 SuperX is way off compared to the other bikes compared here. It looks like fork rake and head angle are, at least partly, to blame.
 
 ```{r pcaGravel, fig.cap = "PCA for just the grave/endurance bikes"}
 
   datForPCAGravel <- dat %>%
-    dplyr::filter(Bars == "Drop"
-                  , grepl("Gravel|Endurance|CX",Use)
-                  , Year >= 2018
-                  )
+    dplyr::filter(grepl("Gravel|Endurance|CX",Use))
 
   pcDatGravel <- princomp(datForPCAGravel %>%
                       dplyr::select_if(noNA) %>%
@@ -157,22 +176,54 @@ Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGra
 
 ---
 
-An eariler version of this post raised the question about trail vs. offset. Does one determine the other? Figure \@ref(fig:trailoff) shows the relationship between these two variables for each of the bikes in the assembled data set. There is no obvious relationship between the two. 
+Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits within each geometry attribute. A driver for creating this data set and analysis was to examine the attributes of a 2012 SuperX compared to gravel bikes. It's clearly an outlier, even among CX bikes, with lowish bbdrop, high fork rake, large head angle and very low trail. The already high bottom bracket is made even higher by running the largest tyres that fit in the frame instead of the 32/33 mm tyres the frame was designed around. Combined, these attributes make the 2012 SuperX skittish at speed on anything loose. It does however handle sharp corners with ease. Time to replace it with something more suitable to its main use - long rides on quiet back roads, fire tracks and trails. The 2018 Defy and UP are closest to the centre of things.
 
-```{r trailoff, fig.cap = "Relationship between traill and (fork) offset (or for rake)"}
+```{r uniGeo, fig.cap = "Where does each bike fall on each geometry attribute?"}
 
-  ggplot(dat, aes(Trail,ForkRake, colour = Use)) +
-    geom_point() +
-    labs(x = "Trail (mm)"
-         , y = "Rake (mm)"
-         )
-
+  datForBox <- dat %>%
+    dplyr::filter(grepl("CX|Endurance|Gravel",Use)) %>%
+    dplyr::mutate(lab = paste0(Frame,"_",Year)) %>%
+    dplyr::select(Man
+                  , Frame
+                  , Year
+                  , Use
+                  , lab
+                  , SeatAngle
+                  ,HeadAngle
+                  ,BBDrop
+                  ,ChainStay
+                  ,ForkRake
+                  ,Stack
+                  ,Reach
+                  ,HeadTube
+                  ,Trail
+                  ) %>%
+    tidyr::gather(Attribute,value,6:ncol(.)) %>%
+    dplyr::left_join(luUnits) %>%
+    dplyr::group_by(Attribute) %>%
+    dplyr::arrange(value) %>%
+    dplyr::mutate(x = seq(-0.5,0.5,length.out=length(unique(.$lab)))) %>%
+    dplyr::ungroup()
+    
+  
+    ggplot(datForBox) +
+      geom_boxplot(aes(y=value)) +
+      geom_text(aes(label = lab, x=x,y=value,colour=Use),size=2) +
+      facet_wrap(~paste0(Attribute,": ",units), scales = "free") +
+      coord_flip() +
+      labs(x = NULL, y = NULL) +
+      theme(axis.title.y=element_blank()
+            , axis.text.y=element_blank()
+            , axis.ticks.y=element_blank()
+            )
 
 ```
 
 ---
 
-#Acknowledgements
+# Acknowledgements
+
+R packages explicitly loaded (i.e. not including dependencies) to create this post are listed in Table \@ref(tab:packages).
 
 ```{r packages}
  
@@ -192,7 +243,7 @@ An eariler version of this post raised the question about trail vs. offset. Does
                         , Description = gsub("\\},","",Description)
                         ) %>%
           dplyr::mutate(Citation = paste0("@R-",Package))
-   , caption = "R packages explicitly loaded (i.e. not including dependencies) to create this post"
+   , caption = "R packages loaded"
    )
  
 ```
