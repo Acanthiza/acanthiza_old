@@ -32,6 +32,7 @@ tags:
                         , message = F
                         #, include = F
                         , collapse = TRUE
+                        , out.width = "110%"
                         )
   
   options(knitr.kable.NA = ''
@@ -111,32 +112,7 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
            , choices = 1:2
            , labels = paste0(datForPCA$Frame,"_",substr(datForPCA$Year,3,4))
            , groups = datForPCA$Use
-           , labels.size = 3
-           )
-
-```
-
----
-
-Here's the data used in the pca.
-
-```{r bikeGeometry}
-
- datatable(datForPCA %>%
-             dplyr::arrange(Man,Frame) %>%
-             dplyr::select(Manufacturer = Man
-                                    , Frame
-                                    , Year
-                                    , Use
-                                    , SeatAngle
-                                    , HeadAngle
-                                    , BBDrop
-                                    , ChainStay
-                                    , ForkRake
-                                    , Stack
-                                    , Reach
-                                    , Trail
-                      )
+           , labels.size = 2
            )
 
 ```
@@ -145,10 +121,12 @@ Here's the data used in the pca.
 
 Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The UP is close to the middle of everything. Again, the 2012 SuperX is way off compared to the other bikes compared here. It looks like fork rake and head angle are, at least partly, to blame.
 
-```{r pcaGravel, fig.cap = "PCA for just the grave/endurance bikes"}
+```{r pcaGravel, fig.cap = "PCA for just the CX/gravel bikes"}
 
   datForPCAGravel <- dat %>%
-    dplyr::filter(grepl("Gravel|Endurance|CX",Use))
+    dplyr::filter(grepl("CX|Gravel|Tour",Use)
+                  #, Year > 2016
+                  )
 
   pcDatGravel <- princomp(datForPCAGravel %>%
                       dplyr::select_if(noNA) %>%
@@ -163,32 +141,32 @@ Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGra
                                     #,HeadTube
                                     ,Trail
                       ) %>%
-                      scale(center=FALSE,scale=TRUE)
+                      scale(center=TRUE,scale=TRUE)
                       )
 
   ggbiplot(pcDatGravel
            , labels = paste0(datForPCAGravel$Frame,"_",substr(datForPCAGravel$Year,3,4))
            , groups = datForPCAGravel$Use
-           , labels.size = 3
+           , labels.size = 2
            )
 
 ```
 
 ---
 
-Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits within each geometry attribute. A driver for creating this data set and analysis was to examine the attributes of a 2012 SuperX compared to gravel bikes. It's clearly an outlier, even among CX bikes, with lowish bbdrop, high fork rake, large head angle and very low trail. The already high bottom bracket is made even higher by running the largest tyres that fit in the frame instead of the 32/33 mm tyres the frame was designed around. Combined, these attributes make the 2012 SuperX skittish at speed on anything loose. It does however handle sharp corners with ease. Time to replace it with something more suitable to its main use - long rides on quiet back roads, fire tracks and trails. The 2018 Defy and UP are closest to the centre of things.
+Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits within each geometry attribute. A driver for creating this data set and analysis was to examine the attributes of a 2012 SuperX compared to gravel bikes. It's clearly an outlier, even among CX bikes, with lowish bbdrop, high fork rake, large head angle and very low trail. The already high bottom bracket is made even higher by running the largest tyres that fit in the frame instead of the 32/33 mm tyres the frame was designed around. Combined, these attributes make the 2012 SuperX skittish at speed on anything loose. It does however handle sharp corners with ease. Time to replace it with something more suitable to its main use - long rides on quiet back roads, fire tracks and trails.
 
 ```{r uniGeo, fig.cap = "Where does each bike fall on each geometry attribute?"}
 
-  datForBox <- dat %>%
-    dplyr::filter(grepl("CX|Endurance|Gravel",Use)) %>%
+  datForBox <- datForPCAGravel %>%
+    #dplyr::inner_join(datForPCAGravel) %>%
     dplyr::mutate(lab = paste0(Frame,"_",Year)) %>%
     dplyr::select(Man
                   , Frame
                   , Year
                   , Use
                   , lab
-                  , SeatAngle
+                  ,SeatAngle
                   ,HeadAngle
                   ,BBDrop
                   ,ChainStay
@@ -208,14 +186,40 @@ Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits with
   
     ggplot(datForBox) +
       geom_boxplot(aes(y=value)) +
-      geom_text(aes(label = lab, x=x,y=value,colour=Use),size=2) +
+      geom_text(aes(label = lab, x=x,y=value,colour=Use),size=1.75) +
       facet_wrap(~paste0(Attribute,": ",units), scales = "free") +
       coord_flip() +
       labs(x = NULL, y = NULL) +
       theme(axis.title.y=element_blank()
             , axis.text.y=element_blank()
             , axis.ticks.y=element_blank()
+            , legend.position = "bottom"
             )
+
+```
+
+---
+
+Here's the data.
+
+```{r bikeGeometry}
+
+ datatable(datForPCA %>%
+             dplyr::arrange(Man,Frame) %>%
+             dplyr::select(Manufacturer = Man
+                                    , Frame
+                                    , Year
+                                    , Use
+                                    , SeatAngle
+                                    , HeadAngle
+                                    , BBDrop
+                                    , ChainStay
+                                    , ForkRake
+                                    , Stack
+                                    , Reach
+                                    , Trail
+                      )
+           )
 
 ```
 
