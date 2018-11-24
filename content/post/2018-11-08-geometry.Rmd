@@ -119,7 +119,7 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
 
 ---
 
-Focussing on just the gravel (and endurance) bikes gives Figure \@ref(fig:pcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The UP is close to the middle of everything. Again, the 2012 SuperX is way off compared to the other bikes compared here. It looks like fork rake and head angle are, at least partly, to blame.
+Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:pcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The GXR is close to the middle of everything. Again, the 2012 SuperX is way off compared to the other bikes compared here. It looks like fork rake and head angle are, at least partly, to blame.
 
 ```{r pcaGravel, fig.cap = "PCA for just the CX/gravel bikes"}
 
