@@ -21,6 +21,7 @@ tags:
                 , "knitr"
                 , "ggbiplot"
                 , "DT"
+                , "pcaPP"
                 )
   
   purrr::walk(packages, library, character.only = TRUE)
@@ -59,14 +60,16 @@ tags:
                    ,"Stack", "mm"
                    ,"Reach", "mm"
                    ,"HeadTube", "mm"
-                   ,"Trail", "mm"
+                   #,"Trail", "mm"
                    )
 
   dat <- read_csv("../../data/BikeGeometry.csv") %>%
-    dplyr::filter(Size >53
-                  , Size < 56
-                  , !is.na(Trail)
-                  )
+    dplyr::group_by(Frame) %>%
+    filter(abs(Size - 55) == min(abs(Size - 55))
+           , !is.na(Stack)
+           ) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(Use = fct_inorder(Use))
 
 ```
 
@@ -84,29 +87,34 @@ The main guides for the important numbers to chase were:
 
 Gaps in geometry were filled in (as best as possible) using this [bike geometry calculator](https://www.bikegeocalc.com/#7Unnameda0b4c743.9802d270e600.64877f769.85608g971.72104h412.76493i340j340k1335l813.03517m1133.98576n679.88726o1177.24813p889.84772q1213.32131r1345.15065s893.89606t31.8u40v6w2x10y280z40A0B150C25D370E45F172.5G30H30Z). 
 
-Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (principal components analysis [pca] on scaled and centred data). The roadies cluster together and appear correlated with high head angle numbers and low chain stay numbers. Then there's a smear of endurance/gravel bikes with large bottom bracket drop and head tube angles. The CX bikes and mtb bikes are spread on the top half of the figure (with the exception of the Crux_2018). High reach and stack seem correlated with XC. The CX bikes are harder to (visually) correlate with any attribute. The 2012 SuperX is definately an outlier.
+Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (principal components analysis [pca] on scaled and centred data). There are clusters of roadies, mtbs and tourers (520 and lets lump cutthroat in with 'tourers') respectively. Then there's a spread of gravel/cx/endurance bikes between those clusters. The roadie cluster appears correlated with high head angle numbers and low chain stay numbers. The smear of endurance/gravel bikes have large bottom bracket drop and head tube angles. High reach and stack seem correlated with XC. The CX bikes are harder to (visually) correlate with any attribute.
 
 ---
 
 ```{r pca, fig.cap = "Principal components analysis of key bike geometry values"}
 
-  datForPCA <- dat
+  datForPCA <- dat %>%
+    dplyr::select(Man
+                  ,Frame
+                  ,Year
+                  ,Use
+                  ,SeatAngle
+                  ,HeadAngle
+                  ,BBDrop
+                  ,ChainStay
+                  ,ForkRake
+                  ,Stack
+                  ,Reach
+                  ,HeadTube
+                  #,Trail
+                  ) %>%
+    na.omit()
 
   pcDat <- princomp(datForPCA %>%
-                      dplyr::select_if(noNA) %>%
+                      dplyr::select(-Year) %>%
                       dplyr::select_if(is.numeric) %>%
-                      dplyr::select(SeatAngle
-                                    ,HeadAngle
-                                    ,BBDrop
-                                    ,ChainStay
-                                    ,ForkRake
-                                    ,Stack
-                                    ,Reach
-                                    ,HeadTube
-                                    ,Trail
-                                    ) %>%
                       scale(center=TRUE,scale=TRUE)
-                      )
+                    )
 
   ggbiplot(pcDat
            , choices = 1:2
@@ -114,16 +122,50 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
            , groups = datForPCA$Use
            , labels.size = 2
            )
+  
+  # UNFINISHED - discriminant function analysis
+  
+  # library(MASS)
+  # fit <- lda(Use ~ SeatAngle + HeadAngle + BBDrop + ChainStay + ForkRake + Stack + Reach + HeadTube, data=datForPCA,na.action="na.omit")
+  # fit # show results
+  # 
+  # 
+  # p <- predict(fit)
+  # freqtable <- table(p$class, datForPCA$Use) 
+  # rownames(freqtable) <- paste0("Predicted ", datForPCA$Use %>% levels)
+  # freqtable %>% addmargins
+  # 
+  # 
+  # datForPCA$LDA1 <- p$x[,1]
+  # datForPCA$LDA2 <- p$x[,2]
+  # 
+  # ggplot(datForPCA, aes(LDA1, fill = Use)) + geom_density(alpha = 0.5, color = NA) + theme(legend.position = "top")
+  # 
+  # ggplot(datForPCA, aes(LDA2, fill = Use)) + geom_density(alpha = 0.5, color = NA) + theme(legend.position = "top")
+  # 
+  # gMeans <- datForPCA %>% dplyr::group_by(Use) %>% dplyr::select(LDA1,LDA2) %>% summarise_each(funs(mean)) 
+  # 
+  # ggplot(datForPCA, aes(LDA1, LDA2, color = Use)) + 
+  #   geom_point(alpha = 0.5) + 
+  #   geom_text(data = gMeans, 
+  #             aes(label = Use),
+  #             color = "black", 
+  #             vjust = 1.75) + 
+  #   geom_point(data = gMeans, 
+  #              aes(fill = Use), 
+  #              size = 4, 
+  #              color = "black", 
+  #              pch = 21) + 
+  #   theme(legend.position = "none") +
+  #   coord_equal()
 
 ```
 
 ---
 
-Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:pcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The GXR is close to the middle of everything. Again, the 2012 SuperX is way off compared to the other bikes compared here. It looks like fork rake and head angle are, at least partly, to blame.
+```{r pcaGravel}
 
-```{r pcaGravel, fig.cap = "PCA for just the CX/gravel bikes"}
-
-  datForPCAGravel <- dat %>%
+  datForPCAGravel <- datForPCA %>%
     dplyr::filter(grepl("CX|Gravel|Tour",Use)
                   #, Year > 2016
                   )
@@ -138,11 +180,28 @@ Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:pcaGravel). The d
                                     ,ForkRake
                                     ,Stack
                                     ,Reach
-                                    #,HeadTube
-                                    ,Trail
+                                    ,HeadTube
+                                    #,Trail
                       ) %>%
                       scale(center=TRUE,scale=TRUE)
                       )
+  library(pcaPP)
+  
+  centre <- as_tibble(pcDatGravel$scores) %>%
+    dplyr::bind_cols(datForPCAGravel[,1:4]) %>%
+    dplyr::mutate(dist1 = abs(Comp.1 - l1median(pcDatGravel$scores[,1:2])[1])
+                  , dist2 = abs(Comp.2 - l1median(pcDatGravel$scores[,1:2])[2])
+                  , distBoth = dist1 + dist2
+                  , label = paste0(Frame,"_",Year)
+                  ) %>%
+    dplyr::filter(distBoth == min(distBoth)) %>%
+    pull(label)
+  
+```
+
+Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:figpcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The `r centre` is close to the middle of everything. The 2012 SuperX is a bit of an outlier compared to the other bikes here. It looks like fork rake, reach and head angle are, at least partly, to blame.
+
+```{r figpcaGravel, fig.cap = "PCA for just the CX/gravel bikes"}
 
   ggbiplot(pcDatGravel
            , labels = paste0(datForPCAGravel$Frame,"_",substr(datForPCAGravel$Year,3,4))
@@ -154,7 +213,7 @@ Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:pcaGravel). The d
 
 ---
 
-Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits within each geometry attribute. A driver for creating this data set and analysis was to examine the attributes of a 2012 SuperX compared to gravel bikes. It's clearly an outlier, even among CX bikes, with lowish bbdrop, high fork rake, large head angle and very low trail. The already high bottom bracket is made even higher by running the largest tyres that fit in the frame instead of the 32/33 mm tyres the frame was designed around. Combined, these attributes make the 2012 SuperX skittish at speed on anything loose. It does however handle sharp corners with ease. Time to replace it with something more suitable to its main use - long rides on quiet back roads, fire tracks and trails.
+Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits within each geometry attribute. A driver for creating this data set and analysis was to examine the attributes of a 2012 SuperX compared to gravel bikes. It's clearly an outlier, even among CX bikes, with lowish bbdrop, high fork rake, large head angle and very low trail (not shown). The already high bottom bracket is made even higher by running the largest tyres that fit in the frame instead of the 32/33 mm tyres the frame was designed around. Combined, these attributes make the 2012 SuperX skittish at speed on anything loose. It does however handle sharp corners with ease. Time to replace it with something more suitable to its main use - long rides on quiet back roads, fire tracks and trails.
 
 ```{r uniGeo, fig.cap = "Where does each bike fall on each geometry attribute?"}
 
@@ -162,10 +221,10 @@ Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits with
     #dplyr::inner_join(datForPCAGravel) %>%
     dplyr::mutate(lab = paste0(Frame,"_",Year)) %>%
     dplyr::select(Man
-                  , Frame
-                  , Year
-                  , Use
-                  , lab
+                  ,Frame
+                  ,Year
+                  ,Use
+                  ,lab
                   ,SeatAngle
                   ,HeadAngle
                   ,BBDrop
@@ -174,7 +233,7 @@ Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits with
                   ,Stack
                   ,Reach
                   ,HeadTube
-                  ,Trail
+                  #,Trail
                   ) %>%
     tidyr::gather(Attribute,value,6:ncol(.)) %>%
     dplyr::left_join(luUnits) %>%
@@ -217,7 +276,7 @@ Here's the data.
                                     , ForkRake
                                     , Stack
                                     , Reach
-                                    , Trail
+                                    #, Trail
                       )
            )
 
