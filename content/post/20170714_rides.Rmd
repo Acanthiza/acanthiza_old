@@ -181,6 +181,8 @@ tags:
                   ) %>%
     dplyr::filter(!Gear %in% c("Canoeing","Swim","Windsurf","run"))
   
+  write_csv(dat %>% dplyr::select(-data), "../../data/ridesCombined.csv")
+  
 # fix dodgy elevation reading from China
   dat[dat$Ascent > 6000 & !is.na(dat$Ascent),'Ascent'] <- 2500
 
@@ -197,28 +199,6 @@ Data from my rides have been scattered in several places. Through the years I mo
 This is the piecing together and exploration of those data.
 
 ---
-
-```{r dataAccess}
-
-  kable(dat1 %>% slice(1:5) %>% select(1:6,-2)
-        , format = "html"
-        , pad = 0
-        , caption = "First few rows/columns of the ride data from MS Access"
-        )
-
-```
-
----
-
-```{r dataStrava}
-
-  kable(dat2 %>% slice(1:5) %>% select(1:6,-2)
-        , format = "html"
-        , pad = 0
-        , caption = "First few rows/columns of ride data from Strava" 
-        )
-   
-```
 
 Combining the datasets gives `r nrow(dat)` individual rides.
 
@@ -381,7 +361,7 @@ Some other interesting overall trends visible in these data:
     + [Polar s725x](https://www.polar.com/support_files/en/C225742500419A8AC2257097003888BC/Polar_S625X_S725X_user_manual_English.pdf) (ascent data starts about mid-2006)
     + [Garmin Edge 705](http://static.garmin.com/pumac/2297_OwnersManual.pdf) (after 2009 data gap)
     + [Garmin Edge 810](http://static.garmin.com/pumac/Edge810_OM_EN.pdf) (from where temperature data starts mid-2015)
-    + [Wahoo elemnt bolt]() (from September 2018 as the edge 810 stopped charging)
+    + [Wahoo elemnt bolt](https://au.wahoofitness.com/devices/bike-computers/gps-elemnt-bolt) (from September 2018 as the edge 810 stopped charging)
 * the garmins seem to record dodgy maximum heart rates frequently (although perhaps i filtered this manually with the polar)
     + the premium heart rate strap may have fixed this in latter data (need to check purchase date...) 
 
