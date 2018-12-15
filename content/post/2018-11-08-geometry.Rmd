@@ -69,7 +69,9 @@ tags:
            , !is.na(Stack)
            ) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(Use = fct_inorder(Use))
+    dplyr::mutate(Use = fct_inorder(Use)
+                  , lab = paste0(Frame,".",substr(Year,3,4))
+                  )
 
 ```
 
@@ -85,7 +87,7 @@ The main guides for the important numbers to chase were:
 * this great resource on [gravel bikes](http://teknecycling.com/how-to-choose-a-gravel-bike-part-2-geometry/) covering geometry in part two
 * [geometrygeeks.com](https://geometrygeeks.bike/understanding-bike-geometry) provides good explanations of each term.
 
-Gaps in geometry were filled in (as best as possible) using this [bike geometry calculator](https://www.bikegeocalc.com/#7Unnameda0b4c743.9802d270e600.64877f769.85608g971.72104h412.76493i340j340k1335l813.03517m1133.98576n679.88726o1177.24813p889.84772q1213.32131r1345.15065s893.89606t31.8u40v6w2x10y280z40A0B150C25D370E45F172.5G30H30Z). 
+Gaps in geometry were filled in (as best as possible) using this [bike geometry calculator](https://www.bikegeocalc.com/#7Unnameda0b4c743.9802d270e600.64877f769.85608g971.72104h412.76493i340j340k1335l813.03517m1133.98576n679.88726o1177.24813p889.84772q1213.32131r1345.15065s893.89606t31.8u40v6w2x10y280z40A0B150C25D370E45F172.5G30H30Z). Frame size was taken from the 'effective top tube' length most manufacturers provide. This analysis focuses on the frame size closest to 55cm.
 
 Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (principal components analysis [pca] on scaled and centred data). There are clusters of roadies, mtbs and tourers (520 and lets lump cutthroat in with 'tourers') respectively. Then there's a spread of gravel/cx/endurance bikes between those clusters. The roadie cluster appears correlated with high head angle numbers and low chain stay numbers. The smear of endurance/gravel bikes have large bottom bracket drop and head tube angles. High reach and stack seem correlated with XC. The CX bikes are harder to (visually) correlate with any attribute.
 
@@ -98,6 +100,8 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
                   ,Frame
                   ,Year
                   ,Use
+                  ,Size
+                  ,lab
                   ,SeatAngle
                   ,HeadAngle
                   ,BBDrop
@@ -118,7 +122,7 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
 
   ggbiplot(pcDat
            , choices = 1:2
-           , labels = paste0(datForPCA$Frame,"_",substr(datForPCA$Year,3,4))
+           , labels = datForPCA$lab
            , groups = datForPCA$Use
            , labels.size = 2
            )
@@ -166,7 +170,11 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
 ```{r pcaGravel}
 
   datForPCAGravel <- datForPCA %>%
-    dplyr::filter(grepl("CX|Gravel|Tour",Use)
+    dplyr::mutate(Use = as.character(Use)
+                  , Use = if_else(Frame != "SuperX", Use, if_else(Year == 2012, "Gravel", Use))
+                  , Use = fct_inorder(Use)
+                  ) %>%
+    dplyr::filter(grepl("Gravel|Tour",Use)
                   #, Year > 2016
                   )
 
@@ -185,26 +193,24 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
                       ) %>%
                       scale(center=TRUE,scale=TRUE)
                       )
-  library(pcaPP)
   
   centre <- as_tibble(pcDatGravel$scores) %>%
-    dplyr::bind_cols(datForPCAGravel[,1:4]) %>%
-    dplyr::mutate(dist1 = abs(Comp.1 - l1median(pcDatGravel$scores[,1:2])[1])
-                  , dist2 = abs(Comp.2 - l1median(pcDatGravel$scores[,1:2])[2])
+    dplyr::bind_cols(datForPCAGravel[,1:6]) %>%
+    dplyr::mutate(dist1 = abs(Comp.1)
+                  , dist2 = abs(Comp.2)
                   , distBoth = dist1 + dist2
-                  , label = paste0(Frame,"_",Year)
                   ) %>%
     dplyr::filter(distBoth == min(distBoth)) %>%
-    pull(label)
+    pull(lab)
   
 ```
 
-Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:figpcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The `r centre` is close to the middle of everything. The 2012 SuperX is a bit of an outlier compared to the other bikes here. It looks like fork rake, reach and head angle are, at least partly, to blame.
+Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:figpcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The `r centre` is closest to the middle of everything. The 2012 SuperX is a bit of an outlier compared to the other bikes here. It looks like fork rake, reach and head angle are, at least partly, to blame.
 
 ```{r figpcaGravel, fig.cap = "PCA for just the CX/gravel bikes"}
 
   ggbiplot(pcDatGravel
-           , labels = paste0(datForPCAGravel$Frame,"_",substr(datForPCAGravel$Year,3,4))
+           , labels = datForPCAGravel$lab
            , groups = datForPCAGravel$Use
            , labels.size = 2
            )
@@ -213,13 +219,11 @@ Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:figpcaGravel). Th
 
 ---
 
-Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits within each geometry attribute. A driver for creating this data set and analysis was to examine the attributes of a 2012 SuperX compared to gravel bikes. It's clearly an outlier, even among CX bikes, with lowish bbdrop, high fork rake, large head angle and very low trail (not shown). The already high bottom bracket is made even higher by running the largest tyres that fit in the frame instead of the 32/33 mm tyres the frame was designed around. Combined, these attributes make the 2012 SuperX skittish at speed on anything loose. It does however handle sharp corners with ease. Time to replace it with something more suitable to its main use - long rides on quiet back roads, fire tracks and trails.
+Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits within each geometry attribute. A driver for creating this data set and analysis was to examine the attributes of a 2012 SuperX compared to gravel bikes. It's clearly an outlier, even among CX bikes, with lowish bbdrop, very high fork rake and very large head angle. The already high bottom bracket is made even higher by running the largest tyres that fit in the frame instead of the 32/33 mm tyres the frame was designed around. Combined, these attributes make the 2012 SuperX skittish at speed on anything loose. It does however handle sharp corners with ease. Time to replace it with something more suitable to its main use - long rides on quiet back roads, fire tracks and trails.
 
 ```{r uniGeo, fig.cap = "Where does each bike fall on each geometry attribute?"}
 
   datForBox <- datForPCAGravel %>%
-    #dplyr::inner_join(datForPCAGravel) %>%
-    dplyr::mutate(lab = paste0(Frame,"_",Year)) %>%
     dplyr::select(Man
                   ,Frame
                   ,Year
@@ -239,14 +243,16 @@ Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits with
     dplyr::left_join(luUnits) %>%
     dplyr::group_by(Attribute) %>%
     dplyr::arrange(value) %>%
-    dplyr::mutate(x = seq(-0.5,0.5,length.out=length(unique(.$lab)))) %>%
+    dplyr::mutate(x = seq(-0.5,0.5,length.out=length(unique(.$lab)))
+                  , Use = if_else(grepl("SuperX",Frame),"cx",as.character(Use))
+                  ) %>%
     dplyr::ungroup()
     
   
     ggplot(datForBox) +
       geom_boxplot(aes(y=value)) +
       geom_text(aes(label = lab, x=x,y=value,colour=Use),size=1.75) +
-      facet_wrap(~paste0(Attribute,": ",units), scales = "free") +
+      facet_wrap(~paste0(Attribute,": ",units), scales = "free",nrow=2) +
       coord_flip() +
       labs(x = NULL, y = NULL) +
       theme(axis.title.y=element_blank()

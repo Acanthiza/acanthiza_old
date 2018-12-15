@@ -6,19 +6,10 @@
     <description>Recent content on Acanthiza</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>How do I ride?</title>
-      <link>/post/how-do-i-ride/</link>
-      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/how-do-i-ride/</guid>
-      <description>Acknowledgements   Table 1: R packages explicitly loaded (i.e. not including dependencies) to create this post    Package  Description  Citation      bookdown  bookdown: Authoring Books and Technical Documents with R Markdown  @R-bookdown    knitr  knitr: A General-Purpose Package for Dynamic Report Generation in R  @R-knitr    tidyverse  tidyverse: Easily Install and Load the ‘Tidyverse’  @R-tidyverse      Citations  </description>
-    </item>
     
     <item>
       <title>Geometry</title>
