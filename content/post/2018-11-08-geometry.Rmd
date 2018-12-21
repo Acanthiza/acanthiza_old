@@ -114,6 +114,7 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
                   ) %>%
     na.omit()
 
+
   pcDat <- princomp(datForPCA %>%
                       dplyr::select(-Year) %>%
                       dplyr::select_if(is.numeric) %>%
