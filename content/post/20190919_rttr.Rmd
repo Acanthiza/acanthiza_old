@@ -2,7 +2,6 @@
 title: Race to the rock
 author: nige
 date: '2018-09-19'
-cover: "mawsontrail.jpg"
 bibliography: ["packageCitations.bib"]
 categories:
   - Bike
@@ -161,6 +160,7 @@ tags:
   riderCol <- scale_colour_manual(name = "Rider", values = col)
   
 ```
+![](/post/20190919_rttr_files/mawsontrail.jpg)
 
 "It’s safer, less painful and less soul destroying to remain a dot watcher."
 

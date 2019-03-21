@@ -3,7 +3,6 @@ title: Geometry
 author: nige
 date: '2018-11-08'
 bibliography: ["packageCitations.bib"]
-cover: "geometry.jpg"
 categories:
   - Bike
   - R
@@ -75,7 +74,7 @@ tags:
 
 ```
 
----
+![](/post/2018-11-08-geometry_files/geometry.jpg)
 
 Baffled by bike geometry? So am I, so don't look for answers here. But here's how I've helped myself scratch the surface of understanding... And began to understand just how much of an outlier my current bike is as a 'gravel' bike.
 
