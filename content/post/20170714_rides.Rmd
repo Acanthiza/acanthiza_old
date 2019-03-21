@@ -397,6 +397,7 @@ All the data finally in one spot. For the first time since abandoning MS Access 
           dplyr::mutate(Citation = paste0("@R-",Package))
    , caption = "R packages explicitly loaded (i.e. not including dependencies) to create this post"
    )
+  
  
 ```
 
