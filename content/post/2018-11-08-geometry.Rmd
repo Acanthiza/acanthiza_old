@@ -19,9 +19,10 @@ tags:
                 , "bookdown"
                 , "knitr"
                 , "ggbiplot"
-                , "DT"
-                , "pcaPP"
+                #, "DT"
+                #, "pcaPP"
                 )
+
   
   purrr::walk(packages, library, character.only = TRUE)
   
@@ -126,42 +127,6 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
            , groups = datForPCA$Use
            , labels.size = 2
            )
-  
-  # UNFINISHED - discriminant function analysis
-  
-  # library(MASS)
-  # fit <- lda(Use ~ SeatAngle + HeadAngle + BBDrop + ChainStay + ForkRake + Stack + Reach + HeadTube, data=datForPCA,na.action="na.omit")
-  # fit # show results
-  # 
-  # 
-  # p <- predict(fit)
-  # freqtable <- table(p$class, datForPCA$Use) 
-  # rownames(freqtable) <- paste0("Predicted ", datForPCA$Use %>% levels)
-  # freqtable %>% addmargins
-  # 
-  # 
-  # datForPCA$LDA1 <- p$x[,1]
-  # datForPCA$LDA2 <- p$x[,2]
-  # 
-  # ggplot(datForPCA, aes(LDA1, fill = Use)) + geom_density(alpha = 0.5, color = NA) + theme(legend.position = "top")
-  # 
-  # ggplot(datForPCA, aes(LDA2, fill = Use)) + geom_density(alpha = 0.5, color = NA) + theme(legend.position = "top")
-  # 
-  # gMeans <- datForPCA %>% dplyr::group_by(Use) %>% dplyr::select(LDA1,LDA2) %>% summarise_each(funs(mean)) 
-  # 
-  # ggplot(datForPCA, aes(LDA1, LDA2, color = Use)) + 
-  #   geom_point(alpha = 0.5) + 
-  #   geom_text(data = gMeans, 
-  #             aes(label = Use),
-  #             color = "black", 
-  #             vjust = 1.75) + 
-  #   geom_point(data = gMeans, 
-  #              aes(fill = Use), 
-  #              size = 4, 
-  #              color = "black", 
-  #              pch = 21) + 
-  #   theme(legend.position = "none") +
-  #   coord_equal()
 
 ```
 
@@ -205,7 +170,7 @@ Analysing geometries accumulated from the web gives Figure \@ref(fig:pca) (princ
   
 ```
 
-Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:figpcaGravel). The diverge has a seriously low (large bbdrop) bottom bracket! There doesn't seem to be much noise about it - only [this](http://ridinggravel.com/forum/?p=%2Fpost%2F2018-specialized-diverge-bb-too-low-9628528) intriguing forum post. The `r centre` is closest to the middle of everything. The 2012 SuperX is a bit of an outlier compared to the other bikes here. It looks like fork rake, reach and head angle are, at least partly, to blame.
+Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:figpcaGravel). The `r centre` is closest to the middle of everything. The 2012 SuperX is a bit of an outlier compared to the other bikes here.
 
 ```{r figpcaGravel, fig.cap = "PCA for just the CX/gravel bikes"}
 
@@ -219,7 +184,7 @@ Focussing on just the gravel(ish) bikes gives Figure \@ref(fig:figpcaGravel). Th
 
 ---
 
-Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits within each geometry attribute. A driver for creating this data set and analysis was to examine the attributes of a 2012 SuperX compared to gravel bikes. It's clearly an outlier, even among CX bikes, with lowish bbdrop, very high fork rake and very large head angle. The already high bottom bracket is made even higher by running the largest tyres that fit in the frame instead of the 32/33 mm tyres the frame was designed around. Combined, these attributes make the 2012 SuperX skittish at speed on anything loose. It does however handle sharp corners with ease. Time to replace it with something more suitable to its main use - long rides on quiet back roads, fire tracks and trails.
+Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits within each geometry attribute. A driver for creating this data set and analysis was to examine the attributes of a 2012 SuperX compared to gravel bikes. It apparently has lowish bbdrop (high bottom bracket), low fork rake and high head angle. The already high bottom bracket is made even higher by running the largest tyres that fit in the frame instead of the 32/33 mm tyres the frame was designed around. I've found the 2012 SuperX skittish at speed on loose surfaces. It does however handle sharp corners with ease. Time to replace it with something more suitable to its main use - long rides on quiet back roads, fire tracks and trails.
 
 ```{r uniGeo, fig.cap = "Where does each bike fall on each geometry attribute?"}
 
@@ -265,31 +230,6 @@ Figure \@ref(fig:uniGeo) gives a better sense of where a specific bike fits with
 
 ---
 
-Here's the data.
-
-```{r bikeGeometry}
-
- datatable(datForPCA %>%
-             dplyr::arrange(Man,Frame) %>%
-             dplyr::select(Manufacturer = Man
-                                    , Frame
-                                    , Year
-                                    , Use
-                                    , SeatAngle
-                                    , HeadAngle
-                                    , BBDrop
-                                    , ChainStay
-                                    , ForkRake
-                                    , Stack
-                                    , Reach
-                                    #, Trail
-                      )
-           )
-
-```
-
----
-
 # Acknowledgements
 
 R packages explicitly loaded (i.e. not including dependencies) to create this post are listed in Table \@ref(tab:packages).
@@ -319,4 +259,4 @@ R packages explicitly loaded (i.e. not including dependencies) to create this po
 
 ---
 
-# Citations 
+# References 
