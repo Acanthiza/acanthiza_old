@@ -2,93 +2,93 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Acanthiza</title>
-    <link>/tags/</link>
+    <link>https://acanthiza.netlify.com/tags/</link>
     <description>Recent content in Tags on Acanthiza</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 08 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://acanthiza.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Bikes</title>
-      <link>/tags/bikes/</link>
+      <title>bikes</title>
+      <link>https://acanthiza.netlify.com/tags/bikes/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/bikes/</guid>
+      <guid>https://acanthiza.netlify.com/tags/bikes/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Data</title>
-      <link>/tags/data/</link>
+      <title>data</title>
+      <link>https://acanthiza.netlify.com/tags/data/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/data/</guid>
+      <guid>https://acanthiza.netlify.com/tags/data/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Dotwatcher</title>
-      <link>/tags/dotwatcher/</link>
-      <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/dotwatcher/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Geometry</title>
-      <link>/tags/geometry/</link>
+      <title>geometry</title>
+      <link>https://acanthiza.netlify.com/tags/geometry/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/geometry/</guid>
+      <guid>https://acanthiza.netlify.com/tags/geometry/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Mapprogress</title>
-      <link>/tags/mapprogress/</link>
+      <title>dotwatcher</title>
+      <link>https://acanthiza.netlify.com/tags/dotwatcher/</link>
       <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/mapprogress/</guid>
+      <guid>https://acanthiza.netlify.com/tags/dotwatcher/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Racetotherock</title>
-      <link>/tags/racetotherock/</link>
+      <title>mapprogress</title>
+      <link>https://acanthiza.netlify.com/tags/mapprogress/</link>
       <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/racetotherock/</guid>
+      <guid>https://acanthiza.netlify.com/tags/mapprogress/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Rides</title>
-      <link>/tags/rides/</link>
-      <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
+      <title>racetotherock</title>
+      <link>https://acanthiza.netlify.com/tags/racetotherock/</link>
+      <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/rides/</guid>
+      <guid>https://acanthiza.netlify.com/tags/racetotherock/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Strava</title>
-      <link>/tags/strava/</link>
+      <title>rides</title>
+      <link>https://acanthiza.netlify.com/tags/rides/</link>
       <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/strava/</guid>
+      <guid>https://acanthiza.netlify.com/tags/rides/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Veloviewer</title>
-      <link>/tags/veloviewer/</link>
+      <title>strava</title>
+      <link>https://acanthiza.netlify.com/tags/strava/</link>
       <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/veloviewer/</guid>
+      <guid>https://acanthiza.netlify.com/tags/strava/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>veloviewer</title>
+      <link>https://acanthiza.netlify.com/tags/veloviewer/</link>
+      <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://acanthiza.netlify.com/tags/veloviewer/</guid>
       <description></description>
     </item>
     

@@ -2,12 +2,19 @@ baseurl = "https://acanthiza.netlify.com/"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 languageCode = "en-us"
 title = "Acanthiza"
-theme = "hugo-theme-hello-friend"
+#theme = "hugo-theme-hello-friend"
 copyright = ""
 paginate = 5
 
 [params]
-  subtitle = "data rides nature"
+  # dir name of your blog content (default is `content/posts`)
+  contentTypeName = "post"
+  # "light" or "dark"
+  defaultTheme = "dark"
+  # if you set this to 0, only submenu trigger will be visible
+  showMenuItems = 2
+  # Enable to show reading time in minutes for posts
+  showReadingTime = false
 
 [params.logo]
   logoText = "data rides nature"
@@ -15,6 +22,10 @@ paginate = 5
 #
 #   path = "/img/your-example-logo.svg"
 #   alt = "Your example logo alt text"
+
+[social]
+    github  = "https://github.com/acanthiza/acanthiza"
+    twitter = "https://twitter.com/acanthiza"
 
 [menu]
   [[menu.main]]

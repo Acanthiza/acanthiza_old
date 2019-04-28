@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bike on Acanthiza</title>
-    <link>/categories/bike/</link>
+    <link>https://acanthiza.netlify.com/categories/bike/</link>
     <description>Recent content in Bike on Acanthiza</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 08 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/bike/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://acanthiza.netlify.com/categories/bike/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Geometry</title>
-      <link>/post/2018-11-08-geometry/</link>
+      <link>https://acanthiza.netlify.com/post/2018-11-08-geometry/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018-11-08-geometry/</guid>
+      <guid>https://acanthiza.netlify.com/post/2018-11-08-geometry/</guid>
       <description>Baffled by bike geometry? So am I, so don’t look for answers here. But here’s how I’ve helped myself scratch the surface of understanding… And began to understand just how much of an outlier my current bike is as a ‘gravel’ bike.
 The main guides for the important numbers to chase were:
  this CylingTips article this great resource on gravel bikes covering geometry in part two geometrygeeks.com provides good explanations of each term.</description>
@@ -24,10 +24,10 @@ The main guides for the important numbers to chase were:
     
     <item>
       <title>Race to the rock</title>
-      <link>/post/20190919_rttr/</link>
+      <link>https://acanthiza.netlify.com/post/20190919_rttr/</link>
       <pubDate>Wed, 19 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/20190919_rttr/</guid>
+      <guid>https://acanthiza.netlify.com/post/20190919_rttr/</guid>
       <description>“It’s safer, less painful and less soul destroying to remain a dot watcher.”
 With those words for inspiration, this post takes dot watching several levels too far.
 For an introduction to Race to the Rock perhaps read about the first 2016 ride. Race to the rock happened again in 2017 and 2018. There’s an active online community serving up a constant stream of visual inspiration.</description>
