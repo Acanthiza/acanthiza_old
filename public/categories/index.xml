@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Acanthiza</title>
-    <link>https://acanthiza.netlify.com/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Acanthiza</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 08 Nov 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://acanthiza.netlify.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bike</title>
-      <link>https://acanthiza.netlify.com/categories/bike/</link>
+      <link>/categories/bike/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://acanthiza.netlify.com/categories/bike/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data</title>
-      <link>https://acanthiza.netlify.com/categories/data/</link>
-      <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://acanthiza.netlify.com/categories/data/</guid>
+      <guid>/categories/bike/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>https://acanthiza.netlify.com/categories/r/</link>
+      <link>/categories/r/</link>
       <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://acanthiza.netlify.com/categories/r/</guid>
+      <guid>/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data</title>
+      <link>/categories/data/</link>
+      <pubDate>Thu, 08 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/data/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rides</title>
-      <link>https://acanthiza.netlify.com/categories/rides/</link>
+      <link>/categories/rides/</link>
       <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://acanthiza.netlify.com/categories/rides/</guid>
+      <guid>/categories/rides/</guid>
       <description></description>
     </item>
     
