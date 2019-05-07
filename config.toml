@@ -2,7 +2,7 @@ baseurl = "https://acanthiza.netlify.com/"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 languageCode = "en-us"
 title = "Acanthiza"
-#theme = "hugo-theme-hello-friend"
+theme = "hugo-theme-hello-friend"
 copyright = ""
 paginate = 5
 
@@ -20,7 +20,7 @@ paginate = 5
   logoText = "data rides nature"
 #   or
 #
-#   path = "/img/your-example-logo.svg"
+#  path = "/img/your-example-logo.svg"
 #   alt = "Your example logo alt text"
 
 [social]
