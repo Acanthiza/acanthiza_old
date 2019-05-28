@@ -79,13 +79,13 @@
   </url>
   
   <url>
-    <loc>/tags/data/</loc>
+    <loc>/categories/data/</loc>
     <lastmod>2018-11-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/data/</loc>
+    <loc>/tags/data/</loc>
     <lastmod>2018-11-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -130,13 +130,13 @@
   </url>
   
   <url>
-    <loc>/tags/rides/</loc>
+    <loc>/categories/rides/</loc>
     <lastmod>2017-07-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/rides/</loc>
+    <loc>/tags/rides/</loc>
     <lastmod>2017-07-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

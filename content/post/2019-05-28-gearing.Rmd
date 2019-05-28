@@ -13,9 +13,7 @@ tags:
   - gearing
 ---
 
-# Front chain ring for 1*11-46
-
-Given an 11-46 cluster, what is a good front chain ring for a 1-by setup?
+Given an 11-46 cluster, what is a good front chain ring for a 1-by setup on a 700c rim with a 38 mm tyre?
 
 ```{r setup, include = F}
   
