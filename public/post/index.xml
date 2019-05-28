@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Acanthiza</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Gearing</title>
+      <link>/post/gearing/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/gearing/</guid>
+      <description>Front chain ring for 1*11-46 Given an 11-46 cluster, what is a good front chain ring for a 1-by setup?
+Figure 1 shows front chain ring, rear cog, speed and cadence change in relation to an upper and lower speed target. Targets were chosen as 6 km/hr as close to walking speed and 45 km/hr as it’s rare I travel faster than that.
+Cadence was chosen in steps of 10 between 50 rpm and 110 rpm.</description>
+    </item>
     
     <item>
       <title>Geometry</title>

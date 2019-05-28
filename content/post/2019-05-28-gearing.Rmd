@@ -1,0 +1,128 @@
+---
+title: Gearing
+author: nige
+date: '2019-05-28'
+slug: gearing
+categories:
+  - Bike
+  - Bikeepacking
+  - Gravel
+tags:
+  - bikes
+  - gravel
+  - gearing
+---
+
+# Front chain ring for 1*11-46
+
+Given an 11-46 cluster, what is a good front chain ring for a 1-by setup?
+
+```{r setup, include = F}
+  
+  packages <- c("tidyverse"
+                , "bookdown"
+                , "knitr"
+                )
+
+  purrr::walk(packages, library, character.only = TRUE)
+  
+  write_bib(packages,file="packageCitations.bib",tweak=TRUE)
+  
+  knitr::opts_chunk$set(echo = F
+                        , warning = F
+                        , message = F
+                        #, include = F
+                        , collapse = TRUE
+                        , out.width = "110%"
+                        )
+  
+  options(knitr.kable.NA = ''
+          , knitr.table.format = "html"
+          )
+
+```
+
+```{r data}
+
+  upperThreshold <- 45
+  lowerThreshold <- 6
+
+  dat <- tibble(front = seq(26,50,2)) %>%
+    dplyr::group_by(front) %>%
+    tidyr::expand(rear = c(11,13,15,17,19,21,24,28,32,37,46)) %>%
+    dplyr::group_by(front,rear) %>%
+    tidyr::expand(setup = "700c * 38mm",diaInches =27.5,diaM = .698) %>%
+    dplyr::group_by_all() %>%
+    tidyr::expand(cadence = seq(50,110,10)) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(roll = diaM*pi*(front/rear)
+                  , speed = roll/1000*cadence*60
+                  , lower = if_else(speed <= lowerThreshold,1,0)
+                  , upper = if_else(speed >= upperThreshold,1,0)
+                  , both = map2_dbl(lower,upper,sum)
+                  )
+    
+
+```
+
+Figure \@ref(fig:plot) shows front chain ring, rear cog, speed and cadence change in relation to an upper and lower speed target. Targets were chosen as `r lowerThreshold` km/hr as close to walking speed and `r upperThreshold` km/hr as it's rare I travel faster than that.
+
+Cadence was chosen in steps of 10 between `r min(dat$cadence)` rpm and `r max(dat$cadence)` rpm.
+
+Any front chain ring between `r dat %>% dplyr::filter(speed >= upperThreshold) %>% dplyr::filter(front == min(front)) %>% dplyr::pull(front)` and `r dat %>% dplyr::filter(speed <= lowerThreshold) %>% dplyr::filter(front == max(front)) %>% dplyr::pull(front)` cross both lines, given the above constraints. For some reason I'm favouring high-end speed over low-end cadence so I think I'll pick 42.
+
+---
+
+```{r plot, fig.height = 10, fig.cap = "Only a few front chain ring sizes cross both speed thresholds when paired with 11-46"}
+
+  ggplot(dat, aes(rear,speed,colour=cadence)) +
+    geom_hline(aes(yintercept = lowerThreshold),linetype=2) +
+    geom_hline(aes(yintercept = upperThreshold),linetype=2) +
+    geom_line(data = dat %>% dplyr::filter(cadence == 80)) +
+    geom_point() +
+    facet_wrap(~front) +
+    scale_colour_viridis_c() +
+    labs(title = ""
+         , y = "speed km/hr"
+         , x = "rear cog"
+         ) +
+    #scale_y_log10() +
+    theme_dark() +
+    labs(title = "Change in speed by rear-cog and cadence. Facets are front chain ring teeth"
+         , subtitle = "Dotted lines are bottom and top speed targets of 6 km/hr and 50 km/hr"
+         )
+
+```
+
+---
+
+# Acknowledgements
+
+R packages explicitly loaded (i.e. not including dependencies) to create this post are listed in Table \@ref(tab:packages).
+
+```{r packages}
+ 
+  cits <- tibble(cits = read_lines("packageCitations.bib"))
+ 
+  kable(cits %>%
+          dplyr::filter(grepl("@",cits)
+                        , !grepl("CiteR",cits)
+                        ) %>%
+          dplyr::rename(Package = cits) %>%
+          dplyr::bind_cols(cits %>%
+                             dplyr::filter(grepl("title",cits)) %>%
+                             dplyr::rename(Description = cits)
+                           ) %>%
+          dplyr::mutate(Package = gsub("@Manual\\{|,|R-","",Package)
+                        , Description = gsub("  title = \\{","",Description)
+                        , Description = gsub("\\},","",Description)
+                        ) %>%
+          dplyr::mutate(Citation = paste0("@R-",Package))
+   , caption = "R packages loaded"
+   )
+ 
+```
+
+---
+
+# References 
