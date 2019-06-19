@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>rides on Acanthiza</title>
-    <link>/tags/rides/</link>
-    <description>Recent content in rides on Acanthiza</description>
+    <title>CX on Acanthiza</title>
+    <link>/categories/cx/</link>
+    <description>Recent content in CX on Acanthiza</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/rides/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/cx/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,16 +18,6 @@
       
       <guid>/post/a-perfect-blend/</guid>
       <description>   Table 1: Overall stats for a perfect blend    km  rides  max      25686  800  231       Table 2: Where rides started    location  n      ,  81    Adelaide, SA  176    Adelaide, South Australia  75    Al Karak, Jordan, Al Karak  1    Aqaba, Jordan, Aqaba  1    Belair, SA  1    Bormio, Lombardy  4    Crafers West, SA  1    Cudlee Creek, South Australia  1    Eastwood, SA  1    Emu Bay, SA  3    Fullarton, South Australia  175    Glenside, SA  2    Glenunga, SA  1    Goolwa, SA  3    Goolwa, South Australia  8    Highgate, SA  1    Lenno, Lombardy  1    Lenswood, SA  1    Lucca, Tuscany  10    Ma’an, Jordan, Ma’an  1    Madaba, Jordan, Madaba  1    Magill, SA  2    Menaggio, Lombardy  7    Mount Pleasant, SA  1    Myrtle Bank, SA  10    Norwood, SA  1    Pove Del Grappa, Veneto  2    Punyelroo, SA  1    Seacliff, SA  1    South Australia, Australia  22    Trentino, Italy, Trentino-Alto Adige/Südtirol  3    Unley, SA  1    Upper Sturt, SA  198    Valcanover, Trentino-Alto Adige/Südtirol  1    Victor Harbor, South Australia  1     </description>
-    </item>
-    
-    <item>
-      <title>My rides</title>
-      <link>/post/20170714_rides/</link>
-      <pubDate>Fri, 14 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/20170714_rides/</guid>
-      <description>Data from my rides have been scattered in several places. Through the years I moved from Excel to Access to Ascent to Strava to store ride data. Recently the following have provided the potential to make combining these data easy:
- workflow, particularly with  tidyverse rmarkdown  apps to rip data out of MS Access databases from a mac mdb accdb Viewer the export .csv button on most pages on Veloviewer  This is the piecing together and exploration of those data.</description>
     </item>
     
   </channel>

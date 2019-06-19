@@ -142,6 +142,7 @@ tags:
                   , Gear, loc1 = City, loc2 = State, Kudos, Notes
                   )
 
+
 ```
 
 ```{r dataRidesCombine}

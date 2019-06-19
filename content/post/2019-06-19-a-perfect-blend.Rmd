@@ -1,0 +1,73 @@
+---
+title: A perfect blend
+author: nige
+date: '2019-06-19'
+slug: a-perfect-blend
+categories:
+  - Bike
+  - Gravel
+  - CX
+tags:
+  - bikes
+  - data
+  - gravel
+  - rides
+---
+
+```{r setup, include = F}
+
+  packages <- c("tidyverse"
+                , "bookdown"
+                , "knitr"
+                , "lubridate"
+                , "zoo"
+                , "ggridges"
+                , "ggmap"
+                )
+  
+  purrr::walk(packages, library, character.only = TRUE)
+  
+  write_bib(packages,file="packageCitations.bib",tweak=TRUE)
+
+  knitr::opts_chunk$set(echo = F
+                        , warning = F
+                        , message = F
+                        #, include = F
+                        )
+  
+  options(knitr.kable.NA = ''
+          , knitr.table.format = "html"
+          )
+
+```
+
+
+```{r data}
+
+  dat <- read_csv("../../data/ridesCombined.csv") %>%
+    dplyr::filter(Gear == "cx"
+                  , Date < "2019-04-20"
+                  )
+
+  kable(dat %>%
+          dplyr::summarise(km = round(sum(Dist,na.rm=TRUE),0)
+                           , rides = n()
+                           , max = round(max(Dist),0)
+                           )
+        , caption = "Overall stats for a perfect blend"
+        )
+
+```
+
+```{r}
+
+  kable(dat %>%
+          dplyr::count(location)
+        , caption = "Where rides started"
+        )
+
+
+```
+
+
+
